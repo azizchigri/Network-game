@@ -1,0 +1,29 @@
+/*
+** EPITECH PROJECT, 2018
+** zappy
+** File description:
+** destroy game
+*/
+
+#include "game.h"
+
+t_game_p *destroy_game(t_game_p *game)
+{
+	int i = 0;
+	int j = 0;
+	if (game == NULL)
+		return (NULL);
+	for (i = 0; game->map[i] != NULL; i += 1) {
+		for (j = 0; j < game->width; j += 1) {
+			if (game->map[i][j].players != NULL)
+				free(game->map[i][j].players);
+		}
+		free(game->map[i]);
+	}
+	if (game->map != NULL)
+		free(game->map);
+	game->map = NULL;
+	free(game);
+	game = NULL;
+	return (game);
+}
