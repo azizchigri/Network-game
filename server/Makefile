@@ -39,11 +39,11 @@ all:    $(NAME)
 $(NAME): $(OBJ)
 	gcc -o $(NAME) $(OBJ) $(CFLAGS)
 
-test_run:
+tests_run:
 	gcc -o $(NAME1) $(SRC1) $(CFLAGS1)
 	./$(NAME1)
 
-test_clean:
+tests_clean:
 	rm -f $(COVER1)
 	rm -f $(COVER2)
 	rm -f $(NAME1)
