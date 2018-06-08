@@ -32,7 +32,7 @@ NAME1	=	test
 
 COVER1	=	*.gcno
 
-COVER2	=	*.gcda	
+COVER2	=	*.gcda
 
 all:    $(NAME)
 
