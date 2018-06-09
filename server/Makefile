@@ -11,8 +11,8 @@ SRC	=	src/generation/map_gen.c	\
 		src/generation/game.c		\
 		src/gameplay/move/go.c		\
 		src/gameplay/move/move.c	\
+		src/gameplay/cmd.c		\
 		src/generation/main.c
-#src/gameplay/cmd.c
 
 SRC1	=	src/generation/map_gen.c	\
 		src/generation/player_gen.c	\
@@ -20,11 +20,13 @@ SRC1	=	src/generation/map_gen.c	\
 		src/generation/game.c		\
 		src/gameplay/move/go.c		\
 		src/gameplay/move/move.c	\
+		src/gameplay/cmd.c		\
 		tests/test_destroy.c		\
 		tests/test_map.c		\
 		tests/test_ressources.c		\
 		tests/test_move.c		\
-		tests/test_player.c
+		tests/test_player.c		\
+		tests/test_cmd.c
 
 OBJ     =       $(SRC:.c=.o)
 
@@ -53,6 +55,14 @@ tests_clean:
 	rm -f $(COVER1)
 	rm -f $(COVER2)
 	rm -f $(NAME1)
+
+tests_debug:
+	gcc -o $(NAME1) $(SRC1) $(CFLAGS1)
+	valgrind ./$(NAME1)
+	rm -f $(COVER1)
+	rm -f $(COVER2)
+	rm -f $(NAME1)
+
 clean:
 	rm -f $(OBJ)
 

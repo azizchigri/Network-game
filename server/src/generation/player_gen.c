@@ -30,19 +30,18 @@ int place_player(t_game_p *game, t_player_p *player)
 
 t_player_p *init_player(t_game_p *game, int fd)
 {
-	//int pos = 0;
+	int pos = -1;
 	t_player_p *player = malloc(sizeof(t_player_p) * 1);
 	if (player == NULL)
 		return (NULL);
 	player->id = fd;
 	player->alive = 1;
 	player->inventory = NULL;
-	write(1, game, 0);
-	/*while (pos == 0) {
-	  player->y = rand() % (game->width + 1) - 1;
-	  player->x = rand() % (game->height + 1) - 1;
-	  pos = place_player(game, player);
-	  }*/
+	while (pos == -1) {
+		player->y = rand() % (game->width + 1) - 1;
+		player->x = rand() % (game->height + 1) - 1;
+		pos = place_player(game, player);
+	}
 	player->lvl = 0;
 	player->direction = 0;
 	return (player);

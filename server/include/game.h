@@ -60,5 +60,7 @@
 	int remove_place(t_player_p *player, t_game_p *game);
 	int new_place(t_player_p *player, t_game_p *game);
 	t_player_p *destroy_player(t_player_p *player);
+	void front(t_player_p *player, t_game_p *game);
+	char *gameplay(char **msg_r, t_player_p *player, t_game_p *game);
 
 #endif
