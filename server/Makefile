@@ -59,13 +59,6 @@ tests_clean:
 	rm -f $(COVER2)
 	rm -f $(NAME1)
 
-tests_debug:
-	gcc -o $(NAME1) $(SRC1) $(CFLAGS1)
-	valgrind ./$(NAME1)
-	rm -f $(COVER1)
-	rm -f $(COVER2)
-	rm -f $(NAME1)
-
 clean:
 	rm -f $(OBJ)
 

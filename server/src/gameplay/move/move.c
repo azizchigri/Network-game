@@ -1,3 +1,4 @@
+
 /*
 ** EPITECH PROJECT, 2018
 ** zappy
@@ -18,7 +19,7 @@ void left(t_player_p *player)
 {
 	player->direction -= 1;
 	if (player->direction == -1)
-		player->direction = 4;
+		player->direction = 3;
 }
 
 void up_down(t_player_p *player, t_game_p *game)
