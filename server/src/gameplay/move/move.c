@@ -28,6 +28,8 @@ void up_down(t_player_p *player, t_game_p *game)
 		if (remove_place(player, game) == -1)
 			return;
 		player->y += 1;
+		if (player->y >= game->height)
+			player->y = 0;
 		if (new_place(player, game) == -1)
 			return;
 	}
@@ -35,6 +37,8 @@ void up_down(t_player_p *player, t_game_p *game)
 		if (remove_place(player, game) == -1)
 			return;
 		player->y -= 1;
+		if (player->y < 0)
+			player->y = game->height - 1;
 		if (new_place(player, game) == -1)
 			return;
 	}
@@ -46,6 +50,8 @@ void left_right(t_player_p *player, t_game_p *game)
 		if (remove_place(player, game) == -1)
 			return;
 		player->x += 1;
+		if (player->x >= game->width)
+			player->x = 0;
 		if (new_place(player, game) == -1)
 			return;
 	}
@@ -53,6 +59,8 @@ void left_right(t_player_p *player, t_game_p *game)
 		if (remove_place(player, game) == -1)
 			return;
 		player->x -= 1;
+		if (player->x < 0)
+			player->x = game->width - 1;
 		if (new_place(player, game) == -1)
 			return;
 	}

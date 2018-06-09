@@ -43,3 +43,13 @@ Test(move_player, right_left_frompars)
 	destroy_game(game);
 	free(player);
 }
+
+Test(move_player, move_forward)
+{
+	char *str[2];
+	t_game_p *game = game_init(10, 10, 1);
+	t_player_p *player = init_player(game, 1);
+	str[0] = "Forward";
+	str[1] = NULL;
+	cr_assert_eq(strcmp(gameplay(str, player, game), "OK"), 0);
+}
