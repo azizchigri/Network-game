@@ -23,7 +23,6 @@ void left(t_player_p *player)
 
 void up_down(t_player_p *player, t_game_p *game)
 {
-	int i = 0;
 	if (player->direction == 0) {
 		if (remove_place(player, game) == -1)
 			return;

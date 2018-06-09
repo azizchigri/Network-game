@@ -9,6 +9,8 @@ SRC	=	src/generation/map_gen.c	\
 		src/generation/player_gen.c	\
 		src/generation/destroy_game.c	\
 		src/generation/game.c		\
+		src/gameplay/move/go.c		\
+		src/gameplay/move/move.c	\
 		src/generation/main.c
 #src/gameplay/cmd.c
 
@@ -16,9 +18,13 @@ SRC1	=	src/generation/map_gen.c	\
 		src/generation/player_gen.c	\
 		src/generation/destroy_game.c	\
 		src/generation/game.c		\
+		src/gameplay/move/go.c		\
+		src/gameplay/move/move.c	\
 		tests/test_destroy.c		\
 		tests/test_map.c		\
-		tests/test_ressources.c
+		tests/test_ressources.c		\
+		tests/test_move.c		\
+		tests/test_player.c
 
 OBJ     =       $(SRC:.c=.o)
 

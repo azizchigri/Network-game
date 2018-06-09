@@ -9,20 +9,20 @@
 
 int remove_place(t_player_p *player, t_game_p *game)
 {
-	int *tmp;
+	t_player_p **tmp;
 	int size = 0;
-	while (game->map[player->x][player->y].players[size] != 0)
+	while (game->map[player->x][player->y].players[size] != NULL)
 		size += 1;
-	tmp = malloc(sizeof(int) * (size - 1));
+	tmp = malloc(sizeof(t_player_p *) * (size - 1));
 	if (tmp == NULL)
 		return (-1);
 	size = 0;
-	while (game->map[player->x][player->y].players[size] != 0) {
-		if (game->map[player->x][player->y].players[size] != player->id)
+	while (game->map[player->x][player->y].players[size] != NULL) {
+		if (game->map[player->x][player->y].players[size]->id != player->id)
 			tmp[size] = game->map[player->x][player->y].players[size];
 		size += 1;
 	}
-	tmp[size - 1] = 0;
+	tmp[size - 1] = NULL;
 	free(game->map[player->x][player->y].players);
 	game->map[player->x][player->y].players = tmp;
 	return (0);
@@ -30,20 +30,20 @@ int remove_place(t_player_p *player, t_game_p *game)
 
 int new_place(t_player_p *player, t_game_p *game)
 {
-	int *tmp;
+	t_player_p **tmp;
 	int size = 0;
-	while (game->map[player->x][player->y].players[size] != 0)
+	while (game->map[player->x][player->y].players[size] != NULL)
 		size += 1;
-	tmp = malloc(sizeof(int) * size + 2);
+	tmp = malloc(sizeof(t_player_p *) * size + 2);
 	if (tmp == NULL)
 		return (-1);
 	size = 0;
-	while (game->map[player->x][player->y].players[size] != 0) {
+	while (game->map[player->x][player->y].players[size] != NULL) {
 		tmp[size] = game->map[player->x][player->y].players[size];
 		size += 1;
 	}
-	tmp[size + 1] = player->id;
-	tmp[size + 2] = 0;
+	tmp[size + 1] = player;
+	tmp[size + 2] = NULL;
 	free(game->map[player->x][player->y].players);
 	game->map[player->x][player->y].players = tmp;
 	return (0);
