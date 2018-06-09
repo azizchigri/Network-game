@@ -42,7 +42,7 @@ void up_down(t_player_p *player, t_game_p *game)
 
 void left_right(t_player_p *player, t_game_p *game)
 {
-	if (player->direction == 0) {
+	if (player->direction == 1) {
 		if (remove_place(player, game) == -1)
 			return;
 		player->x += 1;

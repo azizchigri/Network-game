@@ -24,3 +24,15 @@ Test(player, destroy_player)
 	cr_assert_eq(player, NULL);
 	destroy_game(game);
 }
+
+Test(player, player_coherance)
+{
+	t_game_p *game = game_init(10, 10, 1);
+	t_player_p *player = init_player(game, 1);
+	cr_assert(player->x < game->width);
+	cr_assert(player->y < game->height);
+	cr_assert(player->x >= 0);
+	cr_assert(player->y >= 0);
+	cr_assert_eq(game->map[player->x][player->y].players[0], player);
+	destroy_game(game);
+}

@@ -50,18 +50,34 @@
 		int f;
 	};
 
+//genearation
+	//generate the map
 	int create_map(t_game_p *game);
+	//free the game and return the new game equal to NULL
 	t_game_p *destroy_game(t_game_p *game);
+	//place food and stone randomly on the map
 	void init_ressources(t_game_p *game);
+	//create the game, take width heigth and frequency
 	t_game_p *game_init(int w, int h, int f);
-	void left(t_player_p *player);
-	void right(t_player_p *player);
+	//init the player with an unique id as fd
 	t_player_p *init_player(t_game_p *game, int fd);
-	int remove_place(t_player_p *player, t_game_p *game);
-	int new_place(t_player_p *player, t_game_p *game);
+	//free the player and return NULL
 	t_player_p *destroy_player(t_player_p *player);
+
+//gameplay
+	//turn left the player
+	void left(t_player_p *player);
+	//turn right the player
+	void right(t_player_p *player);
+	//delete the actual position of the player
+	int remove_place(t_player_p *player, t_game_p *game);
+	//add the player on his new place
+	int new_place(t_player_p *player, t_game_p *game);
+	//go forward the direction of the player is imortant
 	void front(t_player_p *player, t_game_p *game);
+	//take the cmd of the AI and do the cmd. return the respond
 	char *gameplay(char **msg_r, t_player_p *player, t_game_p *game);
+	//return the number of free slot in the game as a respond (char*)
 	char *nbr_player(t_game_p *game);
 
 #endif
