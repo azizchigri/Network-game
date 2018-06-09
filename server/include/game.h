@@ -62,5 +62,6 @@
 	t_player_p *destroy_player(t_player_p *player);
 	void front(t_player_p *player, t_game_p *game);
 	char *gameplay(char **msg_r, t_player_p *player, t_game_p *game);
+	char *nbr_player(t_game_p *game);
 
 #endif

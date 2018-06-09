@@ -39,7 +39,7 @@ char *personnal_action(char **msg_r, t_player_p *player, t_game_p *game)
 	}
 	return (respond);
 }
-
+*/
 char *game_info(char **msg_r, t_player_p *player, t_game_p *game)
 {
 	char *respond = NULL;
@@ -52,9 +52,10 @@ char *game_info(char **msg_r, t_player_p *player, t_game_p *game)
 	else if (strcmp(msg_r[0], "Eject") == 0) {
 		respond = "OK";
 	}
+	write(1, player, 0);
 	return (respond);
 }
-
+/*
 char *item_action(char **msg_r, t_player_p *player, t_game_p *game)
 {
 	char *respond = NULL;
@@ -79,11 +80,11 @@ char *gameplay(char **msg_r, t_player_p *player, t_game_p *game)
 		return (msg_s);
 	/*msg_s = personnal_action(msg_r, player, game);
 	if (msg_s != NULL)
-		return (msg_s);
+	return (msg_s);*/
 	msg_s = game_info(msg_r, player, game);
 	if (msg_s != NULL)
 		return (msg_s);
-	msg_s = item_action(msg_r, player, game);
+/*	msg_s = item_action(msg_r, player, game);
 	if (msg_s != NULL)
 		return (msg_s);*/
 	return ("KO");
