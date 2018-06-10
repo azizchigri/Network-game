@@ -27,7 +27,7 @@ class JsonObject():
     def __init__(self):
         pass
     
-    def toJSON(self):
+    def __str__(self):
         """
             Serialize the class into json object
         """
