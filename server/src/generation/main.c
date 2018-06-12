@@ -12,7 +12,7 @@ int main()
 	char *str[2];
 	char *respond;
 
-	str[0] = "Forward";
+        str[0] = "Inventory";
 	str[1] = NULL;
 	srand(time(NULL));
 	game = game_init(w, h, f);
@@ -26,4 +26,6 @@ int main()
 	game = destroy_game(game);
 	player = destroy_player(player);
 	printf("%s", respond);
+	if (strcmp(respond, "OK") != 0 && strcmp(respond, "KO") != 0)
+		free(respond);
 }

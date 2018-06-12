@@ -22,7 +22,13 @@
 		int alive;
 		int lvl;
 		char *teams_name;
-		int *inventory;
+		int linemate;
+		int deraumere;
+		int sibur;
+		int mendiane;
+		int phiras;
+		int thystame;
+		int food;
 		int x;
 		int y;
 		char direction;
@@ -79,5 +85,7 @@
 	char *gameplay(char **msg_r, t_player_p *player, t_game_p *game);
 	//return the number of free slot in the game as a respond (char*)
 	char *nbr_player(t_game_p *game);
+	// gice the inventory as str
+	char *inventory(t_player_p *player);
 
 #endif
