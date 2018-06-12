@@ -12,7 +12,7 @@ int main()
 	char *str[2];
 	char *respond;
 
-        str[0] = "Inventory";
+        str[0] = "Forward";
 	str[1] = NULL;
 	srand(time(NULL));
 	game = game_init(w, h, f);

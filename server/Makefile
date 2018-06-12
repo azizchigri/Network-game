@@ -24,6 +24,7 @@ SRC1	=	src/generation/map_gen.c		\
 		src/gameplay/move/move.c		\
 		src/gameplay/cmd.c			\
 		src/gameplay/game_info/game_info.c	\
+		src/gameplay/player_info/inventory.c	\
 		tests/test_destroy.c			\
 		tests/test_map.c			\
 		tests/test_ressources.c			\

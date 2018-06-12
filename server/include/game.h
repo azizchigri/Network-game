@@ -21,7 +21,7 @@
 		int id;
 		int alive;
 		int lvl;
-		char *teams_name;
+		char *team;
 		int linemate;
 		int deraumere;
 		int sibur;
@@ -87,5 +87,9 @@
 	char *nbr_player(t_game_p *game);
 	// gice the inventory as str
 	char *inventory(t_player_p *player);
+	//free players on a cell
+	t_player_p **free_player_cell(t_player_p **players);
+	//copy player in cpy, return cpy
+	t_player_p *cp_player(t_player_p *player);
 
 #endif

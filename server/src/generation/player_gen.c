@@ -23,7 +23,7 @@ int place_player(t_game_p *game, t_player_p *player)
 		malloc(sizeof(t_player_p *) * 2);
 	if (game->map[player->x][player->y].players == NULL)
 		return (-1);
-	game->map[player->x][player->y].players[0] = player;
+	game->map[player->x][player->y].players[0] = cp_player(player);
 	game->map[player->x][player->y].players[1] = NULL;
 	return (0);
 }
@@ -48,12 +48,13 @@ t_player_p *init_player(t_game_p *game, int fd)
 	player->id = fd;
 	player->alive = 1;
 	init_inventory(player);
+	player->lvl = 0;
+	player->direction = 0;
+	player->team = "";
 	while (pos == -1) {
 		player->y = rand() % (game->width);
 		player->x = rand() % (game->height);
 		pos = place_player(game, player);
 	}
-	player->lvl = 0;
-	player->direction = 0;
 	return (player);
 }

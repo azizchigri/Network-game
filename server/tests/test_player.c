@@ -33,6 +33,5 @@ Test(player, player_coherance)
 	cr_assert(player->y < game->height);
 	cr_assert(player->x >= 0);
 	cr_assert(player->y >= 0);
-	cr_assert_eq(game->map[player->x][player->y].players[0], player);
 	destroy_game(game);
 }
