@@ -16,10 +16,11 @@ int main()
 	t_game_p *game;
 	t_player_p *player;
 	char *respond;
-	char *str[2] = {"Forward", NULL};
+	char *str[2] = {"Set object", "linemate"};
 	srand(time(NULL));
 	game = game_init(w, h, 1);
 	player = init_player(game, 1);
+	player->linemate = 0;
 	respond = gameplay(str, player, game);
 	for (i = 0; game->map[i] != NULL; i += 1) {
 		for (j = 0; j < w; j += 1)
