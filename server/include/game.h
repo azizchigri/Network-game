@@ -91,5 +91,11 @@
 	t_player_p **free_player_cell(t_player_p **players);
 	//copy player in cpy, return cpy
 	t_player_p *cp_player(t_player_p *player);
+	//add a player on a cell
+	int new_place(t_player_p *player, t_game_p *game);
+	//take an item, if not possible return KO
+	char *take(t_player_p *player, t_game_p *game, char *obj);
+	//drop an item, if not possible retrurn KO
+	char *drop(t_player_p *player, t_game_p *game, char *obj);
 
 #endif

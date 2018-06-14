@@ -15,19 +15,6 @@ t_player_p *destroy_player(t_player_p *player)
 	return (player);
 }
 
-int place_player(t_game_p *game, t_player_p *player)
-{
-	if (game->map[player->x][player->y].players != NULL)
-		return (-1);
-	game->map[player->x][player->y].players =
-		malloc(sizeof(t_player_p *) * 2);
-	if (game->map[player->x][player->y].players == NULL)
-		return (-1);
-	game->map[player->x][player->y].players[0] = cp_player(player);
-	game->map[player->x][player->y].players[1] = NULL;
-	return (0);
-}
-
 void init_inventory(t_player_p *player)
 {
 	player->linemate = 0;
@@ -54,7 +41,7 @@ t_player_p *init_player(t_game_p *game, int fd)
 	while (pos == -1) {
 		player->y = rand() % (game->width);
 		player->x = rand() % (game->height);
-		pos = place_player(game, player);
+		pos = new_place(player, game);
 	}
 	return (player);
 }

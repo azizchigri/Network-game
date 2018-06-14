@@ -14,6 +14,9 @@ SRC	=	src/generation/map_gen.c		\
 		src/gameplay/cmd.c			\
 		src/gameplay/game_info/game_info.c	\
 		src/gameplay/player_info/inventory.c	\
+		src/gameplay/item_action/stone.c	\
+		src/gameplay/item_action/stone2.c	\
+		src/gameplay/item_action/drop_take.c	\
 		src/generation/main.c
 
 SRC1	=	src/generation/map_gen.c		\
