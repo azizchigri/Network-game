@@ -16,6 +16,9 @@
 	#include <time.h>
 	#include <criterion/criterion.h>
 
+	#define TAKE 1000
+	#define DROP -1000
+
 	typedef struct s_player_p t_player_p;
 	struct s_player_p {
 		int id;

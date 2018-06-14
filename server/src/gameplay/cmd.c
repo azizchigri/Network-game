@@ -66,9 +66,9 @@ char *item_action(char **msg_r, t_player_p *player, t_game_p *game)
 	else if (strcmp(msg_r[0], "Set object") == 0) {
 		respond = drop(player, game, msg_r[1]);
 	}
-	/*else if (strcmp(msg_r[0], "Incantation") == 0) {
+	else if (strcmp(msg_r[0], "Incantation") == 0) {
 		respond = "OK";
-		}*/
+	}
 	return (respond);
 }
 

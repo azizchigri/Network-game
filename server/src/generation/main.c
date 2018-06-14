@@ -7,7 +7,7 @@
 
 #include "game.h"
 
-int main()
+int main(void)
 {
 	int h = 5;
 	int w = 10;
