@@ -7,11 +7,14 @@
 
 #include "game.h"
 
-t_player_p *write_players(t_game_p *game, t_player_p *player, int size)
+t_player_p *write_players(t_game_p *game, t_player_p *player, int *size)
 {
 	t_player_p *tmp = NULL;
-	if (game->map[player->x][player->y].players[size]->id != player->id)
-		tmp = cp_player(game->map[player->x][player->y].players[size]);
+	if (game->map[player->x][player->y].players[size[0]]->id == player->id)
+		size[0] += 1;
+	tmp = cp_player(game->map[player->x][player->y].players[size[0]]);
+	if (game->map[player->x][player->y].players[size[0]] != NULL)
+		size[0] += 1;
 	return (tmp);
 }
 
@@ -20,10 +23,8 @@ int save_players(t_game_p *game, t_player_p *player, t_player_p **tmp)
 	int size = 0;
 	int size2 = 0;
 	while (game->map[player->x][player->y].players[size] != NULL) {
-		tmp[size2] = write_players(game, player, size);
-		if (tmp[size2] != NULL)
-			size2 += 1;
-		size += 1;
+		tmp[size2] = write_players(game, player, &size);
+		size2 += 1;
 	}
 	return (size);
 }
@@ -34,7 +35,7 @@ int remove_place(t_player_p *player, t_game_p *game)
 	int size = 0;
 	while (game->map[player->x][player->y].players[size] != NULL)
 		size += 1;
-	tmp = malloc(sizeof(t_player_p *) * (size - 1));
+	tmp = malloc(sizeof(t_player_p *) * size);
 	if (tmp == NULL)
 		return (-1);
 	size = save_players(game, player, tmp);
@@ -53,6 +54,8 @@ int remove_place(t_player_p *player, t_game_p *game)
 
 t_player_p *cp_player(t_player_p *player)
 {
+	if (player == NULL)
+		return (NULL);
 	t_player_p *cpy = malloc(sizeof(t_player_p) * 1);
 	if (cpy == NULL)
 		return (NULL);
