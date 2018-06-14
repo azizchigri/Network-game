@@ -83,7 +83,7 @@
 	void front(t_player_p *player, t_game_p *game);
 	//take the cmd of the AI and do the cmd. return the respond
 	char *gameplay(char **msg_r, t_player_p *player, t_game_p *game);
-	//return the number of free slot in the game as a respond (char*)
+	//return the number of free slot in the game as a respond (char *)
 	char *nbr_player(t_game_p *game);
 	// gice the inventory as str
 	char *inventory(t_player_p *player);
@@ -97,5 +97,14 @@
 	char *take(t_player_p *player, t_game_p *game, char *obj);
 	//drop an item, if not possible retrurn KO
 	char *drop(t_player_p *player, t_game_p *game, char *obj);
+
+	//take and drop stone
+	int linemate(t_player_p *player, t_game_p *game, int value);
+	int deraumere(t_player_p *player, t_game_p *game, int value);
+	int mendiane(t_player_p *player, t_game_p *game, int value);
+	int phiras(t_player_p *player, t_game_p *game, int value);
+	int thystame(t_player_p *player, t_game_p *game, int value);
+	int food(t_player_p *player, t_game_p *game, int value);
+	int sibur(t_player_p *player, t_game_p *game, int value);
 
 #endif

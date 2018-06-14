@@ -1,21 +1,24 @@
+/*
+** EPITECH PROJECT, 2018
+** zappy
+** File description:
+** functional test
+*/
+
 #include "game.h"
 
 int main()
 {
 	int h = 5;
 	int w = 10;
-	int f = 1;
 	int i = 0;
 	int j = 0;
 	t_game_p *game;
 	t_player_p *player;
-	char *str[2];
 	char *respond;
-
-        str[0] = "Forward";
-	str[1] = NULL;
+	char *str[2] = {"Forward", NULL};
 	srand(time(NULL));
-	game = game_init(w, h, f);
+	game = game_init(w, h, 1);
 	player = init_player(game, 1);
 	respond = gameplay(str, player, game);
 	for (i = 0; game->map[i] != NULL; i += 1) {

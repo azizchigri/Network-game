@@ -9,44 +9,46 @@
 
 char *take(t_player_p *player, t_game_p *game, char *obj)
 {
-	char *respond = "OK";
 	int check = 0;
-
+	int tmp = 0;
 	check = strcmp(obj, "linemate");
-	linemate(player, game, check - 1);
+	tmp += linemate(player, game, check + 1);
 	check = strcmp(obj, "deraumere");
-	deraumere(player, game, check - 1);
+	tmp += deraumere(player, game, check + 1);
 	check = strcmp(obj, "sibur");
-	sibur(player, game, check - 1);
+	tmp += sibur(player, game, check + 1);
 	check = strcmp(obj, "mendiane");
-	mendiane(player, game, check - 1);
+	tmp += mendiane(player, game, check + 1);
 	check = strcmp(obj, "phiras");
-	phiras(player, game, check - 1);
+	tmp += phiras(player, game, check + 1);
 	check = strcmp(obj, "thystame");
-	thystame(player, game, check - 1);
+	tmp += thystame(player, game, check + 1);
 	check = strcmp(obj, "food");
-	food(player, game, check - 1);
-	return (respond);
+	tmp += food(player, game, check + 1);
+	if (tmp == -6)
+		return ("OK");
+	return ("KO");
 }
 
 char *drop(t_player_p *player, t_game_p *game, char *obj)
 {
-	char *respond = "OK";
 	int check = 0;
-
+	int tmp = 0;
 	check = strcmp(obj, "linemate");
-	linemate(player, game, check + 1);
+	tmp += linemate(player, game, check - 1);
 	check = strcmp(obj, "deraumere");
-	deraumere(player, game, check + 1);
+	tmp += deraumere(player, game, check - 1);
 	check = strcmp(obj, "sibur");
-	sibur(player, game, check + 1);
+	tmp += sibur(player, game, check - 1);
 	check = strcmp(obj, "mendiane");
-	mendiane(player, game, check + 1);
+	tmp += mendiane(player, game, check - 1);
 	check = strcmp(obj, "phiras");
-	phiras(player, game, check + 1);
+	tmp += phiras(player, game, check - 1);
 	check = strcmp(obj, "thystame");
-	thystame(player, game, check + 1);
+	tmp += thystame(player, game, check - 1);
 	check = strcmp(obj, "food");
-	food(player, game, check + 1);
-	return (respond);
+	tmp += food(player, game, check - 1);
+	if (tmp == -6)
+		return ("OK");
+	return ("KO");
 }

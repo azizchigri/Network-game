@@ -7,6 +7,27 @@
 
 #include "game.h"
 
+t_player_p *write_players(t_game_p *game, t_player_p *player, int size)
+{
+	t_player_p *tmp = NULL;
+	if (game->map[player->x][player->y].players[size]->id != player->id)
+		tmp = cp_player(game->map[player->x][player->y].players[size]);
+	return (tmp);
+}
+
+int save_players(t_game_p *game, t_player_p *player, t_player_p **tmp)
+{
+	int size = 0;
+	int size2 = 0;
+	while (game->map[player->x][player->y].players[size] != NULL) {
+		tmp[size2] = write_players(game, player, size);
+		if (tmp[size2] != NULL)
+			size2 += 1;
+		size += 1;
+	}
+	return (size);
+}
+
 int remove_place(t_player_p *player, t_game_p *game)
 {
 	t_player_p **tmp;
@@ -16,13 +37,9 @@ int remove_place(t_player_p *player, t_game_p *game)
 	tmp = malloc(sizeof(t_player_p *) * (size - 1));
 	if (tmp == NULL)
 		return (-1);
-	size = 0;
-	while (game->map[player->x][player->y].players[size] != NULL) {
-		if (game->map[player->x][player->y].players[size]->id != player->id)
-			tmp[size] = cp_player(game->map[player->x][player->y].players[size]);
-		size += 1;
-	}
-	game->map[player->x][player->y].players = free_player_cell(game->map[player->x][player->y].players);
+	size = save_players(game, player, tmp);
+	game->map[player->x][player->y].players =
+		free_player_cell(game->map[player->x][player->y].players);
 	if (size == 1) {
 		game->map[player->x][player->y].players = NULL;
 		free(tmp);
@@ -68,15 +85,12 @@ int new_place(t_player_p *player, t_game_p *game)
 	if (tmp == NULL)
 		return (-1);
 	size = 0;
-	if (game->map[player->x][player->y].players != NULL) {
-		while (game->map[player->x][player->y].players[size] != NULL) {
-			tmp[size] = cp_player(game->map[player->x][player->y].players[size]);
-			size += 1;
-		}
-	}
+	if (game->map[player->x][player->y].players != NULL)
+		size = save_players(game, player, tmp);
 	tmp[size] = cp_player(player);
 	tmp[size + 1] = NULL;
-	game->map[player->x][player->y].players = free_player_cell(game->map[player->x][player->y].players);
+	game->map[player->x][player->y].players =
+		free_player_cell(game->map[player->x][player->y].players);
 	game->map[player->x][player->y].players = tmp;
 	return (0);
 }

@@ -28,7 +28,8 @@ t_game_p *destroy_game(t_game_p *game)
 		return (NULL);
 	for (i = 0; game->map[i] != NULL; i += 1) {
 		for (j = 0; j < game->width; j += 1)
-			game->map[i][j].players = free_player_cell(game->map[i][j].players);
+			game->map[i][j].players =
+				free_player_cell(game->map[i][j].players);
 		free(game->map[i]);
 	}
 	if (game->map != NULL)

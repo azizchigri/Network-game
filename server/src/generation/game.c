@@ -26,6 +26,6 @@ t_game_p *game_init(int w, int h, int f)
 
 void init_teams(t_game_p *game, int slot)
 {
-        game->slot = slot;
-        game->nb_player = 0;
+	game->slot = slot;
+	game->nb_player = 0;
 }
