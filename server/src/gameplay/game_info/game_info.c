@@ -12,7 +12,7 @@ char *nbr_player(t_game_p *game)
 	char *respond;
 	int tmp;
 	int size = 1;
-	for (tmp = game->slot; tmp != 0; tmp /= 10) 
+	for (tmp = game->slot; tmp != 0; tmp /= 10)
 		size += 1;
 	respond = malloc(sizeof(char) * (size + 1));
 	sprintf(respond, "%d", game->slot);

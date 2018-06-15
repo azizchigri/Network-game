@@ -76,7 +76,7 @@ Test(map, is_the_map_have_ressources)
 			mendiane += game->map[i][j].mendiane;
 			phiras += game->map[i][j].phiras;
 			thystame += game->map[i][j].thystame;
-			food += game->map[i][j].food;	
+			food += game->map[i][j].food;
 		}
 	}
 	if (linemate == 0 && deraumere == 0 && sibur == 0

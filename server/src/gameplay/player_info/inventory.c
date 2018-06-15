@@ -10,8 +10,8 @@
 char *int_to_str(int nb)
 {
 	char *str;
-        int tmp;
-        int size = 1;
+	int tmp;
+	int size = 1;
 	for (tmp = nb; tmp != 0; tmp /= 10)
 		size += 1;
 	str = malloc(sizeof(char) * (size + 1));
@@ -31,7 +31,6 @@ char *init_strcat_stone(char *str_nb, char *respond, int size3)
 	size2 = strlen(str_nb);
 	tmp = malloc(sizeof(char) * (size + size2 + size3 + 1));
 	return (tmp);
-		
 }
 
 int write_in(char *tmp, char *str1, char *str2)
@@ -79,8 +78,11 @@ char *inventory(t_player_p *player)
 {
 	int i;
 	char *respond = NULL;
-	char *stone[7] = {"linemate ", " deraumere ", " sibur ", " mendiane ", " phiras ", " thystame ", " food "};
-	int nb_stone[7] = {player->linemate, player->deraumere, player->sibur, player->mendiane, player->phiras, player->thystame, player->food};
+	char *stone[7] = {"linemate ", " deraumere ", " sibur ",
+			" mendiane ", " phiras ", " thystame ", " food "};
+	int nb_stone[7] = {player->linemate, player->deraumere,
+			player->sibur, player->mendiane,
+			player->phiras, player->thystame, player->food};
 	for (i = 0; i < 7; i += 1) {
 		respond = strcat_stone(stone[i], nb_stone[i], respond);
 		if (respond == NULL)
