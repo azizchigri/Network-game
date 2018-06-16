@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-
     public string TeamName { set; get; }
     public int CurrentX { set; get; }
     public int CurrentY { set; get; }
     public int Level { set; get; }
-
-    public static GameObject Prefab = (GameObject)Resources.Load("Prefabs/Character");
 
     public Movement move;
 
