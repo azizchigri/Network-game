@@ -100,7 +100,6 @@
 	char *take(t_player_p *player, t_game_p *game, char *obj);
 	//drop an item, if not possible retrurn KO
 	char *drop(t_player_p *player, t_game_p *game, char *obj);
-
 	//take and drop stone
 	int linemate(t_player_p *player, t_game_p *game, int value);
 	int deraumere(t_player_p *player, t_game_p *game, int value);
@@ -109,5 +108,7 @@
 	int thystame(t_player_p *player, t_game_p *game, int value);
 	int food(t_player_p *player, t_game_p *game, int value);
 	int sibur(t_player_p *player, t_game_p *game, int value);
+	//eject player
+	char *eject(t_player_p *player, t_game_p *game);
 
 #endif

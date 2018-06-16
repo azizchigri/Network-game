@@ -13,6 +13,7 @@ SRC	=	src/generation/map_gen.c		\
 		src/gameplay/move/move.c		\
 		src/gameplay/cmd.c			\
 		src/gameplay/game_info/game_info.c	\
+		src/gameplay/game_info/eject.c		\
 		src/gameplay/player_info/inventory.c	\
 		src/gameplay/item_action/stone.c	\
 		src/gameplay/item_action/stone2.c	\
@@ -31,6 +32,7 @@ SRC1	=	src/generation/map_gen.c		\
 		src/gameplay/item_action/stone.c	\
 		src/gameplay/item_action/stone2.c	\
 		src/gameplay/item_action/drop_take.c	\
+		src/gameplay/game_info/eject.c		\
 		tests/test_take.c			\
 		tests/test_drop.c			\
 		tests/test_destroy.c			\
@@ -39,7 +41,8 @@ SRC1	=	src/generation/map_gen.c		\
 		tests/test_move.c			\
 		tests/test_player.c			\
 		tests/test_game_info.c			\
-		tests/test_cmd.c
+		tests/test_cmd.c			\
+		tests/test_eject.c
 
 OBJ     =       $(SRC:.c=.o)
 

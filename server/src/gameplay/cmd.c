@@ -51,7 +51,7 @@ char *game_info(char **msg_r, t_player_p *player, t_game_p *game)
 		respond = "OK";
 	}
 	else if (strcmp(msg_r[0], "Eject") == 0) {
-		respond = "OK";
+		respond = eject(player, game);
 	}
 	write(1, player, 0);
 	return (respond);
