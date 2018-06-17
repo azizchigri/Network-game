@@ -11,7 +11,7 @@ Test(map, is_the_map_NULL)
 {
 	int height = 10;
 	int width = 10;
-	int freq = 1;
+	int freq = 100;
 	t_game_p *game = game_init(width, height, freq);
 	cr_assert_neq(game->map, NULL);
 	destroy_game(game);
@@ -21,7 +21,7 @@ Test(map, is_random_working)
 {
 	int height = 10;
 	int width = 10;
-	int freq = 1;
+	int freq = 100;
 	t_game_p *game = game_init(width, height, freq);
 	t_game_p *game2 = game_init(width, height, freq);
 	cr_assert_neq(game->map, game2->map);
@@ -50,8 +50,8 @@ Test(map, is_random_working3)
 	t_game_p *game;
 	t_game_p *game2;
 	srand(time(NULL));
-	game = game_init(10, 10, 1);
-	game2 = game_init(10, 10, 1);
+	game = game_init(10, 10, 100);
+	game2 = game_init(10, 10, 100);
 	for (i = 0; game->map[i] != NULL; i += 1) {
 		for (j = 0; j < 10; j += 1)
 			cpt += check_random(game->map[i][j],
@@ -67,7 +67,7 @@ Test(map, is_the_map_have_ressources)
 	int cpt = 0;
 	int i, j;
 	int linemate, deraumere, sibur, mendiane, phiras, thystame, food = 0;
-	t_game_p *game = game_init(10, 10, 1);
+	t_game_p *game = game_init(10, 10, 100);
 	for (i = 0; game->map[i] != NULL; i += 1) {
 		for (j = 0; j < 10; j += 1) {
 			linemate += game->map[i][j].linemate;

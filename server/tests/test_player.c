@@ -9,7 +9,7 @@
 
 Test(player, create_player)
 {
-	t_game_p *game = game_init(10, 10, 1);
+	t_game_p *game = game_init(10, 10, 100);
 	t_player_p *player = init_player(game, 1);
 	cr_assert_eq(player->direction, 0);
 	destroy_game(game);
@@ -18,7 +18,7 @@ Test(player, create_player)
 
 Test(player, destroy_player)
 {
-	t_game_p *game = game_init(10, 10, 1);
+	t_game_p *game = game_init(10, 10, 100);
 	t_player_p *player = init_player(game, 1);
 	player = destroy_player(player);
 	cr_assert_eq(player, NULL);
@@ -27,7 +27,7 @@ Test(player, destroy_player)
 
 Test(player, player_coherance)
 {
-	t_game_p *game = game_init(10, 10, 1);
+	t_game_p *game = game_init(10, 10, 100);
 	t_player_p *player = init_player(game, 1);
 	cr_assert(player->x < game->width);
 	cr_assert(player->y < game->height);

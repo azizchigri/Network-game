@@ -46,10 +46,10 @@ int cooldown(t_game_p *game, t_player_p *player, char **cmd)
 		time = 1;
 	else
 		time = check_time(cmd);
-	sleep(time/game->f);
+	usleep((time * 1000000)/game->f);
 	for (i = 0; game->map[i] != NULL; i += 1) {
 		for (j = 0; j < game->width; j += 1)
 			player_refresh(game->map[i][j].players, player);
 	}
-	return (0);
+	return (time);
 }

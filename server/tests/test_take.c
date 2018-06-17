@@ -10,7 +10,7 @@
 Test(Take, Take_true)
 {
 	char *msg_r[2];
-	t_game_p *game = game_init(10, 10, 1);
+	t_game_p *game = game_init(10, 10, 100);
 	t_player_p *player = init_player(game, 1);
 	msg_r[0] = "Take object";
 	msg_r[1] = "linemate";
@@ -23,7 +23,7 @@ Test(Take, Take_true)
 Test(Take, Take_false)
 {
 	char *msg_r[2];
-	t_game_p *game = game_init(10, 10, 1);
+	t_game_p *game = game_init(10, 10, 100);
 	t_player_p *player = init_player(game, 1);
 	msg_r[0] = "Take object";
 	msg_r[1] = "linemate";
@@ -36,7 +36,7 @@ Test(Take, Take_false)
 Test(Take, Take_true_inventory)
 {
 	char *msg_r[2];
-	t_game_p *game = game_init(10, 10, 1);
+	t_game_p *game = game_init(10, 10, 100);
 	t_player_p *player = init_player(game, 1);
 	msg_r[0] = "Take object";
 	msg_r[1] = "linemate";

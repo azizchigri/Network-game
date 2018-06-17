@@ -44,7 +44,8 @@ SRC1	=	src/generation/map_gen.c		\
 		tests/test_player.c			\
 		tests/test_game_info.c			\
 		tests/test_cmd.c			\
-		tests/test_eject.c
+		tests/test_eject.c			\
+		tests/test_time.c
 
 OBJ     =       $(SRC:.c=.o)
 

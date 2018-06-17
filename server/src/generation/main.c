@@ -16,9 +16,9 @@ int main(void)
 	t_game_p *game;
 	t_player_p *player;
 	char *respond;
-	char *str[2] = {"Set object", "linemate"};
+	char *str[2] = {"Forward", "linemate"};
 	srand(time(NULL));
-	game = game_init(w, h, 1);
+	game = game_init(w, h, 100);
 	player = init_player(game, 1);
 	player->linemate = 0;
 	respond = gameplay(str, player, game);

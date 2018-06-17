@@ -10,7 +10,7 @@
 Test(eject, eject_no_one)
 {
 	char *msg_r[2];
-	t_game_p *game = game_init(10, 10, 1);
+	t_game_p *game = game_init(10, 10, 100);
 	t_player_p *player = init_player(game, 1);
 	msg_r[0] = "Eject";
 	msg_r[1] = NULL;
