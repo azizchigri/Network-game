@@ -76,6 +76,7 @@ char *gameplay(char **msg_r, t_player_p *player, t_game_p *game)
 {
 	char *msg_s = NULL;
 
+	cooldown(game, player, msg_r);
 	msg_s = move(msg_r, player, game);
 	if (msg_s != NULL)
 		return (msg_s);

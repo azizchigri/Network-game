@@ -110,5 +110,7 @@
 	int sibur(t_player_p *player, t_game_p *game, int value);
 	//eject player
 	char *eject(t_player_p *player, t_game_p *game);
+	//wait to do the action
+int cooldown(t_game_p *game, t_player_p *player, char **cmd);
 
 #endif

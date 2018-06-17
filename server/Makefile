@@ -18,6 +18,7 @@ SRC	=	src/generation/map_gen.c		\
 		src/gameplay/item_action/stone.c	\
 		src/gameplay/item_action/stone2.c	\
 		src/gameplay/item_action/drop_take.c	\
+		src/gameplay/time.c			\
 		src/generation/main.c
 
 SRC1	=	src/generation/map_gen.c		\
@@ -33,6 +34,7 @@ SRC1	=	src/generation/map_gen.c		\
 		src/gameplay/item_action/stone2.c	\
 		src/gameplay/item_action/drop_take.c	\
 		src/gameplay/game_info/eject.c		\
+		src/gameplay/time.c			\
 		tests/test_take.c			\
 		tests/test_drop.c			\
 		tests/test_destroy.c			\
