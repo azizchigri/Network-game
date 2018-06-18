@@ -9,7 +9,7 @@
 
 Test(move_player, turn_left)
 {
-	t_game_p *game = game_init(10, 10, 1);
+	t_game_p *game = game_init(10, 10, 100);
 	t_player_p *player = init_player(game, 1);
 	left(player);
 	cr_assert_eq(player->direction, 3);
@@ -19,7 +19,7 @@ Test(move_player, turn_left)
 
 Test(move_player, turn_right)
 {
-	t_game_p *game = game_init(10, 10, 1);
+	t_game_p *game = game_init(10, 10, 100);
 	t_player_p *player = init_player(game, 1);
 	right(player);
 	cr_assert_eq(player->direction, 1);
@@ -30,7 +30,7 @@ Test(move_player, turn_right)
 Test(move_player, right_left_frompars)
 {
 	char *str[2];
-	t_game_p *game = game_init(10, 10, 1);
+	t_game_p *game = game_init(10, 10, 100);
 	t_player_p *player = init_player(game, 1);
 	str[0] = "Left";
 	str[1] = NULL;
@@ -47,7 +47,7 @@ Test(move_player, right_left_frompars)
 Test(move_player, move_forward)
 {
 	char *str[2];
-	t_game_p *game = game_init(10, 10, 1);
+	t_game_p *game = game_init(10, 10, 100);
 	t_player_p *player = init_player(game, 1);
 	str[0] = "Forward";
 	str[1] = NULL;
@@ -58,7 +58,7 @@ Test(move_player, move_forward)
 Test(move_player, move_forward_and_delete)
 {
 	char *str[2];
-	t_game_p *game = game_init(10, 10, 1);
+	t_game_p *game = game_init(10, 10, 100);
 	t_player_p *player = init_player(game, 1);
 	int x = player->x;
 	int y = player->y;

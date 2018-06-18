@@ -9,14 +9,14 @@
 
 Test(free_map, is_it_free)
 {
-	t_game_p *game = game_init(10, 10, 1);
+	t_game_p *game = game_init(10, 10, 100);
 	game = destroy_game(game);
 	cr_assert_eq(game, NULL);
 }
 
 Test(free_map, double_free_corruption)
 {
-	t_game_p *game = game_init(-1, 10, 1);
+	t_game_p *game = game_init(-1, 10, 100);
 	game = destroy_game(game);
 	cr_assert_eq(game, NULL);
 }
