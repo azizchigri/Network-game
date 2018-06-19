@@ -72,22 +72,24 @@ char *item_action(char **msg_r, t_player_p *player, t_game_p *game)
 	return (respond);
 }
 
-char *gameplay(char **msg_r, t_player_p *player, t_game_p *game)
+t_respond gameplay(char **msg_r, t_player_p *player, t_game_p *game)
 {
-	char *msg_s = NULL;
+	t_respond msg_s;
 
-	cooldown(game, player, msg_r);
-	msg_s = move(msg_r, player, game);
-	if (msg_s != NULL)
+	msg_s.respond = NULL;
+	msg_s.time = cooldown(game, player, msg_r);
+	msg_s.respond = move(msg_r, player, game);
+	if (msg_s.respond != NULL)
 		return (msg_s);
-	msg_s = personnal_action(msg_r, player, game);
-	if (msg_s != NULL)
+	msg_s.respond = personnal_action(msg_r, player, game);
+	if (msg_s.respond != NULL)
 		return (msg_s);
-	msg_s = game_info(msg_r, player, game);
-	if (msg_s != NULL)
+	msg_s.respond = game_info(msg_r, player, game);
+	if (msg_s.respond != NULL)
 		return (msg_s);
-	msg_s = item_action(msg_r, player, game);
-	if (msg_s != NULL)
+	msg_s.respond = item_action(msg_r, player, game);
+	if (msg_s.respond != NULL)
 		return (msg_s);
-	return ("KO");
+	msg_s.respond = "KO";
+	return (msg_s);
 }

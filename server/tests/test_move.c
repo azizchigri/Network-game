@@ -34,11 +34,11 @@ Test(move_player, right_left_frompars)
 	t_player_p *player = init_player(game, 1);
 	str[0] = "Left";
 	str[1] = NULL;
-	cr_assert_eq(strcmp(gameplay(str, player, game), "OK"), 0);
+	cr_assert_eq(strcmp(gameplay(str, player, game).respond, "OK"), 0);
 	cr_assert_eq(player->direction, 3);
 	str[0] = "Right";
 	str[1] = NULL;
-	cr_assert_eq(strcmp(gameplay(str, player, game), "OK"), 0);
+	cr_assert_eq(strcmp(gameplay(str, player, game).respond, "OK"), 0);
 	cr_assert_eq(player->direction, 0);
 	destroy_game(game);
 	free(player);
@@ -51,7 +51,7 @@ Test(move_player, move_forward)
 	t_player_p *player = init_player(game, 1);
 	str[0] = "Forward";
 	str[1] = NULL;
-	cr_assert_eq(strcmp(gameplay(str, player, game), "OK"), 0);
+	cr_assert_eq(strcmp(gameplay(str, player, game).respond, "OK"), 0);
 }
 
 
@@ -64,7 +64,7 @@ Test(move_player, move_forward_and_delete)
 	int y = player->y;
 	str[0] = "Forward";
 	str[1] = NULL;
-	cr_assert_eq(strcmp(gameplay(str, player, game), "OK"), 0);
+	cr_assert_eq(strcmp(gameplay(str, player, game).respond, "OK"), 0);
 	cr_assert_eq(game->map[x][y].players, NULL);
 	cr_assert_eq(game->map[player->x][player->y].players[0]->id,
 		player->id);

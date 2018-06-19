@@ -15,13 +15,15 @@ int main(void)
 	int j = 0;
 	t_game_p *game;
 	t_player_p *player;
-	char *respond;
-	char *str[2] = {"Forward", "linemate"};
+	t_player_p *player2;
+	char *str[2] = {"Push", "linemate"};
+	t_respond res;
 	srand(time(NULL));
 	game = game_init(w, h, 100);
 	player = init_player(game, 1);
+	player2 = init_player(game, 2);
 	player->linemate = 0;
-	respond = gameplay(str, player, game);
+	res = gameplay(str, player, game);
 	for (i = 0; game->map[i] != NULL; i += 1) {
 		for (j = 0; j < w; j += 1)
 			printf("%d", game->map[i][j].linemate);
@@ -29,7 +31,8 @@ int main(void)
 	}
 	game = destroy_game(game);
 	player = destroy_player(player);
-	printf("%s", respond);
-	if (strcmp(respond, "OK") != 0 && strcmp(respond, "KO") != 0)
-		free(respond);
+	player2 = destroy_player(player2);
+	printf("%s", res.respond);
+	if (strcmp(res.respond, "OK") != 0 && strcmp(res.respond, "KO") != 0)
+		free(res.respond);
 }
