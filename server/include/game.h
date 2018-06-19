@@ -131,5 +131,14 @@
 	char *eject(t_player_p *player, t_game_p *game);
 	//wait to do the action
 	float cooldown(t_game_p *game, t_player_p *player, char **cmd);
+	//incantation to lvl up
+	char *incantation(t_game_p *game, t_player_p *player);
+	//delete stone to do incantation
+	int del_s1(t_game_p *game, t_player_p *player);
+	int del_s2(t_game_p *game, t_player_p *player);
+	int del_s3(t_game_p *game, t_player_p *player);
+	int del_s4(t_game_p *game, t_player_p *player);
+	int del_s5(t_game_p *game, t_player_p *player);
+	int del_s6(t_game_p *game, t_player_p *player);
 
 #endif

@@ -67,7 +67,7 @@ char *item_action(char **msg_r, t_player_p *player, t_game_p *game)
 		respond = drop(player, game, msg_r[1]);
 	}
 	else if (strcmp(msg_r[0], INCANTATION) == 0) {
-		respond = "OK";
+		respond = incantation(game, player);
 	}
 	return (respond);
 }

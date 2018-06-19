@@ -35,7 +35,7 @@ t_player_p *init_player(t_game_p *game, int fd)
 	player->id = fd;
 	player->alive = 1;
 	init_inventory(player);
-	player->lvl = 0;
+	player->lvl = 1;
 	player->direction = 0;
 	player->team = "";
 	while (pos == -1) {

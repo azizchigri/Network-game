@@ -16,7 +16,7 @@ int main(void)
 	t_game_p *game;
 	t_player_p *player;
 	t_player_p *player2;
-	char *str[2] = {"Push", "linemate"};
+	char *str[2] = {INCANTATION, "linemate"};
 	t_respond res;
 	srand(time(NULL));
 	game = game_init(w, h, 100);
