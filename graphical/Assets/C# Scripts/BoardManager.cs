@@ -6,34 +6,68 @@ public class BoardManager : MonoBehaviour {
 
     public static BoardManager Instance { set; get; }
 
-
     private const float TILE_SIZE = 1.0f;
     private const float TILE_OFFSET = 0.5f;
 
+    public Tile[,] Map { set; get; }
     private DrawMap MyMap;
     private GameObject Landscape;
     public float MapScale = 100;
     public int MapSizeX = 10;
     public int MapSizeY = 10;
 
-    public Character[,] Characters { set; get; }
-    public List<GameObject> activeCharacters;
+    public List<GameObject> Players;
+    public string[] TeamName;
 
     private void Start()
     {
         gameObject.transform.position = Vector3.zero;
         Instance = this;
-        activeCharacters = new List<GameObject>();
-        Characters = new Character[MapSizeX, MapSizeY];
-        SpawnCharacter(5, 5);
+        Players = new List<GameObject>();
+        SpawnCharacter(5, 5, 10);
         MyMap = gameObject.AddComponent<DrawMap>();
-        InitBackground(0, 0, -3);
+        // InitBackground(0, 0, -3);
+        CreateMap();
     }
 
     private void Update()
     {
-        UpdateBackground();
+        //UpdateBackground();
        // Characters[5, 5].MoveTo(50, 50);
+    }
+
+    public void SetMapSizeX(int x)
+    {
+        MapSizeX = x;
+        MyMap.maxX = MapSizeX;
+    }
+
+    public void SetMapSizeY(int y)
+    {
+        MapSizeY = y;
+        MyMap.maxY = MapSizeY;
+    }
+
+    private void CreateMap()
+    {
+        Map = new Tile[MapSizeX, MapSizeY];
+        GameObject MapObject = new GameObject();
+        MapObject.transform.SetParent(transform);
+        MapObject.name = "Map";
+        int id = 1;
+        for (int x = 0; x < MapSizeX; x++)
+        {
+            for (int y = 0; y < MapSizeY; y++)
+            {
+                GameObject go = new GameObject();
+                go.transform.SetParent(MapObject.transform);
+                Map[x, y] = go.AddComponent<Tile>();
+                Map[x, y].CurrentX = x;
+                Map[x, y].CurrentY = y;
+                Map[x, y].gameObject.name = "Tile " + id;
+                id++;
+            }
+        }
     }
 
     private void InitBackground(int x, int y, int z)
@@ -73,29 +107,24 @@ public class BoardManager : MonoBehaviour {
         }
     }
 
-    private void SpawnCharacter(int x, int y)
-    {
-      GameObject go = Instantiate((GameObject)Resources.Load("Prefabs/Character"),
-            GetTileCenter(x, y), Quaternion.identity) as GameObject;
-        go.transform.SetParent(transform);
-        go.transform.localScale = new Vector3(5, 5, 5);
-        Characters[x, y] = go.AddComponent<Character>();
-        Characters[x, y].SetPosition(x, y);
-        activeCharacters.Add(go);
-    }
-
-    private void DeleteCharacter(int x, int y)
-    {
-        Character c = Characters[x, y];
-        activeCharacters.Remove(c.gameObject);
-        Destroy(c.gameObject);
-    }
-
     private Vector3 GetTileCenter(int x, int y)
     {
         Vector3 origin = Vector3.zero;
         origin.x += (TILE_SIZE * x) + TILE_OFFSET;
         origin.z += (TILE_SIZE * y) + TILE_OFFSET;
         return origin;
+    }
+
+    public Character SpawnCharacter(int x, int y, int id)
+    {
+      GameObject go = Instantiate((GameObject)Resources.Load("Prefabs/Character"),
+            GetTileCenter(x, y), Quaternion.identity) as GameObject;
+        go.transform.SetParent(transform);
+        go.transform.localScale = new Vector3(5, 5, 5);
+        Character player = go.AddComponent<Character>();
+        player.SetPosition(x, y);
+        player.Id = id;
+        Players.Add(go);
+        return player;
     }
 }
