@@ -19,6 +19,25 @@
 	#define TAKE 1000
 	#define DROP -1000
 
+	#define LEFT "Left"
+	#define RIGHT "Right"
+	#define FORWARD "Forward"
+	#define LOOK "Look"
+	#define INVENTORY "Inventory"
+	#define BROADCAST "Broadcast"
+	#define CONNECT_NBR "Connect_nbr"
+	#define FORK "Fork"
+	#define EJECT "Eject"
+	#define TAKE_OBJ "Take"
+	#define SET_OBJ "Set"
+	#define INCANTATION "Incantation"
+
+	typedef struct s_respond t_respond;
+	struct s_respond {
+		float time;
+		char *respond;
+	};
+
 	typedef struct s_player_p t_player_p;
 	struct s_player_p {
 		int id;
@@ -84,8 +103,8 @@
 	int new_place(t_player_p *player, t_game_p *game);
 	//go forward the direction of the player is imortant
 	void front(t_player_p *player, t_game_p *game);
-	//take the cmd of the AI and do the cmd. return the respond
-	char *gameplay(char **msg_r, t_player_p *player, t_game_p *game);
+	//take the cmd of the AI and do the cmd. return the respond and time
+	t_respond gameplay(char **msg_r, t_player_p *player, t_game_p *game);
 	//return the number of free slot in the game as a respond (char *)
 	char *nbr_player(t_game_p *game);
 	// gice the inventory as str
@@ -111,6 +130,15 @@
 	//eject player
 	char *eject(t_player_p *player, t_game_p *game);
 	//wait to do the action
-int cooldown(t_game_p *game, t_player_p *player, char **cmd);
+	float cooldown(t_game_p *game, t_player_p *player, char **cmd);
+	//incantation to lvl up
+	char *incantation(t_game_p *game, t_player_p *player);
+	//delete stone to do incantation
+	int del_s1(t_game_p *game, t_player_p *player);
+	int del_s2(t_game_p *game, t_player_p *player);
+	int del_s3(t_game_p *game, t_player_p *player);
+	int del_s4(t_game_p *game, t_player_p *player);
+	int del_s5(t_game_p *game, t_player_p *player);
+	int del_s6(t_game_p *game, t_player_p *player);
 
 #endif
