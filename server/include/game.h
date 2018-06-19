@@ -19,6 +19,19 @@
 	#define TAKE 1000
 	#define DROP -1000
 
+	#define LEFT "Left"
+	#define RIGHT "Right"
+	#define FORWARD "Forward"
+	#define LOOK "Look"
+	#define INVENTORY "Inventory"
+	#define BROADCAST "Broadcast"
+	#define CONNECT_NBR "Connect_nbr"
+	#define FORK "Fork"
+	#define EJECT "Eject"
+	#define TAKE_OBJ "Take"
+	#define SET_OBJ "Set"
+	#define INCANTATION "Incantation"
+
 	typedef struct s_respond t_respond;
 	struct s_respond {
 		float time;

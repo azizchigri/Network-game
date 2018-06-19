@@ -14,7 +14,7 @@ char *eject(t_player_p *player, t_game_p *game)
 	if (game->map[player->x][player->y].players[1] == NULL)
 		return ("KO");
 	for (i = 0;
-	game->map[player->x][player->y].players[i]->id == player->id; i +=1);
+	game->map[player->x][player->y].players[i]->id == player->id; i += 1);
 	player_pushed = cp_player(game->map[player->x][player->y].players[i]);
 	player_pushed->direction = player->direction;
 	front(player_pushed, game);
