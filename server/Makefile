@@ -19,7 +19,8 @@ SRC	=	src/generation/map_gen.c		\
 		src/gameplay/item_action/stone2.c	\
 		src/gameplay/item_action/drop_take.c	\
 		src/gameplay/time.c			\
-		src/generation/main.c
+		src/reseau/manage_server.c          \
+		src/reseau/zappy_server.c
 
 SRC1	=	src/generation/map_gen.c		\
 		src/generation/player_gen.c		\
@@ -53,7 +54,7 @@ CFLAGS	+=	-Wall -Wextra -Werror -Iinclude
 
 CFLAGS1	+=	-Wall -Wextra -Werror -Iinclude -lcriterion --coverage
 
-NAME    =	map
+NAME    =	zappy_server
 
 NAME1	=	test
 
