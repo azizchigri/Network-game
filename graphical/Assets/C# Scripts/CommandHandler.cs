@@ -19,7 +19,9 @@ public class CommandHandler : MonoBehaviour {
 
     private void Start()
     {
-        Manager = Manager;
+        Manager = gameObject.AddComponent<BoardManager>();
+        Manager.transform.SetParent(transform);
+        Manager.name = "BoardManager";
     }
 
     public bool CallCommand(string command)
@@ -27,6 +29,8 @@ public class CommandHandler : MonoBehaviour {
         string[] array = command.Split(' ');
         int i = 0;
 
+        if (command.Length != 0)
+            Debug.Log("Received : " + command);
         foreach (var func in FuncPtr)
         {
             if (array != null && array[0] == FuncName[i])
@@ -46,6 +50,7 @@ public class CommandHandler : MonoBehaviour {
         {
             Manager.SetMapSizeX(int.Parse(array[1]));
             Manager.SetMapSizeY(int.Parse(array[2]));
+            Manager.InitBackground(0, 0, -3);
         } catch (Exception)
         {
             return false;
@@ -100,11 +105,9 @@ public class CommandHandler : MonoBehaviour {
     {
         if (array.Length != 7)
             return false;
-        int[] arr = Array.ConvertAll(array, int.Parse);
-        Character player = Manager.SpawnCharacter(arr[2], arr[3], arr[1]);
-        player.ChangeOrientation((Character.Orientation)arr[4]);
-        player.Level = arr[5];
-        player.TeamName = array[6];
+        Character player = Manager.SpawnCharacter(int.Parse(array[2]), int.Parse(array[3]), int.Parse(array[1]), array[6]);
+        player.ChangeOrientation((Character.Orientation)int.Parse(array[4]));
+        player.Level = int.Parse(array[5]);
         return true;
     }
 
@@ -112,10 +115,9 @@ public class CommandHandler : MonoBehaviour {
     {
         if (array.Length != 5)
             return false;
-        int[] arr = Array.ConvertAll(array, int.Parse);
-        Character player = Manager.Players[arr[1]].GetComponent<Character>();
-        player.MoveTo(arr[1], arr[2]);
-        player.ChangeOrientation((Character.Orientation)arr[3]);
+        Character player = Manager.Players[int.Parse(array[1])].GetComponent<Character>();
+        player.MoveTo(int.Parse(array[1]), int.Parse(array[2]));
+        player.ChangeOrientation((Character.Orientation)int.Parse(array[3]));
         return true;
     }
 
@@ -123,9 +125,8 @@ public class CommandHandler : MonoBehaviour {
     {
         if (array.Length != 3)
             return false;
-        int[] arr = Array.ConvertAll(array, int.Parse);
-        Character player = Manager.Players[arr[1]].GetComponent<Character>();
-        player.Level = arr[2];
+        Character player = Manager.Players[int.Parse(array[1])].GetComponent<Character>();
+        player.Level = int.Parse(array[2]);
         return true;
     }
 
@@ -133,12 +134,11 @@ public class CommandHandler : MonoBehaviour {
     {
         if (array.Length != 11)
             return false;
-        int[] arr = Array.ConvertAll(array, int.Parse);
-        Character player = Manager.Players[arr[1]].GetComponent<Character>();
-        player.SetPosition(arr[2], arr[3]);
+        Character player = Manager.Players[int.Parse(array[1])].GetComponent<Character>();
+        player.SetPosition(int.Parse(array[2]), int.Parse(array[3]));
         for (int i = 4; i < 11; i++)
         {
-            player.resources[i - 4] = arr[i];
+            player.resources[i - 4] = int.Parse(array[i]);
         }
         return true;
     }
@@ -182,10 +182,9 @@ public class CommandHandler : MonoBehaviour {
     {
         if (array.Length != 3)
             return false;
-        int[] arr = Array.ConvertAll(array, int.Parse);
-        Character player = Manager.Players[arr[1]].GetComponent<Character>();
-        Manager.Map[player.CurrentX, player.CurrentY].resources[arr[2]] += 1;
-        player.resources[arr[2]] -= 1;
+        Character player = Manager.Players[int.Parse(array[1])].GetComponent<Character>();
+        Manager.Map[player.CurrentX, player.CurrentY].resources[int.Parse(array[2])] += 1;
+        player.resources[int.Parse(array[2])] -= 1;
         return true;
     }
 
@@ -193,10 +192,9 @@ public class CommandHandler : MonoBehaviour {
     {
         if (array.Length != 3)
             return false;
-        int[] arr = Array.ConvertAll(array, int.Parse);
-        Character player = Manager.Players[arr[1]].GetComponent<Character>();
-        Manager.Map[player.CurrentX, player.CurrentY].resources[arr[2]] -= 1;
-        player.resources[arr[2]] += 1;
+        Character player = Manager.Players[int.Parse(array[1])].GetComponent<Character>();
+        Manager.Map[player.CurrentX, player.CurrentY].resources[int.Parse(array[2])] -= 1;
+        player.resources[int.Parse(array[2])] += 1;
         return true;
     }
 

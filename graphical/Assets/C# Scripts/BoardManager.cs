@@ -18,22 +18,20 @@ public class BoardManager : MonoBehaviour {
 
     public List<GameObject> Players;
     public string[] TeamName;
+    private string[] PlayerPrefab = { "Prefabs/Character 0",
+        "Prefabs/Character 1", "Prefabs/Character 2",
+        "Prefabs/Character 3", "Prefabs/Character 4" };
 
     private void Start()
     {
         gameObject.transform.position = Vector3.zero;
         Instance = this;
         Players = new List<GameObject>();
-        SpawnCharacter(5, 5, 10);
         MyMap = gameObject.AddComponent<DrawMap>();
-        // InitBackground(0, 0, -3);
-        CreateMap();
     }
 
     private void Update()
     {
-        //UpdateBackground();
-       // Characters[5, 5].MoveTo(50, 50);
     }
 
     public void SetMapSizeX(int x)
@@ -70,8 +68,9 @@ public class BoardManager : MonoBehaviour {
         }
     }
 
-    private void InitBackground(int x, int y, int z)
+    public void InitBackground(int x, int y, int z)
     {
+        CreateMap();
         Landscape = Instantiate((GameObject)Resources.Load("Prefabs/Terrain"), new Vector3(x, z, y + y / 2), Quaternion.identity);
         Landscape.transform.SetParent(transform);
         MyMap.maxX = MapSizeX;
@@ -115,15 +114,39 @@ public class BoardManager : MonoBehaviour {
         return origin;
     }
 
-    public Character SpawnCharacter(int x, int y, int id)
+    private int ManageTeam(string teamName)
     {
-      GameObject go = Instantiate((GameObject)Resources.Load("Prefabs/Character"),
+        int i = 0;
+        foreach (string team in TeamName)
+        {
+            if (team == teamName)
+                return i;
+            i++;
+        }
+        TeamName[TeamName.Length] = teamName;
+        return i;
+    }
+
+    public Character SpawnCharacter(int x, int y, int id, string teamName)
+    {
+        int index = ManageTeam(teamName);
+        GameObject go = Instantiate((GameObject)Resources.Load(PlayerPrefab[(index > 4 ? 4 : index)]),
             GetTileCenter(x, y), Quaternion.identity) as GameObject;
         go.transform.SetParent(transform);
         go.transform.localScale = new Vector3(5, 5, 5);
         Character player = go.AddComponent<Character>();
+        if (index > 4)
+        {
+            MeshRenderer ObjectRenderer = go.GetComponent<MeshRenderer>();
+            Material ObjectMaterial = new Material(Shader.Find("Standard"))
+            {
+                color = new Color(1f / index, 1f / index, 1f / index)
+            };
+            ObjectRenderer.material = ObjectMaterial;
+        }
         player.SetPosition(x, y);
         player.Id = id;
+        player.TeamName = teamName;
         Players.Add(go);
         return player;
     }

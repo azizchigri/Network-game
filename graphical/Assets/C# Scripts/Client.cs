@@ -6,7 +6,16 @@ using System;
 public class Client : MonoBehaviour
 {
     public bool isAtStartup = true;
-    TcpClient client = null;
+    TcpClient client;
+    CommandHandler Handler;
+    public int port = 6060;
+
+    private void Start()
+    {
+        Handler = gameObject.AddComponent<CommandHandler>();
+        Handler.transform.SetParent(transform);
+        Handler.name = "CommandHandler";
+    }
 
     void Update()
     {
@@ -16,6 +25,9 @@ public class Client : MonoBehaviour
             {
                 SetupClient();
             }
+        } else if (client.Connected)
+        {
+            Handler.CallCommand(RcvData());
         }
     }
     void OnGUI()
@@ -30,8 +42,7 @@ public class Client : MonoBehaviour
     public void SetupClient()
     {
         client = new TcpClient();
-        client.Connect("192.168.1.4", 5656);
-
+        client.Connect("192.168.1.4", port);
         isAtStartup = false;
     }
 
@@ -45,10 +56,12 @@ public class Client : MonoBehaviour
     public string RcvData()
     {
         NetworkStream stream = client.GetStream();
-        Byte[] data = new Byte[256];
         String responseData = String.Empty;
-        Int32 bytes = stream.Read(data, 0, data.Length);
-        responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
+        if (stream.DataAvailable) {
+            Byte[] data = new Byte[256];
+            Int32 bytes = stream.Read(data, 0, data.Length);
+            responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
+    }
         return responseData;
     }
 }
