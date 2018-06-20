@@ -1,27 +1,20 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using System.Net.Sockets;
+using System;
 
 public class Client : MonoBehaviour
 {
     public bool isAtStartup = true;
-    NetworkClient myClient;
+    TcpClient client = null;
+
     void Update()
     {
         if (isAtStartup)
         {
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                SetupServer();
-            }
             if (Input.GetKeyDown(KeyCode.C))
             {
                 SetupClient();
-            }
-            if (Input.GetKeyDown(KeyCode.B))
-            {
-                SetupServer();
-                SetupLocalClient();
             }
         }
     }
@@ -29,32 +22,33 @@ public class Client : MonoBehaviour
     {
         if (isAtStartup)
         {
-            GUI.Label(new Rect(2, 10, 150, 100), "Press S for server");
-            GUI.Label(new Rect(2, 30, 150, 100), "Press B for both");
             GUI.Label(new Rect(2, 50, 150, 100), "Press C for client");
         }
-    }
-
-    // Create a server and listen on a port
-    public void SetupServer()
-    {
-        NetworkServer.Listen(4444);
-        isAtStartup = false;
     }
 
     // Create a client and connect to the server port
     public void SetupClient()
     {
-        TcpClient client = new TcpClient();
+        client = new TcpClient();
         client.Connect("192.168.1.4", 5656);
-        Debug.Log("I've tried");
+
         isAtStartup = false;
     }
 
-    // Create a local client and connect to the local server
-    public void SetupLocalClient()
+    public void SendData(string msg)
     {
-        myClient = ClientScene.ConnectLocalServer();
-        isAtStartup = false;
+        Byte[] data = System.Text.Encoding.ASCII.GetBytes(msg);
+        NetworkStream stream = client.GetStream();
+        stream.Write(data, 0, data.Length);
+    }
+
+    public string RcvData()
+    {
+        NetworkStream stream = client.GetStream();
+        Byte[] data = new Byte[256];
+        String responseData = String.Empty;
+        Int32 bytes = stream.Read(data, 0, data.Length);
+        responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
+        return responseData;
     }
 }
