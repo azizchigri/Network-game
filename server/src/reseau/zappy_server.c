@@ -19,8 +19,10 @@ int launch_server(int ac, char **av)
 	t_server *server = malloc(sizeof(t_server));
 	if (server == NULL)
 		return (84);
-	if (get_options(ac, av, server) == 84)
-		return (84);
+	if (get_options(ac, av, server) == 84) {
+		fprintf(stderr, "Error, invalid parameters\n");
+		exit(84);
+	}
 	init_server(server);
 	manage_server(server);
 	//free_server();

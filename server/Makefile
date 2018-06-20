@@ -21,7 +21,10 @@ SRC	=	src/generation/map_gen.c		\
 		src/gameplay/time.c			\
 		src/reseau/manage_server.c          \
 		src/reseau/zappy_server.c           \
-		src/parameters.c
+		src/parameters.c                    \
+		src/gameplay/item_action/incantation.c	\
+		src/gameplay/item_action/del_s.c	\
+		src/gameplay/item_action/del_s2.c
 
 SRC1	=	src/generation/map_gen.c		\
 		src/generation/player_gen.c		\
@@ -37,6 +40,9 @@ SRC1	=	src/generation/map_gen.c		\
 		src/gameplay/item_action/drop_take.c	\
 		src/gameplay/game_info/eject.c		\
 		src/gameplay/time.c			\
+		src/gameplay/item_action/incantation.c	\
+		src/gameplay/item_action/del_s.c	\
+		src/gameplay/item_action/del_s2.c	\
 		tests/test_take.c			\
 		tests/test_drop.c			\
 		tests/test_destroy.c			\
@@ -49,7 +55,9 @@ SRC1	=	src/generation/map_gen.c		\
 		tests/test_eject.c			\
 		tests/test_time.c           \
 		tests/test_parameters.c           \
-		src/parameters.c
+		src/parameters.c            \
+		tests/test_time.c			\
+		tests/test_incantation.c
 
 OBJ     =       $(SRC:.c=.o)
 
