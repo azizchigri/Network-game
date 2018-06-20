@@ -5,23 +5,11 @@
 ** zappy_server function
 */
 
-#include "reseau.h"
-
-int get_options(int ac __attribute__((unused)), char **av __attribute__((unused)), t_server *server)
-{
-	server->options.port = 5656;
-	server->options.width = 20;
-	server->options.height = 20;
-	server->options.nameX = NULL;
-	server->options.nb_authorized_client = 10;
-	server->options.frequence = 10;
-	server->fds_len = 0;
-	server->higher_fd = 0;
-	return (0);
-}
+#include "server.h"
 
 void free_server(t_server *server)
 {
+	//free server->name free le tab complet;
 	free(server);
 	server = NULL;
 }
@@ -41,8 +29,6 @@ int launch_server(int ac, char **av)
 
 int main(int ac, char **av)
 {
-
-	printf("Port:5656\n");
 	launch_server(ac, av);
 	return (0);
 }

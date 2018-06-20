@@ -26,24 +26,8 @@ struct s_options {
 	int width;
 	int height;
 	char **nameX;
-	int nb_authorized_client;
+	int nb_clients;
 	int frequence;
 };
-
-typedef struct s_server t_server;
-struct s_server {
-	int fd_connection;
-	int fds_len;
-	int higher_fd;
-	t_options options;
-	fd_set readfds;
-	int fds[];
-};
-
-int init_server(t_server *server);
-int add_connection(t_server *server);
-void read_fd(int fd);
-int manage_fd(t_server *server, fd_set set);
-int manage_server(t_server *server);
 
 #endif //PSU_ZAPPY_2017_RESEAU_H

@@ -20,7 +20,8 @@ SRC	=	src/generation/map_gen.c		\
 		src/gameplay/item_action/drop_take.c	\
 		src/gameplay/time.c			\
 		src/reseau/manage_server.c          \
-		src/reseau/zappy_server.c
+		src/reseau/zappy_server.c           \
+		src/parameters.c
 
 SRC1	=	src/generation/map_gen.c		\
 		src/generation/player_gen.c		\
@@ -46,7 +47,9 @@ SRC1	=	src/generation/map_gen.c		\
 		tests/test_game_info.c			\
 		tests/test_cmd.c			\
 		tests/test_eject.c			\
-		tests/test_time.c
+		tests/test_time.c           \
+		tests/test_parameters.c           \
+		src/parameters.c
 
 OBJ     =       $(SRC:.c=.o)
 

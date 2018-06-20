@@ -6,8 +6,7 @@
 */
 
 
-#include "reseau.h"
-
+#include "server.h"
 
 int init_server(t_server *server)
 {
@@ -18,6 +17,8 @@ int init_server(t_server *server)
 	s_addr.sin_family = AF_INET;
 	s_addr.sin_port = htons(server->options.port);
 	s_addr.sin_addr.s_addr = INADDR_ANY;
+	server->fds_len = 0;
+	server->higher_fd = 0;
 	if (pe == 0)
 		return (ERROR);
 	server->fd_connection = socket(AF_INET, SOCK_STREAM, pe->p_proto);
@@ -28,7 +29,7 @@ int init_server(t_server *server)
 		return (ERROR);
 	}
 	if (listen(server->fd_connection, server->options
-	.nb_authorized_client) == -1) {
+	.nb_clients) == -1) {
 		close(server->fd_connection);
 		return (ERROR);
 	}
@@ -77,7 +78,7 @@ int manage_fd(t_server *server, fd_set set)
 {
 	if (FD_ISSET(server->fd_connection, &set))
 		add_connection(server);
-	for (int i = 0; i < server->fds_len; i++)
+	for (int i = 0; i < server->fds_len; i = i + 1)
 	{
 		if (FD_ISSET(server->fds[i], &set))
 			read_fd(server->fds[i]);
