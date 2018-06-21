@@ -14,7 +14,6 @@ Test(map, height)
 	int freq = 100;
 	t_game_p *game = game_init(width, height, freq);
 	cr_assert_eq(game->height, height);
-	destroy_game(game);
 }
 
 Test(map, width)
@@ -24,7 +23,6 @@ Test(map, width)
 	int freq = 100;
 	t_game_p *game = game_init(width, height, freq);
 	cr_assert_eq(game->width, width);
-	destroy_game(game);
 }
 
 Test(map, freq)
@@ -34,7 +32,6 @@ Test(map, freq)
 	int freq = 100;
 	t_game_p *game = game_init(width, height, freq);
 	cr_assert_eq(game->f, freq);
-	destroy_game(game);
 }
 
 Test(map, error_map)

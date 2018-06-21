@@ -26,8 +26,10 @@ t_teams **free_teams(t_teams **teams)
 
 	if (teams == NULL)
 		return (NULL);
-	for (i = 0; teams[i] != NULL; i += 1)
+	for (i = 0; teams[i] != NULL; i += 1) {
+		if (teams[i] != NULL)
 		free(teams[i]);
+	}
 	free(teams);
 	return (NULL);
 }

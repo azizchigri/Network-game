@@ -7,8 +7,10 @@
 
 #include "game.h"
 
-int main(void)
+int main(int ac, char **tmp)
 {
+	if (ac > 3)
+		return (1);
 	int h = 5;
 	int w = 10;
 	int i = 0;
@@ -20,8 +22,9 @@ int main(void)
 	t_respond res;
 	srand(time(NULL));
 	game = game_init(w, h, 100);
-	player = init_player(game, 1, "poulet");
-	player2 = init_player(game, 2, "test");
+	init_teams(game, tmp, 2);
+	player = init_player(game, 1, tmp[0]);
+	player2 = init_player(game, 2, tmp[0]);
 	player->linemate = 0;
 	res = gameplay(str, player, game);
 	for (i = 0; game->map[i] != NULL; i += 1) {

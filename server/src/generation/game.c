@@ -24,9 +24,3 @@ t_game_p *game_init(int w, int h, int f)
 		return (NULL);
 	return (game);
 }
-
-void init_teams(t_game_p *game, int slot)
-{
-	game->slot = slot;
-	game->nb_player = 0;
-}
