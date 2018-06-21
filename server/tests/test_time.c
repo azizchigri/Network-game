@@ -19,7 +19,7 @@ Test(time, taking_no_time)
 	player = init_player(game, 1, "poulet");
 	msg_r[0] = "poulet";
 	msg_r[1] = NULL;
-	cr_assert_eq(cooldown(game, player, msg_r), 0);
+	cr_assert_eq(cooldown(game, player, msg_r), -1);
 	game = destroy_game(game);
 	player = destroy_player(player);
 }
