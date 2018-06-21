@@ -14,7 +14,6 @@ Test(map, is_the_map_NULL)
 	int freq = 100;
 	t_game_p *game = game_init(width, height, freq);
 	cr_assert_neq(game->map, NULL);
-	destroy_game(game);
 }
 
 Test(map, is_random_working)
@@ -25,8 +24,6 @@ Test(map, is_random_working)
 	t_game_p *game = game_init(width, height, freq);
 	t_game_p *game2 = game_init(width, height, freq);
 	cr_assert_neq(game->map, game2->map);
-	destroy_game(game);
-	destroy_game(game2);
 }
 
 int check_random(t_cell cell, t_cell cell2)
@@ -58,8 +55,6 @@ Test(map, is_random_working3)
 					game2->map[i][j]);
 	}
 	cr_assert(cpt < 100);
-	destroy_game(game);
-	destroy_game(game2);
 }
 
 Test(map, is_the_map_have_ressources)
@@ -83,5 +78,4 @@ Test(map, is_the_map_have_ressources)
 	&& mendiane == 0 && phiras == 0 && thystame == 0 && food == 0)
 		cpt = -1;
 	cr_assert(cpt != -1);
-	destroy_game(game);
 }

@@ -26,13 +26,33 @@ void init_inventory(t_player_p *player)
 	player->food = 0;
 }
 
+int fill_team(t_game_p *game, char *name)
+{
+	int i = 0;
+	int tmp = -1;
+	for (i = 0; game->teams[i] != NULL; i += 1) {
+		if (strcmp(name, game->teams[i]->name) == 0) {
+			game->teams[i]->slot -= 1;
+			tmp = i;
+		}
+	}
+	if (tmp == -1)
+		return (-1);
+	if (game->teams[tmp]->slot < 0) {
+		game->teams[tmp]->slot = 0;
+		return (-1);
+	}
+	return (0);
+}
+
 t_player_p *init_player(t_game_p *game, int fd, char *team)
 {
 	int pos = -1;
-	t_player_p *player = malloc(sizeof(t_player_p) * 1);
-	if (player == NULL)
+	t_player_p *player;
+	if (fill_team(game, team) == -1)
 		return (NULL);
-	if (gen_teams(game, team) == -1)
+	player = malloc(sizeof(t_player_p) * 1);
+	if (player == NULL)
 		return (NULL);
 	player->id = fd;
 	player->alive = 1;

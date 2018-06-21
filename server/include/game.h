@@ -43,6 +43,7 @@
 		char *name;
 		int lvl6;
 		int eggs;
+		int slot;
 	};
 
 	typedef struct s_player_p t_player_p;
@@ -100,7 +101,7 @@
 	//free the player and return NULL
 	t_player_p *destroy_player(t_player_p *player);
 	//init teams in the game
-	int gen_teams(t_game_p *game, char *team);
+	int init_teams(t_game_p *game, char **teams_name, int slot);
 	//free the game teams
 	t_teams **free_teams(t_teams **teams);
 
