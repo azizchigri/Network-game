@@ -20,8 +20,8 @@ int main(void)
 	t_respond res;
 	srand(time(NULL));
 	game = game_init(w, h, 100);
-	player = init_player(game, 1);
-	player2 = init_player(game, 2);
+	player = init_player(game, 1, "poulet");
+	player2 = init_player(game, 2, "test");
 	player->linemate = 0;
 	res = gameplay(str, player, game);
 	for (i = 0; game->map[i] != NULL; i += 1) {

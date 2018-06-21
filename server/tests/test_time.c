@@ -11,7 +11,7 @@ Test(time, taking_no_time)
 {
 	char *msg_r[2];
 	t_game_p *game = game_init(10, 10, 100);
-	t_player_p *player = init_player(game, 1);
+	t_player_p *player = init_player(game, 1, "poulet");
 	msg_r[0] = "poulet";
 	msg_r[1] = NULL;
 	cr_assert_eq(cooldown(game, player, msg_r), 0);
@@ -23,7 +23,7 @@ Test(time, taking_good_time)
 {
 	char *msg_r[2];
 	t_game_p *game = game_init(10, 10, 100);
-	t_player_p *player = init_player(game, 1);
+	t_player_p *player = init_player(game, 1, "poulet");
 	msg_r[0] = FORWARD;
 	msg_r[1] = NULL;
 	cr_assert_eq(cooldown(game, player, msg_r), 7);

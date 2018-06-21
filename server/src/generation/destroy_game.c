@@ -20,6 +20,18 @@ t_player_p **free_player_cell(t_player_p **players)
 	return (players);
 }
 
+t_teams **free_teams(t_teams **teams)
+{
+	int i = 0;
+
+	if (teams == NULL)
+		return (NULL);
+	for (i = 0; teams[i] != NULL; i += 1)
+		free(teams[i]);
+	free(teams);
+	return (NULL);
+}
+
 t_game_p *destroy_game(t_game_p *game)
 {
 	int i = 0;
@@ -32,6 +44,7 @@ t_game_p *destroy_game(t_game_p *game)
 				free_player_cell(game->map[i][j].players);
 		free(game->map[i]);
 	}
+	game->teams = free_teams(game->teams);
 	if (game->map != NULL)
 		free(game->map);
 	game->map = NULL;

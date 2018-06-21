@@ -26,18 +26,20 @@ void init_inventory(t_player_p *player)
 	player->food = 0;
 }
 
-t_player_p *init_player(t_game_p *game, int fd)
+t_player_p *init_player(t_game_p *game, int fd, char *team)
 {
 	int pos = -1;
 	t_player_p *player = malloc(sizeof(t_player_p) * 1);
 	if (player == NULL)
+		return (NULL);
+	if (gen_teams(game, team) == -1)
 		return (NULL);
 	player->id = fd;
 	player->alive = 1;
 	init_inventory(player);
 	player->lvl = 1;
 	player->direction = 0;
-	player->team = "";
+	player->team = team;
 	while (pos == -1) {
 		player->y = rand() % (game->width);
 		player->x = rand() % (game->height);

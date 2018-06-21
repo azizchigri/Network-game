@@ -19,6 +19,7 @@ t_game_p *game_init(int w, int h, int f)
 	game->height = h;
 	game->width = w;
 	game->f = f;
+	game->teams = NULL;
 	if (create_map(game) == -1)
 		return (NULL);
 	return (game);
