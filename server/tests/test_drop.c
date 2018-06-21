@@ -11,7 +11,7 @@ Test(Drop, not_enought)
 {
 	char *msg_r[2];
 	t_game_p *game = game_init(10, 10, 100);
-	t_player_p *player = init_player(game, 1);
+	t_player_p *player = init_player(game, 1, "poulet");
 	msg_r[0] = SET_OBJ;
 	msg_r[1] = "linemate";
 	player->linemate = 0;
@@ -24,7 +24,7 @@ Test(Drop, enought)
 {
 	char *msg_r[2];
 	t_game_p *game = game_init(10, 10, 100);
-	t_player_p *player = init_player(game, 1);
+	t_player_p *player = init_player(game, 1, "poulet");
 	msg_r[0] = SET_OBJ;
 	msg_r[1] = "linemate";
 	player->linemate = 1;
@@ -37,7 +37,7 @@ Test(Drop, enought_inventary)
 {
 	char *msg_r[2];
 	t_game_p *game = game_init(10, 10, 100);
-	t_player_p *player = init_player(game, 1);
+	t_player_p *player = init_player(game, 1, "poulet");
 	msg_r[0] = SET_OBJ;
 	msg_r[1] = "linemate";
 	player->linemate = 1;

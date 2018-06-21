@@ -10,7 +10,7 @@
 Test(move_player, turn_left)
 {
 	t_game_p *game = game_init(10, 10, 100);
-	t_player_p *player = init_player(game, 1);
+	t_player_p *player = init_player(game, 1, "poulet");
 	left(player);
 	cr_assert_eq(player->direction, 3);
 	destroy_game(game);
@@ -20,7 +20,7 @@ Test(move_player, turn_left)
 Test(move_player, turn_right)
 {
 	t_game_p *game = game_init(10, 10, 100);
-	t_player_p *player = init_player(game, 1);
+	t_player_p *player = init_player(game, 1, "poulet");
 	right(player);
 	cr_assert_eq(player->direction, 1);
 	destroy_game(game);
@@ -31,7 +31,7 @@ Test(move_player, right_left_frompars)
 {
 	char *str[2];
 	t_game_p *game = game_init(10, 10, 100);
-	t_player_p *player = init_player(game, 1);
+	t_player_p *player = init_player(game, 1, "poulet");
 	str[0] = LEFT;
 	str[1] = NULL;
 	cr_assert_eq(strcmp(gameplay(str, player, game).respond, "OK"), 0);
@@ -48,7 +48,7 @@ Test(move_player, move_forward)
 {
 	char *str[2];
 	t_game_p *game = game_init(10, 10, 100);
-	t_player_p *player = init_player(game, 1);
+	t_player_p *player = init_player(game, 1, "poulet");
 	str[0] = FORWARD;
 	str[1] = NULL;
 	cr_assert_eq(strcmp(gameplay(str, player, game).respond, "OK"), 0);
@@ -59,7 +59,7 @@ Test(move_player, move_forward_and_delete)
 {
 	char *str[2];
 	t_game_p *game = game_init(10, 10, 100);
-	t_player_p *player = init_player(game, 1);
+	t_player_p *player = init_player(game, 1, "poulet");
 	int x = player->x;
 	int y = player->y;
 	str[0] = FORWARD;
