@@ -20,20 +20,32 @@ void player_refresh(t_player_p **players, t_player_p *player)
 	}
 }
 
+int other_time(char **cmd)
+{
+	int time = 0;
+	if (strcmp(FORK, cmd[0]) == 0)
+		time = 42;
+	else if (strcmp(CONNECT_NBR, cmd[0]) == 0)
+		time = 0;
+	else
+		time = -1;
+	return (time);
+}
+
 int check_time(char **cmd)
 {
 	int time = 0;
-	if (strcmp("Right", cmd[0]) == 0 || strcmp("Left", cmd[0]) == 0
-	|| strcmp("Forward", cmd[0]) == 0
-	|| strcmp("Look", cmd[0]) == 0 || strcmp("Broadcast", cmd[0]) == 0
-	|| strcmp("Eject", cmd[0]) == 0
-	|| strcmp("Take object", cmd[0]) == 0
-	|| strcmp("Set Object", cmd[0]) == 0)
+	if (strcmp(RIGHT, cmd[0]) == 0 || strcmp(LEFT, cmd[0]) == 0
+	|| strcmp(FORWARD, cmd[0]) == 0
+	|| strcmp(LOOK, cmd[0]) == 0 || strcmp(BROADCAST, cmd[0]) == 0
+	|| strcmp(EJECT, cmd[0]) == 0
+	|| strcmp(TAKE_OBJ, cmd[0]) == 0
+	|| strcmp(SET_OBJ, cmd[0]) == 0)
 		time = 7;
-	else if (strcmp("Incantation", cmd[0]) == 0)
+	else if (strcmp(INCANTATION, cmd[0]) == 0)
 		time = 300;
-	else if (strcmp("Fork", cmd[0]) == 0)
-		time = 42;
+	else
+		time = other_time(cmd);
 	return (time);
 }
 

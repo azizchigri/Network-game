@@ -38,6 +38,14 @@
 		char *respond;
 	};
 
+	typedef struct s_teams t_teams;
+	struct s_teams {
+		char *name;
+		int lvl6;
+		int eggs;
+		int slot;
+	};
+
 	typedef struct s_player_p t_player_p;
 	struct s_player_p {
 		int id;
@@ -75,6 +83,7 @@
 		int slot;
 		int nb_player;
 		t_cell **map;
+		t_teams **teams;
 		int f;
 	};
 
@@ -88,9 +97,13 @@
 	//create the game, take width heigth and frequency
 	t_game_p *game_init(int w, int h, int f);
 	//init the player with an unique id as fd
-	t_player_p *init_player(t_game_p *game, int fd);
+	t_player_p *init_player(t_game_p *game, int fd, char *team);
 	//free the player and return NULL
 	t_player_p *destroy_player(t_player_p *player);
+	//init teams in the game
+	int init_teams(t_game_p *game, char **teams_name, int slot);
+	//free the game teams
+	t_teams **free_teams(t_teams **teams);
 
 //gameplay
 	//turn left the player

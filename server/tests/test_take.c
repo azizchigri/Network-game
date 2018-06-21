@@ -11,7 +11,12 @@ Test(Take, Take_true)
 {
 	char *msg_r[2];
 	t_game_p *game = game_init(10, 10, 100);
-	t_player_p *player = init_player(game, 1);
+	t_player_p *player;
+	char *str[2];
+	str[0] = "poulet";
+	str[1] = NULL;
+	init_teams(game, str, 2);
+	player = init_player(game, 1, "poulet");
 	msg_r[0] = TAKE_OBJ;
 	msg_r[1] = "linemate";
 	game->map[player->x][player->y].linemate = 1;
@@ -24,7 +29,12 @@ Test(Take, Take_false)
 {
 	char *msg_r[2];
 	t_game_p *game = game_init(10, 10, 100);
-	t_player_p *player = init_player(game, 1);
+	t_player_p *player;
+	char *str[2];
+	str[0] = "poulet";
+	str[1] = NULL;
+	init_teams(game, str, 2);
+	player = init_player(game, 1, "poulet");
 	msg_r[0] = TAKE_OBJ;
 	msg_r[1] = "linemate";
 	game->map[player->x][player->y].linemate = 0;
@@ -37,7 +47,12 @@ Test(Take, Take_true_inventory)
 {
 	char *msg_r[2];
 	t_game_p *game = game_init(10, 10, 100);
-	t_player_p *player = init_player(game, 1);
+	t_player_p *player;
+	char *str[2];
+	str[0] = "poulet";
+	str[1] = NULL;
+	init_teams(game, str, 2);
+	player = init_player(game, 1, "poulet");
 	msg_r[0] = TAKE_OBJ;
 	msg_r[1] = "linemate";
 	game->map[player->x][player->y].linemate = 1;

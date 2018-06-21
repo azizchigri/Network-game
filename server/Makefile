@@ -6,6 +6,7 @@
 ##
 
 SRC	=	src/generation/map_gen.c		\
+		src/generation/teams.c			\
 		src/generation/player_gen.c		\
 		src/generation/destroy_game.c		\
 		src/generation/game.c			\
@@ -28,6 +29,7 @@ SRC	=	src/generation/map_gen.c		\
 
 SRC1	=	src/generation/map_gen.c		\
 		src/generation/player_gen.c		\
+		src/generation/teams.c			\
 		src/generation/destroy_game.c		\
 		src/generation/game.c			\
 		src/gameplay/move/go.c			\
