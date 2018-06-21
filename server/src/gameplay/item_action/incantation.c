@@ -7,17 +7,24 @@
 
 #include "game.h"
 
-int check_nbr_player(int lvl, int tmp)
+int check_nbr_player2(int lvl, int tmp)
 {
 	if (lvl == 1)
 		return (1);
 	else if ((lvl == 2 || lvl == 3) && tmp >= 2)
 		return (2);
-	else if ((lvl == 4 || lvl == 5) && tmp >= 4)
-		return (4);
+	else
+		return (-1);
+}
+
+int check_nbr_player(int lvl, int tmp)
+{
+	int ret = check_nbr_player2(lvl, tmp);
+	if ((lvl == 4 || lvl == 5) && tmp >= 4)
+		ret = 4;
 	else if ((lvl == 6 || lvl == 7) && tmp >= 6)
-		return (6);
-	return (-1);
+		ret = 6;
+	return (ret);
 }
 
 int check_incantation(t_game_p *game, t_player_p *player)
@@ -56,28 +63,24 @@ void lvl_up(t_game_p *game, t_player_p *player, int tmp)
 	player->lvl += 1;
 }
 
-int start_incantation(t_game_p *game, t_player_p *player, int tmp)
-{
-	int error = 0;
-	error += del_s1(game, player);
-	error += del_s2(game, player);
-	error += del_s3(game, player);
-	error += del_s4(game, player);
-	error += del_s5(game, player);
-	error += del_s6(game, player);
-	if (error != 0)
-		error = -1;
-	else
-		lvl_up(game, player, tmp);
-	return (error);
-}
-
 char *incantation(t_game_p *game, t_player_p *player)
 {
 	int tmp = check_incantation(game, player);
+	int error = 0;
 	if (tmp == -1)
 		return ("KO");
-	else if (start_incantation(game, player, tmp) == -1)
-		return ("KO");
+	else
+	{
+		error += del_s1(game, player);
+		error += del_s2(game, player);
+		error += del_s3(game, player);
+		error += del_s4(game, player);
+		error += del_s5(game, player);
+		error += del_s6(game, player);
+		if (error != 0)
+			return ("KO");
+		else
+			lvl_up(game, player, tmp);
+	}
 	return ("OK");
 }
