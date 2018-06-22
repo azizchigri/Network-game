@@ -53,6 +53,8 @@ char **str_to_wordtab(char *str)
 	int cpt = 1;
 	char **tab;
 
+	if (str == NULL)
+		return (NULL);
 	for (i = 0; str[i] != '\0'; i += 1) {
 		if (str[i] == ' ')
 			cpt += 1;
