@@ -26,7 +26,6 @@ typedef struct s_buff t_buff;
 struct s_buff {
 	char *cmd;
 	int time;
-	int fd;
 };
 
 int init_server(t_server *server);
