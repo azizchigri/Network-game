@@ -16,8 +16,8 @@
 	#include <time.h>
 	#include <criterion/criterion.h>
 
-	#define TAKE 1000
-	#define DROP -1000
+	#define TAKE (1000)
+	#define DROP (-1000)
 
 	#define LEFT "Left"
 	#define RIGHT "Right"
@@ -104,6 +104,8 @@
 	int init_teams(t_game_p *game, char **teams_name, int slot);
 	//free the game teams
 	t_teams **free_teams(t_teams **teams);
+	//free respond
+	t_respond free_respond(t_respond respond);
 
 //gameplay
 	//turn left the player
@@ -142,7 +144,7 @@
 	int sibur(t_player_p *player, t_game_p *game, int value);
 	//eject player
 	char *eject(t_player_p *player, t_game_p *game);
-	//wait to do the action
+	//return time for each action
 	int cooldown(t_game_p *game, t_player_p *player, char **cmd);
 	//incantation to lvl up
 	char *incantation(t_game_p *game, t_player_p *player);
@@ -153,5 +155,12 @@
 	int del_s4(t_game_p *game, t_player_p *player);
 	int del_s5(t_game_p *game, t_player_p *player);
 	int del_s6(t_game_p *game, t_player_p *player);
+	//find where the msg came from
+	char *is_right(char up_down, t_player_p *player);
+	char  *is_left(char up_down, t_player_p *player);
+	char *is_center(char up_down, t_player_p *player);
+	//return the cell where end player recieve msg
+	char *broadcast(t_game_p *game, t_player_p *start, t_player_p *end);
+
 
 #endif

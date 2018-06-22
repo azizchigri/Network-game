@@ -7,6 +7,16 @@
 
 #include "game.h"
 
+t_respond free_respond(t_respond respond)
+{
+	if (strcmp(respond.respond, "KO") != 0
+	&& strcmp(respond.respond, "OK") != 0
+	&& respond.respond != NULL)
+		free(respond.respond);
+	respond.respond = NULL;
+	return (respond);
+}
+
 t_player_p **free_player_cell(t_player_p **players)
 {
 	int i = 0;

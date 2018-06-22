@@ -32,6 +32,7 @@ int execute_commandes(t_server *server)
 				printf("retour = %s\n", rep.respond);
 				client->buf[i].cmd= NULL; // tempo a degager ->free
 				client->buf[i].time = -1;
+				//pour free la reponse rep = free_respond(rep);
 			}
 		}
 		client = client->next;
