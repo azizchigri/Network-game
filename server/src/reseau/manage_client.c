@@ -8,21 +8,22 @@
 #include "server.h"
 #include "game.h"
 
-t_client *init_client(t_server *server, int fd)
+t_client *init_client(t_server *server __attribute__((unused)), int fd)
 {
 	t_client *client = malloc(sizeof(t_client));
 	if (client == NULL)
 		exit(ERROR);
 	client->fd = fd;
-	client->player = init_player(server->game, fd, "teaam");
-	if (client->player == NULL) {
-		free(client);
-		return (NULL);
+	client->player = NULL;
+	for (int i = 0; i < 10; i += 1) {
+		client->buf[i].cmd = NULL;
+		client->buf[i].time = -1;
 	}
 	return (client);
 }
 
-int connect_client(t_server *server, int fd, char **tab)
+int connect_client(t_server *server, int fd, char
+**tab)
 {
 	int i = 0;
 
@@ -60,5 +61,7 @@ int manage_new_client(t_server *server, int fd)
 	FD_SET(fd, &(server->readfds));
 	printf("New client connected\n");
 	send(fd, "WELCOME\n", 8, 0);
+	server->client = add_client(server->client,
+	init_client(server, fd));
 	return (0);
 }

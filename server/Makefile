@@ -28,7 +28,8 @@ SRC	=	src/generation/map_gen.c		\
 		src/lib/str_to_wordtab.c	\
 		src/reseau/client.c	\
         	src/parameters.c        \
-        src/reseau/manage_client.c
+        src/reseau/manage_client.c  \
+        src/reseau/execute.c
 
 SRC1	=	src/generation/map_gen.c		\
 		src/generation/player_gen.c		\

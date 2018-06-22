@@ -58,16 +58,30 @@ int add_connection(t_server *server)
 	return (0);
 }
 
-void read_fd(int fd)
+void read_fd(t_server *server, int fd)
 {
+	int i = 0;
+	int i2 = 0;
 	char buff[1024];
+	t_client *client = server->client;
 	int result = recv(fd, buff, sizeof(buff), 0);
 	if (result < 1) {
 		printf("Round %d, and the data read size is: n=%d \n", fd,
 		result);
 	}
 	buff[result] = 0;
-	printf("message:%s\n", buff);
+	buff[strlen(buff) - 1] = '\0';
+	printf("message:%s, len:%ld\n", buff, strlen(buff));
+	if (client != NULL) {
+		for (i = 0; client->fd != fd && client != NULL; i += 1) {
+			client = client->next;
+		}
+		for (i2 = 0; client->buf[i2].cmd != NULL && i2 < 10; i2 += 1);
+		client->buf[i2].cmd = strdup(buff);
+		char **tab = str_to_wordtab(buff);
+		client->buf[i2].time = cooldown(server->game, client->player,
+		tab);
+	}
 }
 
 int manage_fd(t_server *server, fd_set set)
@@ -76,7 +90,7 @@ int manage_fd(t_server *server, fd_set set)
 		add_connection(server);
 	for (int i = 0; i < server->fds_len; i = i + 1) {
 		if (FD_ISSET(server->fds[i], &set))
-			read_fd(server->fds[i]);
+			read_fd(server, server->fds[i]);
 	}
 	return (0);
 }
@@ -96,6 +110,7 @@ int manage_server(t_server *server)
 			error = -1;
 		else if (result)
 			manage_fd(server, set);
+		execute_commandes(server);
 	}
 	return (0);
 }
