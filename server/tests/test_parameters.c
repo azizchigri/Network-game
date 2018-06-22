@@ -38,8 +38,7 @@ Test(no_parameters, get_options)
 	av[0] = "zappy_server";
 	av[1] = NULL;
 	if (server != NULL){
-		int result = get_options(1, av, server);
-		cr_assert_eq(84, result);
+		cr_assert_eq(84, get_options(1, av, server));
 	}
 }
 
