@@ -11,6 +11,20 @@
 #define ERROR_PARAM (-84)
 
 #include "reseau.h"
+#include "game.h"
+
+typedef struct s_buff t_buff;
+struct s_buff {
+	char *cmd;
+	int time;
+};
+
+typedef struct s_client t_client;
+struct s_client {
+	int fd;
+	t_player_p *player;
+	t_buff buf[10];
+};
 
 typedef struct s_server t_server;
 struct s_server {
@@ -19,13 +33,8 @@ struct s_server {
 	int higher_fd;
 	t_options options;
 	fd_set readfds;
+	t_client *client;
 	int fds[];
-};
-
-typedef struct s_buff t_buff;
-struct s_buff {
-	char *cmd;
-	int time;
 };
 
 int init_server(t_server *server);
