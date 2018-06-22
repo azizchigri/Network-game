@@ -22,6 +22,13 @@ struct s_server {
 	int fds[];
 };
 
+typedef struct s_buff t_buff;
+struct s_buff {
+	char *cmd;
+	int time;
+	int fd;
+};
+
 int init_server(t_server *server);
 int add_connection(t_server *server);
 void read_fd(int fd);
