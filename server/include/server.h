@@ -24,6 +24,7 @@ struct s_client {
 	int fd;
 	t_player_p *player;
 	t_buff buf[10];
+	t_client *next;
 };
 
 typedef struct s_server t_server;
