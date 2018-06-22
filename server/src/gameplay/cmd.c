@@ -79,7 +79,6 @@ t_respond gameplay(char **msg_r, t_player_p *player, t_game_p *game)
 		msg_s.respond = "dead";
 		return (msg_s);
 	}
-	msg_s.time = cooldown(game, player, msg_r);
 	msg_s.respond = move(msg_r, player, game);
 	if (msg_s.respond != NULL)
 		return (msg_s);

@@ -24,8 +24,12 @@ SRC	=	src/generation/map_gen.c		\
 		src/gameplay/item_action/del_s.c	\
 		src/gameplay/item_action/del_s2.c   \
 		src/reseau/manage_server.c          \
-        src/reseau/zappy_server.c           \
-        src/parameters.c
+        	src/reseau/zappy_server.c           \
+		src/lib/str_to_wordtab.c	\
+		src/reseau/client.c	\
+        	src/parameters.c        \
+        src/reseau/manage_client.c  \
+        src/reseau/execute.c
 
 SRC1	=	src/generation/map_gen.c		\
 		src/generation/player_gen.c		\

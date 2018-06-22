@@ -7,7 +7,7 @@
 
 #include "server.h"
 
-char **get_n_parameter(int ac __attribute__((unused)),
+void get_n_parameter(int ac __attribute__((unused)),
 char **av __attribute__((unused)), int index __attribute__((unused)),
 t_server *server)
 {
@@ -15,12 +15,12 @@ t_server *server)
 	int i = 0;
 	for (i = 0; index + i < ac && *av[index + i] != '-'; i += 1);
 	server->options.nameX = malloc(sizeof(char *) * (i + 1));
-	server->options.nameX[i] = NULL;
+	if (server->options.nameX == NULL)
+		exit(ERROR);
 	for (int cpt = 0; index + cpt < index + i; cpt += 1) {
 		server->options.nameX[cpt] = strdup(av[index + cpt]);
-
 	}
-	return (av);
+	server->options.nameX[i] = NULL;
 }
 
 int get_int_parameter(char *param)
@@ -46,8 +46,7 @@ int manage_parameters(int ac, char **av, int c, t_server *server)
 			server->options.height = get_int_parameter(optarg);
 			break;
 		case 'n':
-			server->options.nameX = get_n_parameter(ac, av, optind,
-			server);
+			get_n_parameter(ac, av, optind,	server);
 			break;
 		case 'c':
 			server->options.nb_clients = get_int_parameter(optarg);
@@ -66,9 +65,11 @@ int check_options(t_server *server)
 {
 	t_options opt = server->options;
 	if (opt.port <= 0 || opt.width <= 0 || opt.height <= 0 ||
-	    opt.nameX == NULL || opt.nb_clients <= 0 || opt.frequence <= 0) {
+	    opt.nameX == NULL || opt.nb_clients <= 0) {
 		return (ERROR);
 	}
+	if (opt.frequence <= 0)
+		opt.frequence = 100;
 	return (0);
 }
 
