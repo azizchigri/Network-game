@@ -43,7 +43,6 @@ Test(no_parameters, get_options)
 	}
 }
 
-
 Test(bad_parameters, get_options)
 {
 	t_server *server = malloc(sizeof(t_server));

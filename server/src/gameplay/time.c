@@ -49,7 +49,7 @@ int check_time(char **cmd)
 	return (time);
 }
 
-float cooldown(t_game_p *game, t_player_p *player, char **cmd)
+int cooldown(t_game_p *game, t_player_p *player, char **cmd)
 {
 	int i;
 	int j;
