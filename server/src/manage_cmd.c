@@ -90,5 +90,6 @@ void manage_cmd(t_server *server, t_client *client)
 		clear_cmd(client);
 		// free_respond();
 	}
-	client->buf[0].time -= 1;
+	if (client->buf[0].time != -1)
+		client->buf[0].time -= 1;
 }
