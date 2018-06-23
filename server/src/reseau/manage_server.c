@@ -7,27 +7,19 @@
 
 #include "server.h"
 
-int init_server(t_server *server)
+void init_server_params(t_server *server)
 {
 	FD_ZERO(&(server->readfds));
-
 	srand(time(NULL));
-	struct sockaddr_in s_addr;
-	struct protoent *pe = getprotobyname("TCP");
-	s_addr.sin_family = AF_INET;
-	s_addr.sin_port = htons(server->options.port);
-	s_addr.sin_addr.s_addr = INADDR_ANY;
 	server->fds_len = 0;
 	server->higher_fd = 0;
+	server->client = NULL;
 	server->game = game_init(server->options.width, server->options.height,
 	server->options.frequence);
-	int result = init_teams(server->game, server->options.nameX,
-	server->options.nb_clients);
-	if (server->game == NULL || result == -1)
-		exit(ERROR);
-	if (pe == 0)
-		return (ERROR);
-	server->fd_connection = socket(AF_INET, SOCK_STREAM, pe->p_proto);
+}
+
+int init_sockets(struct sockaddr_in s_addr, t_server *server)
+{
 	if (server->fd_connection == -1)
 		return (ERROR);
 	if (bind(server->fd_connection, (const struct sockaddr *) &s_addr,
@@ -45,6 +37,24 @@ int init_server(t_server *server)
 	return (0);
 }
 
+int init_server(t_server *server)
+{
+	struct sockaddr_in s_addr;
+	struct protoent *pe = getprotobyname("TCP");
+	s_addr.sin_family = AF_INET;
+	s_addr.sin_port = htons(server->options.port);
+	s_addr.sin_addr.s_addr = INADDR_ANY;
+	init_server_params(server);
+	int result = init_teams(server->game, server->options.nameX,
+	server->options.nb_clients);
+	if (server->game == NULL || result == -1)
+		exit(ERROR);
+	if (pe == 0)
+		return (ERROR);
+	server->fd_connection = socket(AF_INET, SOCK_STREAM, pe->p_proto);
+	return (init_sockets(s_addr, server));
+}
+
 int add_connection(t_server *server)
 {
 	struct sockaddr_in addr_client;
@@ -55,32 +65,6 @@ int add_connection(t_server *server)
 	fd_client = accept(server->fd_connection,
 	(struct sockaddr *) &addr_client, &addr_size);
 	manage_new_client(server, fd_client);
-	return (0);
-}
-
-void read_fd(t_server *server, int fd)
-{
-
-	char buff[BUFF_SIZE];
-	int result = recv(fd, buff, sizeof(buff), 0);
-	if (result < 1) {
-		printf("Round %d, and the data read size is: n=%d \n", fd,
-		result);
-	}
-	buff[result] = 0;
-	buff[strlen(buff) - 1] = '\0';
-	printf("message:%s, len:%ld\n", buff, strlen(buff));
-	add_client_cmd(server, fd, buff);
-}
-
-int manage_fd(t_server *server, fd_set set)
-{
-	if (FD_ISSET(server->fd_connection, &set))
-		add_connection(server);
-	for (int i = 0; i < server->fds_len; i = i + 1) {
-		if (FD_ISSET(server->fds[i], &set))
-			read_fd(server, server->fds[i]);
-	}
 	return (0);
 }
 

@@ -8,12 +8,11 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-void free_tab(char **tab)
+void free_tab(char **tab __attribute__((unused)))
 {
-	if (tab != NULL) {
-		for (int i = 0; tab[i] != NULL; i += 1) {
+	/*for (int i = 0; tab[i] != NULL; i += 1) {
 			free(tab[i]);
 		}
 		free(tab);
-	}
+	} */
 }
