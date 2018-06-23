@@ -16,8 +16,8 @@
 	#include <time.h>
 	#include <criterion/criterion.h>
 
-	#define TAKE 1000
-	#define DROP -1000
+	#define TAKE (1000)
+	#define DROP (-1000)
 
 	#define LEFT "Left"
 	#define RIGHT "Right"
@@ -104,12 +104,14 @@
 	int init_teams(t_game_p *game, char **teams_name, int slot);
 	//free the game teams
 	t_teams **free_teams(t_teams **teams);
+	//free respond
+	t_respond free_respond(t_respond respond);
 
 //gameplay
 	//turn left the player
-	void left(t_player_p *player);
+	void left(t_player_p *player, t_game_p *game);
 	//turn right the player
-	void right(t_player_p *player);
+	void right(t_player_p *player, t_game_p *game);
 	//delete the actual position of the player
 	int remove_place(t_player_p *player, t_game_p *game);
 	//add the player on his new place
@@ -119,7 +121,7 @@
 	//take the cmd of the AI and do the cmd. return the respond and time
 	t_respond gameplay(char **msg_r, t_player_p *player, t_game_p *game);
 	//return the number of free slot in the game as a respond (char *)
-	char *nbr_player(t_game_p *game);
+	char *nbr_player(t_game_p *game, t_player_p *player);
 	// gice the inventory as str
 	char *inventory(t_player_p *player);
 	//free players on a cell
@@ -142,7 +144,7 @@
 	int sibur(t_player_p *player, t_game_p *game, int value);
 	//eject player
 	char *eject(t_player_p *player, t_game_p *game);
-	//wait to do the action
+	//return time for each action
 	int cooldown(t_game_p *game, t_player_p *player, char **cmd);
 	//incantation to lvl up
 	char *incantation(t_game_p *game, t_player_p *player);
@@ -153,5 +155,29 @@
 	int del_s4(t_game_p *game, t_player_p *player);
 	int del_s5(t_game_p *game, t_player_p *player);
 	int del_s6(t_game_p *game, t_player_p *player);
+	//find where the msg came from
+	char *is_right(char up_down, t_player_p *player);
+	char  *is_left(char up_down, t_player_p *player);
+	char *is_center(char up_down, t_player_p *player);
+	//return the cell where end player recieve msg
+	char *broadcast(t_game_p *game, t_player_p *start, t_player_p *end);
+	//refresh before and after action client and map
+	void refresh_map(t_player_p *player, t_game_p *game);
+	void refresh_player(t_player_p *player, t_game_p *game);
+	// eat or die, if die return dead
+	char *eat(t_player_p *player, t_game_p *game);
+	//com with graphical client
+	char *death(t_player_p *player);
+	char *lvl_client(t_player_p *player);
+	char *add_str(char *src, char *str);
+	char *add_int(char *str, int nb);
+	char *map_size(t_game_p *game);
+	char *ppo(t_player_p *player);
+	char *pin(t_player_p *player);
+	char *take_r_client(char ress, int nb);
+	char *drop_r_client(char ress, int nb);
+	//check if a team won the game, return ko or the team name;
+	char *check_win(t_game_p *game);
+
 
 #endif

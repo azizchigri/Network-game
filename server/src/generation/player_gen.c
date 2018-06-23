@@ -23,7 +23,7 @@ void init_inventory(t_player_p *player)
 	player->mendiane = 0;
 	player->phiras = 0;
 	player->thystame = 0;
-	player->food = 0;
+	player->food = 10;
 }
 
 int fill_team(t_game_p *game, char *name)

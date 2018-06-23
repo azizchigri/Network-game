@@ -15,13 +15,14 @@ char *move(char **msg_r, t_player_p *player, t_game_p *game)
 		respond = "OK";
 	}
 	else if (strcmp(msg_r[0], RIGHT) == 0) {
-		right(player);
+		right(player, game);
 		respond = "OK";
 	}
 	else if (strcmp(msg_r[0], LEFT) == 0) {
-		left(player);
+		left(player, game);
 		respond = "OK";
 	}
+	refresh_map(player, game);
 	return (respond);
 }
 
@@ -34,10 +35,7 @@ char *personnal_action(char **msg_r, t_player_p *player, t_game_p *game)
 	else if (strcmp(msg_r[0], INVENTORY) == 0) {
 		respond = inventory(player);
 	}
-	else if (strcmp(msg_r[0], BROADCAST) == 0) {
-		respond = "OK";
-	}
-	write(1, game, 0);
+	refresh_map(player, game);
 	return (respond);
 }
 
@@ -45,15 +43,12 @@ char *game_info(char **msg_r, t_player_p *player, t_game_p *game)
 {
 	char *respond = NULL;
 	if (strcmp(msg_r[0], CONNECT_NBR) == 0) {
-		respond = nbr_player(game);
-	}
-	else if (strcmp(msg_r[0], FORK) == 0) {
-		respond = "OK";
+		respond = nbr_player(game, player);
 	}
 	else if (strcmp(msg_r[0], EJECT) == 0) {
 		respond = eject(player, game);
 	}
-	write(1, player, 0);
+	refresh_map(player, game);
 	return (respond);
 }
 
@@ -69,12 +64,14 @@ char *item_action(char **msg_r, t_player_p *player, t_game_p *game)
 	else if (strcmp(msg_r[0], INCANTATION) == 0) {
 		respond = incantation(game, player);
 	}
+	refresh_map(player, game);
 	return (respond);
 }
 
 t_respond gameplay(char **msg_r, t_player_p *player, t_game_p *game)
 {
 	t_respond msg_s;
+	refresh_player(player, game);
 	if (player->alive == 0) {
 		msg_s.respond = "dead";
 		return (msg_s);
