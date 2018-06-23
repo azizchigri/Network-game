@@ -31,6 +31,7 @@ public class Client : MonoBehaviour
 
     void Quit()
     {
+        Debug.Log("Quit program");
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
@@ -40,7 +41,7 @@ public class Client : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.Escape) || (!isAtStartup && client == null))
             Quit();
         if (!isAtStartup && client.Connected)
         {
@@ -54,7 +55,14 @@ public class Client : MonoBehaviour
         SetPort();
         SetIp();
         client = new TcpClient();
-        client.Connect(ipAddress, port);
+        try
+        {
+            client.Connect(ipAddress, port);
+        } catch (SocketException e) {
+            Debug.Log(e);
+            Quit();
+        }
+        
         isAtStartup = false;
     }
 

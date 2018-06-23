@@ -70,6 +70,8 @@ public class CommandHandler : MonoBehaviour {
         {
             Manager.Map[x, y].resources[i - 3] = int.Parse(array[i]);
         }
+        if (Manager.Map[x, y] == Manager.selectedTile)
+            Manager.DisplayTileInventory();
         return true;
     }
 
@@ -185,6 +187,8 @@ public class CommandHandler : MonoBehaviour {
         Character player = Manager.Players[int.Parse(array[1])].GetComponent<Character>();
         Manager.Map[player.CurrentX, player.CurrentY].resources[int.Parse(array[2])] += 1;
         player.resources[int.Parse(array[2])] -= 1;
+        if (Manager.Map[player.CurrentX, player.CurrentY] == Manager.selectedTile)
+            Manager.DisplayTileInventory();
         return true;
     }
 
@@ -195,6 +199,8 @@ public class CommandHandler : MonoBehaviour {
         Character player = Manager.Players[int.Parse(array[1])].GetComponent<Character>();
         Manager.Map[player.CurrentX, player.CurrentY].resources[int.Parse(array[2])] -= 1;
         player.resources[int.Parse(array[2])] += 1;
+        if (Manager.Map[player.CurrentX, player.CurrentY] == Manager.selectedTile)
+            Manager.DisplayTileInventory();
         return true;
     }
 

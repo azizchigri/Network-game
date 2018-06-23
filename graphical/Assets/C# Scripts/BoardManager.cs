@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 public class BoardManager : MonoBehaviour {
 
     public static BoardManager Instance { set; get; }
@@ -22,6 +23,14 @@ public class BoardManager : MonoBehaviour {
         "Prefabs/Character 1", "Prefabs/Character 2",
         "Prefabs/Character 3", "Prefabs/Character 4" };
 
+    private Vector3 clickPosition = Vector3.zero;
+    public Tile selectedTile = null;
+
+    private Canvas PanelCanvas;
+    private GameObject CanvasObject;
+    private RectTransform CharPanel;
+    private RectTransform TilePanel;
+
     private void Start()
     {
         gameObject.transform.position = Vector3.zero;
@@ -30,10 +39,59 @@ public class BoardManager : MonoBehaviour {
         MyMap = gameObject.AddComponent<DrawMap>();
         TeamName = new List<string>();
         TeamColor = new List<Color>();
+        CanvasObject = Instantiate((GameObject)Resources.Load("Prefabs/Panel"));
+        CanvasObject.transform.SetParent(transform);
+        Transform tmp = CanvasObject.transform.Find("TilePanel");
+        TilePanel = tmp.GetComponent<RectTransform>();
+        tmp = CanvasObject.transform.Find("CharacterPanel");
+        CharPanel = tmp.GetComponent<RectTransform>();
     }
 
     private void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            {
+                clickPosition = hit.point;
+                getTileOnClick();
+            }
+        }
+    }
+
+    private void getTileOnClick()
+    {
+        float x = 0, y = 0;
+        int MapX, MapY;
+
+        x = ((clickPosition.x - MyMap.gridOffset.x - MapScale / 2) / MapScale);
+        y = ((clickPosition.z - MyMap.gridOffset.z - MapScale / 2) / MapScale);
+        MapX = (int)Mathf.Round(x);
+        MapY = (int)Mathf.Round(y);
+        if (MapX >= 0 && MapY >= 0 && MapX < MapSizeX && MapY < MapSizeY)
+            selectedTile = Map[MapX, MapY];
+        DisplayTileInventory();
+    }
+
+    public void DisplayTileInventory()
+    {
+        if (selectedTile)
+        {
+            string[] prefabName = { "Food", "Linemate", "Deraumere", "Sibur", "Mendiane", "Phiras", "Thystame" };
+            TilePanel.gameObject.SetActive(true);
+            int i = 0;
+            foreach (string name in prefabName) {
+                Transform tmp = TilePanel.transform.Find(name);
+                Text text = tmp.GetComponent<Text>();
+                text.text = name + ": " + selectedTile.resources[i];
+                i++;
+            }
+            Transform tmp2 = TilePanel.transform.Find("Title");
+            Text text2 = tmp2.GetComponent<Text>();
+            text2.text = "TILE (" + selectedTile.CurrentX + "," + selectedTile.CurrentY + ")";
+        }
     }
 
     public void SetMapSizeX(int x)
@@ -80,6 +138,8 @@ public class BoardManager : MonoBehaviour {
         MyMap.gridScale = MapScale;
         float landScale = 2 * MapSizeX * MapSizeY;
         Landscape.transform.localScale = new Vector3(landScale, 0.13f, landScale);
+        var boxCollider2 = Landscape.AddComponent<BoxCollider>();
+        boxCollider2.center = Vector3.zero;
     }
 
     private void UpdateBackground()

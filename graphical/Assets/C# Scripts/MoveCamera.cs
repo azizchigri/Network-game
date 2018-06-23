@@ -5,7 +5,7 @@ public class MoveCamera : MonoBehaviour
 {
 
     private static readonly float PanSpeed = 40f;
-    private static readonly float ZoomSpeedTouch = 0.5f;
+    private static readonly float ZoomSpeedTouch = 20f;
     private static readonly float ZoomSpeedMouse = 1f;
 
     private static readonly float[] BoundsX = new float[] { -20f, 10f };
@@ -26,6 +26,26 @@ public class MoveCamera : MonoBehaviour
     }
 
     void Update()
+    {
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            transform.Translate(new Vector3(ZoomSpeedTouch * Time.deltaTime, 0, 0));
+        }
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            transform.Translate(new Vector3(-ZoomSpeedTouch * Time.deltaTime, 0, 0));
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            transform.Translate(new Vector3(0, -ZoomSpeedTouch * Time.deltaTime, 0));
+        }
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            transform.Translate(new Vector3(0, ZoomSpeedTouch * Time.deltaTime, 0));
+        }
+    }
+
+    void Updates()
     {
         if (Input.touchSupported && Application.platform != RuntimePlatform.WebGLPlayer)
         {
