@@ -1,0 +1,22 @@
+/*
+** EPITECH PROJECT, 2018
+** zappy
+** File description:
+** move cell to receive msg because orientation
+*/
+
+#include "game.h"
+
+char or(int or, char *cell)
+{
+	int tmp = 0;
+	int sum = 2 * or;
+	if (cell == '0')
+		return (cell);
+	for (tmp = 0; tmp != sum; tmp += 1) {
+		if (cell == 0)
+			cell = 8;
+		cell -= 1;
+	}
+	return (cell);
+}
