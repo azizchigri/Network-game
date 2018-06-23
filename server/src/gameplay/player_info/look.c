@@ -22,7 +22,7 @@ char **get_cell(t_game_p *game, int x, int y)
 
 char **look(t_game_p *game, t_player_p *player)
 {
-	char ***respond = "KO\n";
+	char ***respond = "KO";
 
 	return (respond);
 

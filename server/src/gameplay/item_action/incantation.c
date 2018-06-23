@@ -68,7 +68,7 @@ char *incantation(t_game_p *game, t_player_p *player)
 	int tmp = check_incantation(game, player);
 	int error = 0;
 	if (tmp == -1)
-		return ("KO\n");
+		return ("KO");
 	else
 	{
 		error += del_s1(game, player);
@@ -78,9 +78,9 @@ char *incantation(t_game_p *game, t_player_p *player)
 		error += del_s5(game, player);
 		error += del_s6(game, player);
 		if (error != 0)
-			return ("KO\n");
+			return ("KO");
 		else
 			lvl_up(game, player, tmp);
 	}
-	return ("OK\n");
+	return ("OK");
 }
