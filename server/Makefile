@@ -32,6 +32,7 @@ SRC	=	src/generation/map_gen.c		\
 		src/graph_client/mapsize.c		\
 		src/graph_client/player_p.c		\
 		src/graph_client/res_drop_take.c	\
+		src/gameplay/game.c			\
 		src/reseau/manage_server.c	\
         	src/reseau/zappy_server.c	\
 		src/lib/str_to_wordtab.c	\
@@ -70,6 +71,7 @@ SRC1	=	src/generation/map_gen.c		\
 		src/graph_client/mapsize.c		\
 		src/graph_client/player_p.c		\
 		src/graph_client/res_drop_take.c	\
+		src/gameplay/game.c			\
 		tests/test_take.c			\
 		tests/test_drop.c			\
 		tests/test_destroy.c			\
