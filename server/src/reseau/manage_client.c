@@ -19,39 +19,16 @@ void init_client_player(t_server *server, t_client *client, char **tab)
 	}
 }
 
-//ajouter fct detroy-client
-
-char **get_cmd(char *buff)
+void destroy_client(t_server *server, t_client *client)
 {
-	if (buff != NULL)
-	{
-		char *caract = strrchr(buff, '-');
-		if (caract != NULL && buff[0] == 'T')
-			*caract = ' ';
+	if (client->buffer != NULL)
+		free(client->buffer);
+	destroy_player(client->player);
+	for (int i = 0; i < 10; i += 1) {
+		if (client->buf[i].cmd != NULL)
+			free(client->buf[i].cmd);
 	}
-	return (str_to_wordtab(buff));
-}
-
-
-void add_client_cmd(t_server *server, int fd, char *buff)
-{
-	t_client *client = server->client;
-	int i = 0;
-	int i2 = 0;
-	char **tab = get_cmd(buff);
-	if (tab != NULL && client != NULL) {
-		int time = cooldown(server->game, client->player, tab);
-		if (time == -1) {
-			return;
-		}
-		for (i = 0; client->fd != fd && client != NULL; i += 1) {
-			client = client->next;
-		}
-		for (i2 = 0; client->buf[i2].cmd != NULL && i2 < 10; i2 += 1);
-		//appller destroy client
-		client->buf[i2].cmd = tab;
-		client->buf[i2].time = time;
-	}
+	server->client = delete_client(server->client, client);
 }
 
 t_client *init_client(t_server *server __attribute__((unused)), int fd)
@@ -72,7 +49,6 @@ t_client *init_client(t_server *server __attribute__((unused)), int fd)
 int connect_client(t_server *server, t_client *client, int fd, char **tab)
 {
 	int i = 0;
-	//int cpt = 0;
 	char str[2048];
 	char str2[2048];
 	t_game_p *game = server->game;
@@ -89,10 +65,6 @@ int connect_client(t_server *server, t_client *client, int fd, char **tab)
 		server->options.height);
 		send(fd, str2, strlen(str2), 0);
 	} else {
-		/*for (cpt = 0; cpt < server->higher_fd &&
-			      server->fds[cpt] != fd; cpt += 1);
-		server->fds[cpt] = -1;
-		FD_CLR(fd, &(server->readfds)); */
 		send(fd, "ko\n", strlen("ko\n"), 0);
 	}
 	clear_cmd(client);
@@ -114,4 +86,4 @@ int manage_new_client(t_server *server, int fd)
 	send(fd, "WELCOME\n", 8, 0);
 	server->client = add_client(server->client, init_client(server, fd));
 	return (0);
-}
+                                                                                                                       }

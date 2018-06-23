@@ -39,7 +39,7 @@ struct s_server {
 	fd_set readfds;
 	t_game_p *game;
 	t_client *client;
-	int fds[];
+	int fds[999999];
 };
 
 int init_server(t_server *server);
@@ -58,5 +58,10 @@ void add_client_cmd(t_server *server, int fd, char *buff);
 int connect_client(t_server *server, t_client *client, int fd, char **tab);
 void free_tab(char **tab);
 void clear_cmd(t_client *client);
+void destroy_client(t_server *server, t_client *client);
+char **get_cmd(char *buff);
+void manage_buff(t_server *server, char *buff, int fd);
+t_client *delete_client(t_client *liste, t_client *delete);
+void manage_cmd(t_server *server, t_client *client);
 
 #endif //PSU_ZAPPY_2017_SERVER_H

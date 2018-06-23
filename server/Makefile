@@ -34,7 +34,9 @@ SRC	=	src/generation/map_gen.c		\
 		src/reseau/client.c	\
         	src/parameters.c        \
         src/reseau/manage_client.c  \
-        src/reseau/execute.c
+        src/reseau/execute.c        \
+        src/manage_cmd.c            \
+        src/manage_fd.c
 
 SRC1	=	src/generation/map_gen.c		\
 		src/generation/player_gen.c		\
