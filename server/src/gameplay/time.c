@@ -25,7 +25,8 @@ int other_time(char **cmd)
 	int time = 0;
 	if (strcmp(FORK, cmd[0]) == 0)
 		time = 42;
-	else if (strcmp(CONNECT_NBR, cmd[0]) == 0, strcmp("TEAM", cmd[0]) == 0)
+	else if (strcmp(CONNECT_NBR, cmd[0]) == 0 ||
+		 strcmp("TEAM", cmd[0]) == 0)
 		time = 0;
 	else
 		time = -1;
@@ -35,12 +36,10 @@ int other_time(char **cmd)
 int check_time(char **cmd)
 {
 	int time = 0;
-	if (strcmp(RIGHT, cmd[0]) == 0 || strcmp(LEFT, cmd[0]) == 0
-	|| strcmp(FORWARD, cmd[0]) == 0
-	|| strcmp(LOOK, cmd[0]) == 0 || strcmp(BROADCAST, cmd[0]) == 0
-	|| strcmp(EJECT, cmd[0]) == 0
-	|| strcmp(TAKE_OBJ, cmd[0]) == 0
-	|| strcmp(SET_OBJ, cmd[0]) == 0)
+	if (strcmp(RIGHT, cmd[0]) == 0 || strcmp(LEFT, cmd[0]) == 0 ||
+	    strcmp(FORWARD, cmd[0]) == 0 || strcmp(LOOK, cmd[0]) == 0 ||
+	    strcmp(BROADCAST, cmd[0]) == 0 || strcmp(EJECT, cmd[0]) == 0 ||
+	    strcmp(TAKE_OBJ, cmd[0]) == 0 || strcmp(SET_OBJ, cmd[0]) == 0)
 		time = 7;
 	else if (strcmp(INCANTATION, cmd[0]) == 0)
 		time = 300;

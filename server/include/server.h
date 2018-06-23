@@ -13,9 +13,11 @@
 #include "reseau.h"
 #include "game.h"
 
+#define BUFF_SIZE (2048)
+
 typedef struct s_buff t_buff;
 struct s_buff {
-	char *cmd;
+	char **cmd;
 	int time;
 };
 
@@ -25,6 +27,7 @@ struct s_client {
 	t_player_p *player;
 	t_buff buf[10];
 	t_client *next;
+	int buff_start;
 };
 
 typedef struct s_server t_server;
@@ -49,6 +52,8 @@ int get_options(int ac __attribute__((unused)), char **av __attribute__(
 t_client *add_client(t_client *liste, t_client *client);
 int manage_new_client(t_server *server, int fd);
 char **str_to_wordtab(char *str);
-int execute_commandes(t_server *server);
+int execute_commands(t_server *server);
+void init_client_player(t_server *server, t_client *client, char **tab);
+void add_client_cmd(t_server *server, int fd, char *buff);
 
 #endif //PSU_ZAPPY_2017_SERVER_H
