@@ -22,9 +22,10 @@ SRC	=	src/generation/map_gen.c		\
 		src/gameplay/time.c			\
 		src/gameplay/item_action/incantation.c	\
 		src/gameplay/item_action/del_s.c	\
-		src/gameplay/item_action/del_s2.c   \
+		src/gameplay/item_action/del_s2.c   	\
 		src/gameplay/game_info/sound_from.c	\
 		src/gameplay/game_info/broadcast.c	\
+		src/gameplay/refresh.c			\
 		src/reseau/manage_server.c	\
         	src/reseau/zappy_server.c	\
 		src/lib/str_to_wordtab.c	\
@@ -54,6 +55,7 @@ SRC1	=	src/generation/map_gen.c		\
 		src/gameplay/item_action/del_s2.c	\
 		src/gameplay/game_info/sound_from.c	\
 		src/gameplay/game_info/broadcast.c	\
+		src/gameplay/refresh.c			\
 		tests/test_take.c			\
 		tests/test_drop.c			\
 		tests/test_destroy.c			\

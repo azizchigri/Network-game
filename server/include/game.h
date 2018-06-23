@@ -161,5 +161,8 @@
 	char *is_center(char up_down, t_player_p *player);
 	//return the cell where end player recieve msg
 	char *broadcast(t_game_p *game, t_player_p *start, t_player_p *end);
+	//refresh before and after action client and map
+	void refresh_map(t_player_p *player, t_game_p *game);
+	void refresh_player(t_player_p *player, t_game_p *game);
 
 #endif
