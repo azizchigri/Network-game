@@ -25,7 +25,7 @@ int other_time(char **cmd)
 	int time = 0;
 	if (strcmp(FORK, cmd[0]) == 0)
 		time = 42;
-	else if (strcmp(CONNECT_NBR, cmd[0]) == 0)
+	else if (strcmp(CONNECT_NBR, cmd[0]) == 0, strcmp("TEAM", cmd[0]) == 0)
 		time = 0;
 	else
 		time = -1;
