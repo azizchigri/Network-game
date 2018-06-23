@@ -26,8 +26,8 @@ char *take(t_player_p *player, t_game_p *game, char *obj)
 	check = strcmp(obj, "food");
 	tmp += food(player, game, check + TAKE);
 	if (tmp == -6)
-		return ("OK");
-	return ("KO");
+		return ("OK\n");
+	return ("KO\n");
 }
 
 char *drop(t_player_p *player, t_game_p *game, char *obj)
@@ -49,6 +49,6 @@ char *drop(t_player_p *player, t_game_p *game, char *obj)
 	check = strcmp(obj, "food");
 	tmp += food(player, game, check + DROP);
 	if (tmp == -6)
-		return ("OK");
-	return ("KO");
+		return ("OK\n");
+	return ("KO\n");
 }

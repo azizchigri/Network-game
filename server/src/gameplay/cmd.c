@@ -12,15 +12,15 @@ char *move(char **msg_r, t_player_p *player, t_game_p *game)
 	char *respond = NULL;
 	if (strcmp(msg_r[0], FORWARD) == 0) {
 		front(player, game);
-		respond = "OK";
+		respond = "OK\n";
 	}
 	else if (strcmp(msg_r[0], RIGHT) == 0) {
 		right(player);
-		respond = "OK";
+		respond = "OK\n";
 	}
 	else if (strcmp(msg_r[0], LEFT) == 0) {
 		left(player);
-		respond = "OK";
+		respond = "OK\n";
 	}
 	return (respond);
 }
@@ -29,7 +29,7 @@ char *personnal_action(char **msg_r, t_player_p *player, t_game_p *game)
 {
 	char *respond = NULL;
 	if (strcmp(msg_r[0], LOOK) == 0) {
-		respond = "OK";
+		respond = "OK\n";
 	}
 	else if (strcmp(msg_r[0], INVENTORY) == 0) {
 		respond = inventory(player);
@@ -70,7 +70,7 @@ t_respond gameplay(char **msg_r, t_player_p *player, t_game_p *game)
 {
 	t_respond msg_s;
 	if (player->alive == 0) {
-		msg_s.respond = "dead";
+		msg_s.respond = "dead\n";
 		return (msg_s);
 	}
 	msg_s.respond = move(msg_r, player, game);
@@ -85,6 +85,6 @@ t_respond gameplay(char **msg_r, t_player_p *player, t_game_p *game)
 	msg_s.respond = item_action(msg_r, player, game);
 	if (msg_s.respond != NULL)
 		return (msg_s);
-	msg_s.respond = "KO";
+	msg_s.respond = "KO\n";
 	return (msg_s);
 }

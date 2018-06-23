@@ -39,7 +39,6 @@ char up_or_do(t_game_p *game, t_player_p *start, t_player_p *end)
 	int tmp = 0;
 	int tmp2 = 0;
 	char u_d = 'x';
-	char c = y + 48;
 	for (y = start->y; y != y2; y += 1) {
 		if (y == game->height)
 			y = -1;

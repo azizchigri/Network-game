@@ -66,7 +66,6 @@ SRC1	=	src/generation/map_gen.c		\
 		src/parameters.c            \
 		tests/test_time.c			\
 		tests/test_parameters.c           \
-		tests/test_broadcast.c			\
 		tests/test_incantation.c
 
 OBJ     =       $(SRC:.c=.o)

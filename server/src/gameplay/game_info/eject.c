@@ -13,7 +13,7 @@ char *eject(t_player_p *player, t_game_p *game)
 	t_player_p *player_pushed;
 	int tmp;
 	if (game->map[player->x][player->y].players[1] == NULL)
-		return ("KO");
+		return ("KO\n");
 	for (i = 0;
 	game->map[player->x][player->y].players[i]->id == player->id;
 	i += 1);
@@ -28,5 +28,5 @@ char *eject(t_player_p *player, t_game_p *game)
 	game->map[player_pushed->x][player_pushed->y].players[i]->direction
 		= tmp;
 	free(player_pushed);
-	return ("OK");
+	return ("OK\n");
 }

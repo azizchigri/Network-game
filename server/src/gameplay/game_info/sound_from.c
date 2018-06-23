@@ -18,48 +18,51 @@ char real_pos_sound(char tmp, t_player_p *player)
 
 char *is_right(char up_down, t_player_p *player)
 {
-	char tmp = 2;
+	char tmp = '2';
 	char *cell = malloc(sizeof(char) * 2);
 
 	if (cell == NULL)
 		return (NULL);
 	if (up_down == 'x')
-		tmp = 3;
+		tmp = '3';
 	else if (up_down == 'd')
-		tmp = 4;
-	cell[0] = real_pos_sound(tmp, player);
+		tmp = '4';
+	cell[0] = tmp;
 	cell[1] = 0;
+	write(1, player, 0);
 	return (cell);
 }
 
 char *is_left(char up_down, t_player_p *player)
 {
-	char tmp = 8;
+	char tmp = '8';
 	char *cell = malloc(sizeof(char) * 2);
 
 	if (cell == NULL)
 		return (NULL);
 	if (up_down == 'x')
-		tmp = 7;
+		tmp = '7';
 	else if (up_down == 'd')
-		tmp = 6;
-	cell[0] = real_pos_sound(tmp, player);
+		tmp = '6';
+	cell[0] = tmp;
 	cell[1] = 0;
+	write(1, player, 0);
 	return (cell);
 }
 
 char *is_center(char up_down, t_player_p *player)
 {
-	char tmp = 1;
+	char tmp = '1';
 	char *cell = malloc(sizeof(char) * 2);
 
 	if (cell == NULL)
 		return (NULL);
 	if (up_down == 'x')
-		tmp = 0;
+		tmp = '0';
 	else if (up_down == 'd')
-		tmp = 5;
-	cell[0] = real_pos_sound(tmp, player);
+		tmp = '5';
+	cell[0] = tmp;
 	cell[1] = 0;
+	write(1, player, 0);
 	return (cell);
 }
