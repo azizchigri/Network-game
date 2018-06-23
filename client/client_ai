@@ -10,14 +10,26 @@ class Client:
 		self.team = args[1][:len].decode('utf-8')
 		self.id = "NewPlayer"
 		self.is_alive = True
+		self.level = 0
+		self.pos = [0, 0]
+		self.list_Client = [0]
 		self.ressources = [9, 0, 0, 0, 0, 0, 0]
+		self.ressources_limit = [9999, 9, 8, 10, 5, 6, 1]
 		self.ressources_name = ["food", "limemate", "deraumere",
-		"sibur", "mendiane", "phiras", "thistame"]
+				"sibur", "mendiane", "phiras", "thistame"]
+		self.ressources_incant = [[1, 0, 0, 0, 0, 0],
+				[1, 1, 1, 0, 0, 0], [2, 0, 1, 0, 2, 0],
+				[1, 1, 2, 0, 1, 0], [1, 2, 1, 3, 0, 0],
+				[1, 2, 3, 0, 1, 0], [2, 2, 2, 2, 2, 1]]
+		self.res = True
+		self.looked = ""
 		self.buffer = (ctypes.c_char * 4096)()
+		self.buff_str = ""
 		self.memory_message = ""
 		self.ia_com = ia_com
 
 	def send(self, message_string):
+		print(message_string)
 		enc_message = message_string.encode('utf-8')
 		message = ctypes.create_string_buffer(enc_message)
 		if self.ia_com.client_send(self.sock_fd, message) == 84:
@@ -25,30 +37,31 @@ class Client:
 		return 0
 
 	def receive(self):
-		buff_str = ""
 		is_number = False
-		while not buff_str.startswith('[') \
-		and not buff_str.startswith("ok") \
-		and not buff_str.startswith("ko") \
-		and is_number is False:
+		while (not self.buff_str.startswith('[') \
+				and not self.buff_str.startswith("ok") \
+				and not self.buff_str.startswith("ko") \
+				and is_number is False):
 			if self.ia_com.client_receive(
 				self.sock_fd, self.buffer)== 84:
 				return 84
-			buff_str = self.buffer.value.decode(
-				'utf-8').split("\n", 1)[0]
-			if buff_str.startswith("dead"):
+			self.buff_str = self.buffer.value.decode(
+					'utf-8').split("\n", 1)[0]
+			print(self.buff_str)
+			if self.buff_str.startswith("dead"):
 				self.isAlive = False
 				return 0
 			try:
-				int(buff_str)
+				int(self.buff_str)
 				is_number = True
 			except ValueError:
 				is_number = False
-			if self.id in buff_str:
-				self.memory_message = buff_str
+			if self.id in self.buff_str:
+				self.memory_message = self.buff_str
 			if self.memory_message is None \
-			and (self.team + ":all:") in buff_str:
-				self.memory_message = buff_str
+			and (self.team + ":all:") in self.buff_str:
+				self.memory_message = self.buff_str
+		self.res = True if self.buff_str.startswith("ok") else False
 		return 0
 
 	def connect(self, args):
@@ -94,19 +107,20 @@ class Client:
 			return 84
 		if self.receive() == 84:
 			return 84
-		#Get loot info
+		self.looked = self.buff_str
 		return 0
 
 	def inventory(self):
-		#Necessary only for food update? Com. w/ others?
 		if self.send("Inventory") == 84:
 			return 84
 		if self.receive() == 84:
 			return 84
+		self.ressources[0] = int(self.buff_str.split(",", 1)[0]
+				.split("food ", 1)[1])
 		return 0
 
 	def broadcast(self, message):
-		if self.send("Broadcast" + message) == 84:
+		if self.send("Broadcast " + message) == 84:
 			return 84
 		if self.receive() == 84:
 			return 84
@@ -120,7 +134,7 @@ class Client:
 		return 0
 
 	def fork(self):
-		if self.send("Forward") == 84:
+		if self.send("Fork") == 84:
 			return 84
 		if self.receive() == 84:
 			return 84
@@ -131,7 +145,10 @@ class Client:
 			return 84
 		if self.receive() == 84:
 			return 84
-		#update inventory
+		if self.res is True:
+			for i, l_item in self.ressources_name:
+				if l_item is item:
+					self.ressources[i] += 1
 		return 0
 
 	def set_item(self, item):
@@ -139,7 +156,10 @@ class Client:
 			return 84
 		if self.receive() == 84:
 			return 84
-		#update inventory
+		if self.res is True:
+			for i, l_item in self.ressources_name:
+				if l_item is item:
+					self.ressources[i] -= 1
 		return 0
 
 	def incantation(self):
@@ -151,8 +171,7 @@ class Client:
 		return 0
 
 	def run(self):
-		if self.broadcast("Broadcast " + self.team
-		+ ":all:NewPlayer") == 84:
+		if self.broadcast(self.team + ":all:NewPlayer") == 84:
 			return 84
 		if self.look() == 84:
 			return 84
@@ -160,6 +179,7 @@ class Client:
 			return 84
 		if self.id in self.memory_message:
 			self.id = self.memory_message.split("NewPlayer:", 1)[1]
+			self.list_Client.append(self.id)
 		else:
 			self.id = "0"
 		if self.roles() == 84:
@@ -168,16 +188,31 @@ class Client:
 
 	def roles(self):
 		if int(self.id) == 0:
-			if self.doQueen() == 84:
+			if self.queen() == 84:
 				return 84
 		return 0
 
-	def doQueen(self):
+	def master(self):
+		while (1):
+			if self.get_ressources() == 84:
+				return 84
+
+	def queen(self):
 		while (1):
 			if self.fork() == 84:
 				return 84
 			if self.is_alive == False:
 				return 0
+			if self.queen_check_broadcast() == 84:
+				return 84
+
+	def queen_check_broadcast(self):
+		if (self.team + ":all:NewPlayer") in self.memory_message:
+			self.list_Client.append(str(int(self.list_Client[-1] + 1)))
+			if self.broadcast(self.team + ":NewPlayer:" ):
+				return 84
+		return 0
+
 
 def	launch_client(ia_com, args):
 	sock_fd = ia_com.init_socket()
@@ -185,7 +220,6 @@ def	launch_client(ia_com, args):
 		return (84)
 	if (ia_com.init_connection(args, sock_fd) == 84):
 		return (84)
-
 	len_team_name = ia_com.get_len_team_name(args)
 	myClient = Client(sock_fd, ia_com, args, len_team_name)
 	if myClient.connect(args) == 84:
@@ -205,7 +239,6 @@ def	main():
 	for i, arg in enumerate(sys.argv):
 		enc_arg = arg.encode('utf-8')
 		argv[i] = ctypes.create_string_buffer(enc_arg)
-
 	if (ia_com.get_help(argc, argv) == 0):
 		return (0)
 	args = ia_com.get_args(argc, argv)
