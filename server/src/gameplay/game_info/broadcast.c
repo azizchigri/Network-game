@@ -21,20 +21,18 @@ char relativ_pos(int or, char cell)
 	return (cell);
 }
 
-char le_or_ri(t_game_p *game, t_player_p *start, t_player_p *end)
+char le_or_ri(t_game_p *game, t_player_p *start, t_player_p *end, int tmp)
 {
-	int x = start->x;
 	int x2 = end->x;
-	int tmp = 0;
 	int tmp2 = 0;
 	char l_r = 'x';
-	for (x = start->x; x != x2; x += 1) {
+	for (int x = start->x; x != x2; x += 1) {
 		if (x == game->width)
 			x = -1;
 		else
 			tmp += 1;
 	}
-	for (x = start->x; x != x2; x -= 1) {
+	for (int x = start->x; x != x2; x -= 1) {
 		if (x < 0)
 			x = game->width;
 		else
@@ -47,20 +45,18 @@ char le_or_ri(t_game_p *game, t_player_p *start, t_player_p *end)
 	return (l_r);
 }
 
-char up_or_do(t_game_p *game, t_player_p *start, t_player_p *end)
+char up_or_do(t_game_p *game, t_player_p *start, t_player_p *end, int tmp)
 {
-	int y = start->y;
 	int y2 = end->y;
-	int tmp = 0;
 	int tmp2 = 0;
 	char u_d = 'x';
-	for (y = start->y; y != y2; y += 1) {
+	for (int y = start->y; y != y2; y += 1) {
 		if (y == game->height)
 			y = -1;
 		else
 			tmp += 1;
 	}
-	for (y = start->y; y != y2; y -= 1) {
+	for (int y = start->y; y != y2; y -= 1) {
 		if (y < 0)
 			y = game->height;
 		else
@@ -75,8 +71,8 @@ char up_or_do(t_game_p *game, t_player_p *start, t_player_p *end)
 
 char *broadcast(t_game_p *game, t_player_p *start, t_player_p *end)
 {
-	char  l_r = le_or_ri(game, start, end);
-	char u_d = up_or_do(game, start, end);
+	char  l_r = le_or_ri(game, start, end, 0);
+	char u_d = up_or_do(game, start, end, 0);
 	char *cell;
 
 	if (l_r == 'r')

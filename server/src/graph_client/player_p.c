@@ -20,7 +20,7 @@ char *write_ppo(char *result, t_player_p *player)
 	return (result);
 }
 
-char *ppo(t_player_p *player)
+char *player_pos(t_player_p *player)
 {
 	char *result;
 	int size = 0;
@@ -90,7 +90,7 @@ char *write_pin(char *result, t_player_p *player)
 	return (result);
 }
 
-char *pin(t_player_p *player)
+char *player_inv(t_player_p *player)
 {
 	char *result;
 	int size = 0;

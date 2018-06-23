@@ -15,17 +15,17 @@ t_respond move(char **msg_r, t_player_p *player, t_game_p *game)
 	if (strcmp(msg_r[0], FORWARD) == 0) {
 		front(player, game);
 		resp.respond = "OK";
-		resp.respond_g = ppo(player);
+		resp.respond_g = player_pos(player);
 	}
 	else if (strcmp(msg_r[0], RIGHT) == 0) {
 		right(player, game);
 		resp.respond = "OK";
-		resp.respond_g = ppo(player);
+		resp.respond_g = player_pos(player);
 	}
 	else if (strcmp(msg_r[0], LEFT) == 0) {
 		left(player, game);
 		resp.respond = "OK";
-		resp.respond_g = ppo(player);
+		resp.respond_g = player_pos(player);
 	}
 	refresh_map(player, game);
 	return (resp);
@@ -62,12 +62,10 @@ t_respond item_action(char **msg_r, t_player_p *player, t_game_p *game)
 	t_respond resp;
 	resp.respond = NULL;
 	resp.respond_g = NULL;
-	if (strcmp(msg_r[0], TAKE_OBJ) == 0) {
-		resp.respond = take(player, game, msg_r[1]);
-	}
-	else if (strcmp(msg_r[0], SET_OBJ) == 0) {
-		resp.respond = drop(player, game, msg_r[1]);
-	}
+	if (strcmp(msg_r[0], TAKE_OBJ) == 0)
+		resp = take(player, game, msg_r[1]);
+	else if (strcmp(msg_r[0], SET_OBJ) == 0)
+		resp = drop(player, game, msg_r[1]);
 	else if (strcmp(msg_r[0], INCANTATION) == 0) {
 		resp.respond = incantation(game, player);
 		resp.respond_g = lvl_client(player);

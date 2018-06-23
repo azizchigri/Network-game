@@ -132,9 +132,9 @@
 	//add a player on a cell
 	int new_place(t_player_p *player, t_game_p *game);
 	//take an item, if not possible return KO
-	char *take(t_player_p *player, t_game_p *game, char *obj);
+	t_respond take(t_player_p *player, t_game_p *game, char *obj);
 	//drop an item, if not possible retrurn KO
-	char *drop(t_player_p *player, t_game_p *game, char *obj);
+	t_respond drop(t_player_p *player, t_game_p *game, char *obj);
 	//take and drop stone
 	int linemate(t_player_p *player, t_game_p *game, int value);
 	int deraumere(t_player_p *player, t_game_p *game, int value);
@@ -173,8 +173,8 @@
 	char *add_str(char *src, char *str);
 	char *add_int(char *str, int nb);
 	char *map_size(t_game_p *game);
-	char *ppo(t_player_p *player);
-	char *pin(t_player_p *player);
+	char *player_pos(t_player_p *player);
+	char *player_inv(t_player_p *player);
 	char *take_r_client(char ress, int nb);
 	char *drop_r_client(char ress, int nb);
 	//check if a team won the game, return ko or the team name;
