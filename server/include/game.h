@@ -36,6 +36,7 @@
 	struct s_respond {
 		int time;
 		char *respond;
+		char *respond_g;
 	};
 
 	typedef struct s_teams t_teams;

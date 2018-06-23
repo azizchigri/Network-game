@@ -40,13 +40,14 @@ void refresh_map(t_player_p *player, t_game_p *game)
 	i += 1);
 	game->map[player->x][player->y].players[i]->x = player->x;
 	game->map[player->x][player->y].players[i]->y = player->y;
-	game->map[player->x][player->y].players[i]->direction = player->direction;
+	game->map[player->x][player->y].players[i]->direction =
+		player->direction;
 	game->map[player->x][player->y].players[i]->linemate = player->linemate;
-	game->map[player->x][player->y].players[i]->deraumere = player->deraumere;
+	game->map[player->x][player->y].players[i]->deraumere =
+		player->deraumere;
 	game->map[player->x][player->y].players[i]->sibur = player->sibur;
 	game->map[player->x][player->y].players[i]->mendiane = player->mendiane;
 	game->map[player->x][player->y].players[i]->phiras = player->phiras;
 	game->map[player->x][player->y].players[i]->thystame = player->thystame;
 	game->map[player->x][player->y].players[i]->food = player->food;
-	
 }

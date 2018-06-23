@@ -14,6 +14,9 @@ t_respond free_respond(t_respond respond)
 	&& respond.respond != NULL)
 		free(respond.respond);
 	respond.respond = NULL;
+	if (respond.respond_g != NULL)
+		free(respond.respond_g);
+	respond.respond_g = NULL;
 	return (respond);
 }
 
