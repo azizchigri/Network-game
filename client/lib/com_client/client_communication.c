@@ -8,9 +8,11 @@
 #include "client.h"
 #include <ctype.h>
 
-void client_send(int fd, char *message)
+int client_send(int fd, char *message)
 {
-	dprintf(fd, "%s\n", message);
+	if (dprintf(fd, "%s\n", message) < 0)
+		return (return_error(fd));
+	return (0);
 }
 
 int client_receive(int fd, char *message)
@@ -40,7 +42,8 @@ int client_receive_manual(int fd, char *message)
 			perror("read failed");
 			return (return_error(fd));
 		}
-		dprintf(1, "%.*s", nb_read, message);
+		if (dprintf(1, "%.*s", nb_read, message) < 0)
+			return (return_error(fd));
 		if (!strncmp(message, "dead\n", 5))
 			return (-1);
 		for (int i = 0; (i < len) && (digit != 0); i++)

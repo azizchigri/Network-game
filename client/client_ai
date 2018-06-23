@@ -1,0 +1,218 @@
+#!/usr/bin/python3.6
+
+import sys
+import ctypes
+
+class Client:
+
+	def __init__(self, sock_fd, ia_com, args, len):
+		self.sock_fd = sock_fd
+		self.team = args[1][:len].decode('utf-8')
+		self.id = "NewPlayer"
+		self.is_alive = True
+		self.ressources = [9, 0, 0, 0, 0, 0, 0]
+		self.ressources_name = ["food", "limemate", "deraumere",
+		"sibur", "mendiane", "phiras", "thistame"]
+		self.buffer = (ctypes.c_char * 4096)()
+		self.memory_message = ""
+		self.ia_com = ia_com
+
+	def send(self, message_string):
+		enc_message = message_string.encode('utf-8')
+		message = ctypes.create_string_buffer(enc_message)
+		if self.ia_com.client_send(self.sock_fd, message) == 84:
+			return 84
+		return 0
+
+	def receive(self):
+		buff_str = ""
+		is_number = False
+		while not buff_str.startswith('[') \
+		and not buff_str.startswith("ok") \
+		and not buff_str.startswith("ko") \
+		and is_number is False:
+			if self.ia_com.client_receive(
+				self.sock_fd, self.buffer)== 84:
+				return 84
+			buff_str = self.buffer.value.decode(
+				'utf-8').split("\n", 1)[0]
+			if buff_str.startswith("dead"):
+				self.isAlive = False
+				return 0
+			try:
+				int(buff_str)
+				is_number = True
+			except ValueError:
+				is_number = False
+			if self.id in buff_str:
+				self.memory_message = buff_str
+			if self.memory_message is None \
+			and (self.team + ":all:") in buff_str:
+				self.memory_message = buff_str
+		return 0
+
+	def connect(self, args):
+		if self.ia_com.client_receive(self.sock_fd, self.buffer) == 84:
+			return 84
+		if "WELCOME\n" not in self.buffer.value.decode('utf-8'):
+			print("Error: Client not connected to a zappy server")
+			return 84
+		if self.ia_com.client_send(self.sock_fd, args[1]) == 84:
+			return 84
+		if self.ia_com.client_receive(self.sock_fd, self.buffer):
+			return 84
+		if "ko\n" in self.buffer.value.decode('utf-8'):
+			print("Error: Bad Team Name. Retry to connect with an" \
+			+ " allowed team name")
+			return self.ia_com.return_error(self.sock_fd)
+		#Get map x/y?
+		return 0
+
+	def forward(self):
+		if self.send("Forward") == 84:
+			return 84
+		if self.receive() == 84:
+			return 84
+		return 0
+
+	def left(self):
+		if self.send("Left") == 84:
+			return 84
+		if self.receive() == 84:
+			return 84
+		return 0
+
+	def right(self):
+		if self.send("Right") == 84:
+			return 84
+		if self.receive() == 84:
+			return 84
+		return 0
+
+	def look(self):
+		if self.send("Look") == 84:
+			return 84
+		if self.receive() == 84:
+			return 84
+		#Get loot info
+		return 0
+
+	def inventory(self):
+		#Necessary only for food update? Com. w/ others?
+		if self.send("Inventory") == 84:
+			return 84
+		if self.receive() == 84:
+			return 84
+		return 0
+
+	def broadcast(self, message):
+		if self.send("Broadcast" + message) == 84:
+			return 84
+		if self.receive() == 84:
+			return 84
+		return 0
+
+	def get_team_sots(self):
+		if self.send("Connect_nbr") == 84:
+			return 84
+		if self.receive() == 84:
+			return 84
+		return 0
+
+	def fork(self):
+		if self.send("Forward") == 84:
+			return 84
+		if self.receive() == 84:
+			return 84
+		return 0
+
+	def take_item(self, item):
+		if self.send("Take " + item) == 84:
+			return 84
+		if self.receive() == 84:
+			return 84
+		#update inventory
+		return 0
+
+	def set_item(self, item):
+		if self.send("Set " + item) == 84:
+			return 84
+		if self.receive() == 84:
+			return 84
+		#update inventory
+		return 0
+
+	def incantation(self):
+		if self.send("Forward") == 84:
+			return 84
+		if self.receive() == 84:
+			return 84
+		#recheck incantation
+		return 0
+
+	def run(self):
+		if self.broadcast("Broadcast " + self.team
+		+ ":all:NewPlayer") == 84:
+			return 84
+		if self.look() == 84:
+			return 84
+		if self.take_item(self.ressources_name[0]) == 84:
+			return 84
+		if self.id in self.memory_message:
+			self.id = self.memory_message.split("NewPlayer:", 1)[1]
+		else:
+			self.id = "0"
+		if self.roles() == 84:
+			return 84
+		return 0
+
+	def roles(self):
+		if int(self.id) == 0:
+			if self.doQueen() == 84:
+				return 84
+		return 0
+
+	def doQueen(self):
+		while (1):
+			if self.fork() == 84:
+				return 84
+			if self.is_alive == False:
+				return 0
+
+def	launch_client(ia_com, args):
+	sock_fd = ia_com.init_socket()
+	if (sock_fd < 0):
+		return (84)
+	if (ia_com.init_connection(args, sock_fd) == 84):
+		return (84)
+
+	len_team_name = ia_com.get_len_team_name(args)
+	myClient = Client(sock_fd, ia_com, args, len_team_name)
+	if myClient.connect(args) == 84:
+		return 84
+	if myClient.run() == 84:
+		return 84
+	return (ia_com.stop_socket(sock_fd))
+
+def	main():
+	ia_com = ctypes.CDLL('./libia.so')
+	LP_c_char = ctypes.POINTER(ctypes.c_char)
+	LP_LP_c_char = ctypes.POINTER(LP_c_char)
+	ia_com.get_args.argtypes = (ctypes.c_int, LP_LP_c_char)
+	ia_com.get_args.restype = LP_LP_c_char
+	argc = len(sys.argv)
+	argv = (LP_c_char * (argc + 1))()
+	for i, arg in enumerate(sys.argv):
+		enc_arg = arg.encode('utf-8')
+		argv[i] = ctypes.create_string_buffer(enc_arg)
+
+	if (ia_com.get_help(argc, argv) == 0):
+		return (0)
+	args = ia_com.get_args(argc, argv)
+	if args is None:
+		return (84)
+	if (ia_com.check_args(args) == 84):
+		return (84)
+	return (launch_client(ia_com, args))
+
+exit(main())
