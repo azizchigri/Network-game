@@ -80,6 +80,7 @@ SRC1	=	src/generation/map_gen.c		\
 		tests/test_game_info.c			\
 		tests/test_cmd.c			\
 		tests/test_eject.c			\
+		tests/test_cmd_g.c			\
 		src/parameters.c            \
 		tests/test_time.c			\
 		tests/test_parameters.c           \
