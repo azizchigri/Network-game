@@ -26,6 +26,7 @@ SRC	=	src/generation/map_gen.c		\
 		src/gameplay/game_info/sound_from.c	\
 		src/gameplay/game_info/broadcast.c	\
 		src/gameplay/refresh.c			\
+		src/gameplay/eat.c			\
 		src/reseau/manage_server.c	\
         	src/reseau/zappy_server.c	\
 		src/lib/str_to_wordtab.c	\
@@ -56,6 +57,7 @@ SRC1	=	src/generation/map_gen.c		\
 		src/gameplay/game_info/sound_from.c	\
 		src/gameplay/game_info/broadcast.c	\
 		src/gameplay/refresh.c			\
+		src/gameplay/eat.c			\
 		tests/test_take.c			\
 		tests/test_drop.c			\
 		tests/test_destroy.c			\

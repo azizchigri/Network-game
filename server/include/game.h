@@ -164,5 +164,7 @@
 	//refresh before and after action client and map
 	void refresh_map(t_player_p *player, t_game_p *game);
 	void refresh_player(t_player_p *player, t_game_p *game);
+	// eat or die, if die return dead
+	char *eat(t_player_p *player, t_game_p *game);
 
 #endif
