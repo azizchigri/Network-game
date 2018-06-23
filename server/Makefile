@@ -27,6 +27,11 @@ SRC	=	src/generation/map_gen.c		\
 		src/gameplay/game_info/broadcast.c	\
 		src/gameplay/refresh.c			\
 		src/gameplay/eat.c			\
+		src/graph_client/death.c		\
+		src/graph_client/lvl_up.c		\
+		src/graph_client/mapsize.c		\
+		src/graph_client/player_p.c		\
+		src/graph_client/res_drop_take.c	\
 		src/reseau/manage_server.c	\
         	src/reseau/zappy_server.c	\
 		src/lib/str_to_wordtab.c	\
@@ -60,6 +65,11 @@ SRC1	=	src/generation/map_gen.c		\
 		src/gameplay/game_info/broadcast.c	\
 		src/gameplay/refresh.c			\
 		src/gameplay/eat.c			\
+		src/graph_client/death.c		\
+		src/graph_client/lvl_up.c		\
+		src/graph_client/mapsize.c		\
+		src/graph_client/player_p.c		\
+		src/graph_client/res_drop_take.c	\
 		tests/test_take.c			\
 		tests/test_drop.c			\
 		tests/test_destroy.c			\

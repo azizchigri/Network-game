@@ -24,6 +24,7 @@ char *ppo(t_player_p *player)
 {
 	char *result;
 	int size = 0;
+	int tmp;
 	for (tmp = player->id; tmp != 0; tmp /= 10)
 		size += 1;
 	for (tmp = player->x; tmp != 0; tmp /= 10)
@@ -42,7 +43,7 @@ char *ppo(t_player_p *player)
 	return (result);
 }
 
-int size_pin(t_player_p *player, int *size)
+void size_pin(t_player_p *player, int *size, int tmp)
 {
 	for (tmp = player->id; tmp != 0; tmp /= 10)
 		*size += 1;
@@ -66,9 +67,9 @@ int size_pin(t_player_p *player, int *size)
 		*size += 1;
 }
 
-char *write_ppo(char *result, t_player_p *player)
+char *write_pin(char *result, t_player_p *player)
 {
-	result = add_str(result, "ppo ");
+	result = add_str(result, "pin ");
 	result = add_int(result, player->id);
 	result = add_str(result, " ");
 	result = add_int(result, player->x);
@@ -93,7 +94,7 @@ char *pin(t_player_p *player)
 {
 	char *result;
 	int size = 0;
-	size_pin(player, &size);
+	size_pin(player, &size, 0);
 	size += 13;
 	result = malloc(sizeof(char) * size + 1);
 	if (result == NULL)

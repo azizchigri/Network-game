@@ -42,7 +42,6 @@ char *map_size(t_game_p *game)
 	char *result;
 	int x = game->width;
 	int y = game->height;
-	int i = 0;
 	int tmp;
 	int size = 1;
 	for (tmp = x; tmp != 0; tmp /= 10)

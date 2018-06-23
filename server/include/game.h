@@ -166,5 +166,16 @@
 	void refresh_player(t_player_p *player, t_game_p *game);
 	// eat or die, if die return dead
 	char *eat(t_player_p *player, t_game_p *game);
+	//com with graphical client
+	char *death(t_player_p *player);
+	char *lvl_client(t_player_p *player);
+	char *add_str(char *src, char *str);
+	char *add_int(char *str, int nb);
+	char *map_size(t_game_p *game);
+	char *ppo(t_player_p *player);
+	char *pin(t_player_p *player);
+	char *take_r_client(char ress, int nb);
+	char *drop_r_client(char ress, int nb);
+
 
 #endif
