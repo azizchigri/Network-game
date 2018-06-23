@@ -16,8 +16,9 @@ char le_or_ri(t_game_p *game, t_player_p *start, t_player_p *end)
 	char l_r = 'x';
 	for (x = start->x; x != x2; x += 1) {
 		if (x == game->width)
-			x = 0;
-		tmp += 1;
+			x = -1;
+		else
+			tmp += 1;
 	}
 	for (x = start->x; x != x2; x -= 1) {
 		if (x < 0)
@@ -38,10 +39,12 @@ char up_or_do(t_game_p *game, t_player_p *start, t_player_p *end)
 	int tmp = 0;
 	int tmp2 = 0;
 	char u_d = 'x';
+	char c = y + 48;
 	for (y = start->y; y != y2; y += 1) {
 		if (y == game->height)
-			y = 0;
-		tmp += 1;
+			y = -1;
+		else
+			tmp += 1;
 	}
 	for (y = start->y; y != y2; y -= 1) {
 		if (y < 0)
