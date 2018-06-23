@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class BoardManager : MonoBehaviour {
 
     public static BoardManager Instance { set; get; }
@@ -17,7 +16,8 @@ public class BoardManager : MonoBehaviour {
     public int MapSizeY = 10;
 
     public List<GameObject> Players;
-    public string[] TeamName;
+    public List<string> TeamName;
+    public List<Color> TeamColor;
     private string[] PlayerPrefab = { "Prefabs/Character 0",
         "Prefabs/Character 1", "Prefabs/Character 2",
         "Prefabs/Character 3", "Prefabs/Character 4" };
@@ -28,6 +28,8 @@ public class BoardManager : MonoBehaviour {
         Instance = this;
         Players = new List<GameObject>();
         MyMap = gameObject.AddComponent<DrawMap>();
+        TeamName = new List<string>();
+        TeamColor = new List<Color>();
     }
 
     private void Update()
@@ -76,7 +78,7 @@ public class BoardManager : MonoBehaviour {
         MyMap.maxX = MapSizeX;
         MyMap.maxY = MapSizeY;
         MyMap.gridScale = MapScale;
-        float landScale = MyMap.gridScale / 4f;
+        float landScale = 2 * MapSizeX * MapSizeY;
         Landscape.transform.localScale = new Vector3(landScale, 0.13f, landScale);
     }
 
@@ -106,11 +108,11 @@ public class BoardManager : MonoBehaviour {
         }
     }
 
-    private Vector3 GetTileCenter(int x, int y)
+    public Vector3 GetTileCenter(int x, int y)
     {
         Vector3 origin = Vector3.zero;
-        origin.x += (TILE_SIZE * x) + TILE_OFFSET;
-        origin.z += (TILE_SIZE * y) + TILE_OFFSET;
+        origin.x += (MapScale * x) + MapScale / 2 + MyMap.gridOffset.x;
+        origin.z += (MapScale * y) + MapScale / 2 + MyMap.gridOffset.z;
         return origin;
     }
 
@@ -120,10 +122,11 @@ public class BoardManager : MonoBehaviour {
         foreach (string team in TeamName)
         {
             if (team == teamName)
-                return i;
+                break;
             i++;
         }
-        TeamName[TeamName.Length] = teamName;
+        if (!TeamName.Contains(teamName))
+            TeamName.Add(teamName);
         return i;
     }
 
@@ -133,18 +136,20 @@ public class BoardManager : MonoBehaviour {
         GameObject go = Instantiate((GameObject)Resources.Load(PlayerPrefab[(index > 4 ? 4 : index)]),
             GetTileCenter(x, y), Quaternion.identity) as GameObject;
         go.transform.SetParent(transform);
-        go.transform.localScale = new Vector3(5, 5, 5);
         Character player = go.AddComponent<Character>();
-        if (index > 4)
+        if (TeamColor.Count <= index)
+            TeamColor.Add(Random.ColorHSV());
+        if (index >= 4)
         {
             MeshRenderer ObjectRenderer = go.GetComponent<MeshRenderer>();
             Material ObjectMaterial = new Material(Shader.Find("Standard"))
             {
-                color = new Color(1f / index, 1f / index, 1f / index)
+                color = TeamColor[index]
             };
             ObjectRenderer.material = ObjectMaterial;
+            player.CurrentZ = 25;
         }
-        player.SetPosition(x, y);
+        player.SetPosition(GetTileCenter(x, y));
         player.Id = id;
         player.TeamName = teamName;
         Players.Add(go);

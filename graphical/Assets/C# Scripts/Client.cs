@@ -5,44 +5,56 @@ using System;
 
 public class Client : MonoBehaviour
 {
-    public bool isAtStartup = true;
     TcpClient client;
     CommandHandler Handler;
-    public int port = 6060;
+    int port;
+    string ipAddress;
+    public bool isAtStartup = true;
 
     private void Start()
     {
         Handler = gameObject.AddComponent<CommandHandler>();
         Handler.transform.SetParent(transform);
         Handler.name = "CommandHandler";
+        SetupClient();
+    }
+
+    public void SetPort()
+    {
+        port = int.Parse(Parameters.port);
+    }
+
+    public void SetIp()
+    {
+        ipAddress = Parameters.ip;
+    }
+
+    void Quit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     void Update()
     {
-        if (isAtStartup)
-        {
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-                SetupClient();
-            }
-        } else if (client.Connected)
+        if (Input.GetKey(KeyCode.Escape))
+            Quit();
+        if (!isAtStartup && client.Connected)
         {
             Handler.CallCommand(RcvData());
-        }
-    }
-    void OnGUI()
-    {
-        if (isAtStartup)
-        {
-            GUI.Label(new Rect(2, 50, 150, 100), "Press C for client");
         }
     }
 
     // Create a client and connect to the server port
     public void SetupClient()
     {
+        SetPort();
+        SetIp();
         client = new TcpClient();
-        client.Connect("192.168.1.4", port);
+        client.Connect(ipAddress, port);
         isAtStartup = false;
     }
 

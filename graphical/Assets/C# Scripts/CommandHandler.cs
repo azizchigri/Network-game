@@ -96,8 +96,8 @@ public class CommandHandler : MonoBehaviour {
     {
         if (array.Length < 2)
             return false;
-        Manager.TeamName = new string[array.Length];
-        array.CopyTo(Manager.TeamName, 1);
+        Manager.TeamName = new List<string>(array);
+        Manager.TeamName.RemoveAt(0);
         return true;
     }
 
@@ -116,8 +116,8 @@ public class CommandHandler : MonoBehaviour {
         if (array.Length != 5)
             return false;
         Character player = Manager.Players[int.Parse(array[1])].GetComponent<Character>();
-        player.MoveTo(int.Parse(array[1]), int.Parse(array[2]));
-        player.ChangeOrientation((Character.Orientation)int.Parse(array[3]));
+        player.MoveTo(Manager.GetTileCenter(int.Parse(array[2]), int.Parse(array[3])));
+        player.ChangeOrientation((Character.Orientation)int.Parse(array[4]));
         return true;
     }
 
