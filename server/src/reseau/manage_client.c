@@ -21,10 +21,14 @@ void init_client_player(t_server *server, t_client *client, char **tab)
 
 void destroy_client(t_server *server, t_client *client)
 {
+	int i;
+	for (i = 0; strcmp(client->player->team, server->game->teams[i]->name) != 0; i += 1);
+	server->game->teams[i]->slot += 1;
+	remove_place(client->player, server->game);
 	if (client->buffer != NULL)
 		free(client->buffer);
 	destroy_player(client->player);
-	for (int i = 0; i < 10; i += 1) {
+	for (i = 0; i < 10; i += 1) {
 		if (client->buf[i].cmd != NULL)
 			free(client->buf[i].cmd);
 	}
