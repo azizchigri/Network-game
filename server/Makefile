@@ -28,6 +28,7 @@ SRC	=	src/generation/map_gen.c		\
 		src/reseau/manage_server.c	\
         	src/reseau/zappy_server.c	\
 		src/lib/str_to_wordtab.c	\
+		src/lib/free.c	\
 		src/reseau/client.c	\
         	src/parameters.c        \
         src/reseau/manage_client.c  \
