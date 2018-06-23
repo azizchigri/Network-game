@@ -36,7 +36,6 @@ char *personnal_action(char **msg_r, t_player_p *player, t_game_p *game)
 		respond = inventory(player);
 	}
 	refresh_map(player, game);
-	write(1,game,0);
 	return (respond);
 }
 
