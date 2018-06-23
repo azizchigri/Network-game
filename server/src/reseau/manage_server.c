@@ -58,9 +58,48 @@ int add_connection(t_server *server)
 	return (0);
 }
 
+size_t get_size_buff(char *str1, char *str2)
+{
+	if (str1 == NULL){
+		if (str2 == NULL)
+			return (0);
+		else
+			return (strlen(str2) + 1);
+	} else if (str2 == NULL)
+		return (strlen(str1) + 1);
+	else
+		return (strlen(str1) + strlen(str1) + 1);
+}
+
+void manage_buff(t_server *server, char *buff, int fd)
+{
+	int i;
+	t_client *client = server->client;
+	for (i = 0; client->fd != fd && client != NULL; i += 1) {
+		client = client->next;
+	}
+	if (client != NULL) {
+		size_t size = get_size_buff(client->buffer, buff);
+		client->buffer = realloc(client->buffer,
+		sizeof(char) * size);
+		client->buffer[0] = '\0';
+		strcat(client->buffer, buff);
+		//buff[strlen(buff) - 1] = '\0';
+		char *result;
+		while (((result = strchr(client->buffer, '\n')) != NULL)) {
+			char *new = strdup(result + 1);
+			if (new == NULL)
+				exit(84);
+			*result = '\0';
+			add_client_cmd(server, fd, client->buffer);
+			free(client->buffer);
+			client->buffer = new;
+		}
+	}
+}
+
 void read_fd(t_server *server, int fd)
 {
-
 	char buff[BUFF_SIZE];
 	int result = recv(fd, buff, sizeof(buff), 0);
 	if (result < 1) {
@@ -68,9 +107,8 @@ void read_fd(t_server *server, int fd)
 		result);
 	}
 	buff[result] = 0;
-	buff[strlen(buff) - 1] = '\0';
+	manage_buff(server, buff, fd);
 	printf("message:%s, len:%ld\n", buff, strlen(buff));
-	add_client_cmd(server, fd, buff);
 }
 
 int manage_fd(t_server *server, fd_set set)

@@ -63,6 +63,7 @@ t_client *init_client(t_server *server __attribute__((unused)), int fd)
 		exit(ERROR);
 	client->fd = fd;
 	client->player = NULL;
+	client->buffer = NULL;
 	for (int i = 0; i < 10; i += 1) {
 		client->buf[i].cmd = NULL;
 		client->buf[i].time = -1;

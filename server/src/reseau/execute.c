@@ -20,7 +20,7 @@ void clear_cmd(t_client *client)
 
 void manage_cmd(t_server *server, t_client *client)
 {
-	if (client->buf[0].time == 0) {
+	while (client->buf[0].time == 0) {
 		char **cmd = client->buf[0].cmd;
 		printf("cmd :%s", client->buf[0].cmd[0]);
 		t_respond rep = gameplay(cmd, client->player, server->game);
