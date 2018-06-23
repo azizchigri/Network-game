@@ -19,8 +19,8 @@ int check_args(char **args)
 
 int get_help(int argc, char **argv)
 {
-	for (int i = 2; i < argc; i = i + 2) {
-		if (!strcmp(argv[1], "-help")) {
+	for (int i = 1; i < argc; i = i + 2) {
+		if (!strcmp(argv[i], "-help")) {
 			print_usage();
 			return (0);
 		}
@@ -34,6 +34,14 @@ void print_usage()
 	printf("\tport\tis the port number\n");
 	printf("\tname\tis the name of the team\n");
 	printf("\tmachine\tis the name of the machine; localhost by default\n");
+}
+
+int get_len_team_name(char **args)
+{
+	int i = 0;
+	while (args[1][i] != '\0')
+		i += 1;
+	return i;
 }
 
 char **get_args(int argc, char **argv)

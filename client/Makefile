@@ -2,29 +2,28 @@
 ## EPITECH PROJECT, 2018
 ## zappy
 ## File description:
-## client makefile
+## zappy serveur makefile
 ##
 
-SRC	=	src/communication/main.c			\
-		src/communication/args_management.c		\
-		src/communication/error_client.c		\
-		src/communication/client_communication.c	\
-		src/communication/init_communication.c		\
-		src/communication/get_next_line.c
+SRC	=	lib/com_client/args_management.c	\
+		lib/com_client/client_communication.c	\
+		lib/com_client/error_client.c		\
+		lib/com_client/get_next_line.c		\
+		lib/com_client/init_communication.c
 
-SRC1	=	src/communication/main.c			\
-		src/communication/args_management.c		\
-		src/communication/error_client.c		\
-		src/communication/client_communication.c	\
-		src/communication/init_communication.c		\
+SRC1	=	lib/com_client/args_management.c	\
+		lib/com_client/client_communication.c	\
+		lib/com_client/error_client.c		\
+		lib/com_client/get_next_line.c		\
+		lib/com_client/init_communication.c
 
 OBJ     =       $(SRC:.c=.o)
 
-CFLAGS	+=	-Wall -Wextra -Werror -Iinclude
+CFLAGS	+=	-Wall -Wextra -Werror -Iinclude -fpic -shared
 
 CFLAGS1	+=	-Wall -Wextra -Werror -Iinclude -lcriterion --coverage
 
-NAME    =	client_ai
+NAME    =	libia.so
 
 NAME1	=	test
 
@@ -35,7 +34,14 @@ COVER2	=	*.gcda
 all:    $(NAME)
 
 $(NAME): $(OBJ)
-	gcc -o $(NAME) $(OBJ) $(CFLAGS)
+	gcc $(CFLAGS) $(OBJ) -o $(NAME)
+
+debug: $(OBJ)
+	gcc -o $(NAME) $(OBJ) $(CFLAGS) -g3
+
+tests_run:
+	gcc -o $(NAME1) $(SRC1) $(CFLAGS1)
+	./$(NAME1)
 
 tests_clean:
 	rm -f $(COVER1)

@@ -1,0 +1,23 @@
+
+#Client arrive sur server
+#  Client Broadcast son arrivée #(attente de reponse)
+#  Client Look
+#  Client attrape une ressource, nourriture prioritaire, caillou sinon
+#    Si pas de ressource sur sa case, avance.
+#  (attente terminée)
+#  Avec réponse : Client connait son rôle
+#  Sans réponse : Client devient pondeuse
+
+#Pondeuse:
+#  Fork jusqu'à la mort. Boucle infini de ponte
+#  (Prévoir une ponte pour un remplaçant ?)
+
+#Maitre:
+#  Les 6 premiers après la pondeuse,
+#  Nourriture prioritaire.
+#  Va chercher les caillou pour augmenter de niveau.
+
+#Esclave (facultatif)
+#  Trade ses ressources avec les maitres
+#  (Sacrifie sa vie en donnant toute sa nourriture à un Maitre ?)
+
