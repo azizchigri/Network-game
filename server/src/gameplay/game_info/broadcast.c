@@ -7,6 +7,21 @@
 
 #include "game.h"
 
+char relativ_pos(int or, char cell)
+{
+        int tmp = 0;
+        int sum = 2 * or;
+        if (cell == '0')
+                return (cell);
+        for (tmp = 0; tmp != sum; tmp += 1) {
+                if (cell == 0)
+                        cell = 8;
+                cell -= 1;
+        }
+        return (cell);
+}
+
+
 char le_or_ri(t_game_p *game, t_player_p *start, t_player_p *end)
 {
 	int x = start->x;
@@ -22,8 +37,9 @@ char le_or_ri(t_game_p *game, t_player_p *start, t_player_p *end)
 	}
 	for (x = start->x; x != x2; x -= 1) {
 		if (x < 0)
-			x = game->width - 1;
-		tmp2 += 1;
+			x = game->width;
+		else
+			tmp2 += 1;
 	}
 	if (tmp < tmp2)
 		l_r = 'l';
@@ -47,8 +63,9 @@ char up_or_do(t_game_p *game, t_player_p *start, t_player_p *end)
 	}
 	for (y = start->y; y != y2; y -= 1) {
 		if (y < 0)
-			y = game->height - 1;
-		tmp2 += 1;
+			y = game->height;
+		else
+			tmp2 += 1;
 	}
 	if (tmp < tmp2)
 		u_d = 'd';
@@ -69,6 +86,7 @@ char *broadcast(t_game_p *game, t_player_p *start, t_player_p *end)
 		cell = is_left(u_d, end);
 	else
 		cell = is_center(u_d, end);
+	cell[0] = relativ_pos(end->direction, cell[0]);
 	return (cell);
 		
 }

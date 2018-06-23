@@ -162,5 +162,4 @@ char *nbr_player(t_game_p *game, t_player_p *player);
 	//return the cell where end player recieve msg
 	char *broadcast(t_game_p *game, t_player_p *start, t_player_p *end);
 
-
 #endif
