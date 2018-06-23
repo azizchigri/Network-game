@@ -103,6 +103,7 @@ void read_fd(t_server *server, int fd)
 	char buff[BUFF_SIZE];
 	int result = recv(fd, buff, sizeof(buff), 0);
 	if (result < 1) {
+		exit(0);
 		printf("Round %d, and the data read size is: n=%d \n", fd,
 		result);
 	}

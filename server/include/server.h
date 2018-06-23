@@ -57,5 +57,6 @@ void init_client_player(t_server *server, t_client *client, char **tab);
 void add_client_cmd(t_server *server, int fd, char *buff);
 int connect_client(t_server *server, t_client *client, int fd, char **tab);
 void free_tab(char **tab);
+void clear_cmd(t_client *client);
 
 #endif //PSU_ZAPPY_2017_SERVER_H

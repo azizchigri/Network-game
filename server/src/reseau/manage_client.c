@@ -41,9 +41,7 @@ void add_client_cmd(t_server *server, int fd, char *buff)
 	char **tab = get_cmd(buff);
 	if (tab != NULL && client != NULL) {
 		int time = cooldown(server->game, client->player, tab);
-		if (time == -1 ||
-		    (client->player == NULL && strcmp(tab[0], "TEAM") != 0)) {
-			send(fd, "ko\n", strlen("ko\n"), 0);
+		if (time == -1) {
 			return;
 		}
 		for (i = 0; client->fd != fd && client != NULL; i += 1) {
@@ -97,9 +95,7 @@ int connect_client(t_server *server, t_client *client, int fd, char **tab)
 		FD_CLR(fd, &(server->readfds)); */
 		send(fd, "ko\n", strlen("ko\n"), 0);
 	}
-	client->buf[0].cmd = NULL; // tempo a degager ->free
-	// redécaller de tableau a gauche
-	client->buf[0].time = -1;
+	clear_cmd(client);
 	// free_respond();
 	return (0);
 }
