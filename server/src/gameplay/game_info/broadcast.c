@@ -9,18 +9,17 @@
 
 char relativ_pos(int or, char cell)
 {
-        int tmp = 0;
-        int sum = 2 * or;
-        if (cell == '0')
-                return (cell);
-        for (tmp = 0; tmp != sum; tmp += 1) {
-                if (cell == 0)
-                        cell = 8;
-                cell -= 1;
-        }
-        return (cell);
+	int tmp = 0;
+	int sum = 2 * or;
+	if (cell == '0')
+		return (cell);
+	for (tmp = 0; tmp != sum; tmp += 1) {
+		if (cell == 0)
+			cell = 8;
+		cell -= 1;
+	}
+	return (cell);
 }
-
 
 char le_or_ri(t_game_p *game, t_player_p *start, t_player_p *end)
 {
@@ -43,7 +42,7 @@ char le_or_ri(t_game_p *game, t_player_p *start, t_player_p *end)
 	}
 	if (tmp < tmp2)
 		l_r = 'l';
-	else if(tmp > tmp2)
+	else if (tmp > tmp2)
 		l_r = 'r';
 	return (l_r);
 }
@@ -69,7 +68,7 @@ char up_or_do(t_game_p *game, t_player_p *start, t_player_p *end)
 	}
 	if (tmp < tmp2)
 		u_d = 'd';
-	else if(tmp > tmp2)
+	else if (tmp > tmp2)
 		u_d = 'u';
 	return (u_d);
 }
@@ -88,5 +87,4 @@ char *broadcast(t_game_p *game, t_player_p *start, t_player_p *end)
 		cell = is_center(u_d, end);
 	cell[0] = relativ_pos(end->direction, cell[0]);
 	return (cell);
-		
 }

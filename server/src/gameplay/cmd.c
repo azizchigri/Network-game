@@ -15,11 +15,11 @@ char *move(char **msg_r, t_player_p *player, t_game_p *game)
 		respond = "OK";
 	}
 	else if (strcmp(msg_r[0], RIGHT) == 0) {
-		right(player);
+		right(player, game);
 		respond = "OK";
 	}
 	else if (strcmp(msg_r[0], LEFT) == 0) {
-		left(player);
+		left(player, game);
 		respond = "OK";
 	}
 	return (respond);

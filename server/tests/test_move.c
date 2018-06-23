@@ -16,7 +16,7 @@ Test(move_player, turn_left)
 	tmp[1] = NULL;
 	init_teams(game, tmp, 2);
 	player = init_player(game, 1, "poulet");
-	left(player);
+	left(player, game);
 	cr_assert_eq(player->direction, 3);
 	destroy_game(game);
 	free(player);
@@ -31,7 +31,7 @@ Test(move_player, turn_right)
 	tmp[1] = NULL;
 	init_teams(game, tmp, 2);
 	player = init_player(game, 1, "poulet");
-	right(player);
+	right(player, game);
 	cr_assert_eq(player->direction, 1);
 	destroy_game(game);
 	free(player);

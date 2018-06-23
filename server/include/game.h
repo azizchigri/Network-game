@@ -109,9 +109,9 @@
 
 //gameplay
 	//turn left the player
-	void left(t_player_p *player);
+	void left(t_player_p *player, t_game_p *game);
 	//turn right the player
-	void right(t_player_p *player);
+	void right(t_player_p *player, t_game_p *game);
 	//delete the actual position of the player
 	int remove_place(t_player_p *player, t_game_p *game);
 	//add the player on his new place
@@ -121,7 +121,7 @@
 	//take the cmd of the AI and do the cmd. return the respond and time
 	t_respond gameplay(char **msg_r, t_player_p *player, t_game_p *game);
 	//return the number of free slot in the game as a respond (char *)
-char *nbr_player(t_game_p *game, t_player_p *player);
+	char *nbr_player(t_game_p *game, t_player_p *player);
 	// gice the inventory as str
 	char *inventory(t_player_p *player);
 	//free players on a cell
