@@ -35,8 +35,7 @@
 
 	typedef struct s_respond t_respond;
 	struct s_respond {
-		int time;
-
+		int *id;
 		char *respond;
 		char *respond_g;
 	};
