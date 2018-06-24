@@ -25,7 +25,7 @@ char le_or_ri(t_game_p *game, t_player_p *start, t_player_p *end, int tmp)
 {
 	int x2 = end->x;
 	int tmp2 = 0;
-	char l_r = 'x';
+	char left_right = 'x';
 	for (int x = start->x; x != x2; x += 1) {
 		if (x == game->width)
 			x = -1;
@@ -39,17 +39,17 @@ char le_or_ri(t_game_p *game, t_player_p *start, t_player_p *end, int tmp)
 			tmp2 += 1;
 	}
 	if (tmp < tmp2)
-		l_r = 'l';
+		left_right = 'l';
 	else if (tmp > tmp2)
-		l_r = 'r';
-	return (l_r);
+		left_right = 'r';
+	return (left_right);
 }
 
 char up_or_do(t_game_p *game, t_player_p *start, t_player_p *end, int tmp)
 {
 	int y2 = end->y;
 	int tmp2 = 0;
-	char u_d = 'x';
+	char up_down = 'x';
 	for (int y = start->y; y != y2; y += 1) {
 		if (y == game->height)
 			y = -1;
@@ -63,24 +63,24 @@ char up_or_do(t_game_p *game, t_player_p *start, t_player_p *end, int tmp)
 			tmp2 += 1;
 	}
 	if (tmp < tmp2)
-		u_d = 'd';
+		up_down = 'd';
 	else if (tmp > tmp2)
-		u_d = 'u';
-	return (u_d);
+		up_down = 'u';
+	return (up_down);
 }
 
 char *broadcast(t_game_p *game, t_player_p *start, t_player_p *end)
 {
-	char  l_r = le_or_ri(game, start, end, 0);
-	char u_d = up_or_do(game, start, end, 0);
+	char left_right = le_or_ri(game, start, end, 0);
+	char up_down = up_or_do(game, start, end, 0);
 	char *cell;
 
-	if (l_r == 'r')
-		cell = is_right(u_d, end);
-	else if (l_r == 'l')
-		cell = is_left(u_d, end);
+	if (left_right == 'r')
+		cell = is_right(up_down, end);
+	else if (left_right == 'l')
+		cell = is_left(up_down, end);
 	else
-		cell = is_center(u_d, end);
+		cell = is_center(up_down, end);
 	cell[0] = relativ_pos(end->direction, cell[0]);
 	return (cell);
 }

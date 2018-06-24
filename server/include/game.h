@@ -17,7 +17,8 @@
 	#include <criterion/criterion.h>
 
 	#define TAKE (1000)
-	#define DROP (-1000)
+
+#define DROP (-1000)
 
 	#define LEFT "Left"
 	#define RIGHT "Right"
@@ -35,6 +36,7 @@
 	typedef struct s_respond t_respond;
 	struct s_respond {
 		int time;
+
 		char *respond;
 		char *respond_g;
 	};
@@ -144,7 +146,7 @@
 	int food(t_player_p *player, t_game_p *game, int value);
 	int sibur(t_player_p *player, t_game_p *game, int value);
 	//eject player
-	char *eject(t_player_p *player, t_game_p *game);
+	t_respond eject(t_player_p *player, t_game_p *game);
 	//return time for each action
 	int cooldown(t_game_p *game, t_player_p *player, char **cmd);
 	//incantation to lvl up
