@@ -14,6 +14,8 @@ void mct(t_game_p *game, int fd)
 {
 	char *tmp;
 
+	if (game == NULL)
+		return;
 	for (int i = 0; i < game->width; i += 1) {
 		for (int j = 0; j < game->height; j += 1) {
 			t_cell map = game->map[i][j];
