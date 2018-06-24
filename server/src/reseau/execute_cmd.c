@@ -50,7 +50,7 @@ void execute_incantation_next(t_server *server, t_client *client)
 int execute_other_md_next(t_server *server, t_client *client, char **tab)
 {
 	if (tab != NULL && strcmp(tab[0], "Fork") == 0 &&
-	    client->buf[0].time == 0) {
+		client->buf[0].time == 0) {
 		if (client->player != NULL)
 			server->egg = add_egg(server, server->egg,
 			client->player->team);
