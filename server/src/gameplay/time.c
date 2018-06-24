@@ -35,7 +35,8 @@ int other_time(char **cmd)
 		time = 42;
 	else if (strcmp(CONNECT_NBR, cmd[0]) == 0 ||
 		strcmp("TEAM", cmd[0]) == 0 ||
-		strcmp("Graphical", cmd[0]) == 0)
+		strcmp("Graphical", cmd[0]) == 0 ||
+		strcmp(INCANTATION, cmd[0]) == 0)
 		time = 0;
 	else
 		time = fork_time(cmd);
@@ -50,8 +51,6 @@ int check_time(char **cmd)
 	strcmp(BROADCAST, cmd[0]) == 0 || strcmp(EJECT, cmd[0]) == 0 ||
 	strcmp(TAKE_OBJ, cmd[0]) == 0 || strcmp(SET_OBJ, cmd[0]) == 0)
 		time = 7;
-	else if (strcmp(INCANTATION, cmd[0]) == 0)
-		time = 300;
 	else
 		time = other_time(cmd);
 	return (time);

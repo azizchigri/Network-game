@@ -45,7 +45,7 @@ t_respond take(t_player_p *player, t_game_p *game, char *obj)
 	t_respond resp;
 	char *stone[7] = {"food", "linemate", "deraumere",
 			"sibur", "mendiane", "phiras", "thystame"};
-	resp.respond = "OK";
+	resp.respond = OK;
 	resp.respond_g = graphical_take(obj, stone, player);
 	tmp = call_take_drop(player, game, TAKE, obj);
 	if (tmp == -6)
@@ -54,7 +54,7 @@ t_respond take(t_player_p *player, t_game_p *game, char *obj)
 		free(resp.respond_g);
 		resp.respond_g = NULL;
 	}
-	resp.respond = "KO";
+	resp.respond = KO;
 	return (resp);
 }
 
@@ -75,7 +75,7 @@ t_respond drop(t_player_p *player, t_game_p *game, char *obj)
 	t_respond resp;
 	char *stone[7] = {"food", "linemate", "deraumere",
 			"sibur", "mendiane", "phiras", "thystame"};
-	resp.respond = "OK";
+	resp.respond = OK;
 	resp.respond_g = graphical_drop(obj, stone, player);
 	tmp = call_take_drop(player, game, DROP, obj);
 	if (tmp == -6)
@@ -84,6 +84,6 @@ t_respond drop(t_player_p *player, t_game_p *game, char *obj)
 		free(resp.respond_g);
 		resp.respond_g = NULL;
 	}
-	resp.respond = "KO";
+	resp.respond = KO;
 	return (resp);
 }

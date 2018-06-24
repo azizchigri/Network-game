@@ -43,7 +43,7 @@ t_respond eject(t_player_p *player, t_game_p *game)
 {
 	t_respond resp;
 	int i = find_player_map(player, game);
-	resp.respond = "KO";
+	resp.respond = KO;
 	resp.respond_g = NULL;
 	if (i == -1)
 		return (resp);

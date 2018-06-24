@@ -19,7 +19,7 @@ Test(eject, eject_no_one)
 	player = init_player(game, 1, "poulet");
 	msg_r[0] = EJECT;
 	msg_r[1] = NULL;
-	cr_assert_eq(strcmp(gameplay(msg_r, player, game).respond, "KO"), 0);
+	cr_assert_eq(strcmp(gameplay(msg_r, player, game).respond, KO), 0);
 	game = destroy_game(game);
 	player = destroy_player(player);
 }
