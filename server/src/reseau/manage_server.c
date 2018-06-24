@@ -18,6 +18,7 @@ void init_server_params(t_server *server)
 	server->options.frequence);
 	server->eat = SERVER_EAT;
 	server->graph = -1;
+	server->egg = NULL;
 }
 
 int init_sockets(struct sockaddr_in s_addr, t_server *server)

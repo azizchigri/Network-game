@@ -89,6 +89,13 @@
 		int f;
 	};
 
+	typedef struct s_egg t_egg;
+	struct s_egg {
+		float time;
+		char *team;
+		t_egg *next;
+	};
+
 //genearation
 	//generate the map
 	int create_map(t_game_p *game);

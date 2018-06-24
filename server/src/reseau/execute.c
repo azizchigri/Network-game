@@ -91,5 +91,6 @@ int execute_commands(t_server *server)
 	}
 	eat_client(server);
 	check_client_win(server);
+	check_egg(server, server->egg);
 	return (0);
 }
