@@ -50,6 +50,7 @@
 	typedef struct s_player_p t_player_p;
 	struct s_player_p {
 		int id;
+		int fd;
 		int alive;
 		int lvl;
 		char *team;
@@ -106,8 +107,7 @@
 	//create the game, take width heigth and frequency
 	t_game_p *game_init(int w, int h, int f);
 	//init the player with an unique id as fd
-	t_player_p *init_player(t_game_p *game,
-				int fd __attribute__((unused)), char *team);
+	t_player_p *init_player(t_game_p *game, int fd, char *team);
 	//free the player and return NULL
 	t_player_p *destroy_player(t_player_p *player);
 	//init teams in the game
@@ -159,7 +159,7 @@
 	//return time for each action
 	int cooldown(t_game_p *game, t_player_p *player, char **cmd);
 	//incantation to lvl up
-t_respond incantation(t_game_p *game, t_player_p *player, int begin);
+	t_respond incantation(t_game_p *game, t_player_p *player, int begin);
 	//delete stone to do incantation
 	int del_s1(t_game_p *game, t_player_p *player);
 	int del_s2(t_game_p *game, t_player_p *player);
