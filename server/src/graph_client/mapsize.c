@@ -25,7 +25,7 @@ char *add_int(char *str, int nb)
 {
 	char *in_t;
 	int tmp;
-	int size;
+	int size = 1;
 	for (tmp = nb; tmp != 0; tmp /= 10)
 		size += 1;
 	in_t = malloc(sizeof(char) * size + 1);

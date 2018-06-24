@@ -17,6 +17,7 @@ t_player_p *destroy_player(t_player_p *player)
 
 void init_inventory(t_player_p *player)
 {
+	player->lvl = 1;
 	player->linemate = 0;
 	player->deraumere = 0;
 	player->sibur = 0;
@@ -45,8 +46,10 @@ int fill_team(t_game_p *game, char *name)
 	return (0);
 }
 
-t_player_p *init_player(t_game_p *game, int fd, char *team)
+t_player_p *init_player(t_game_p *game,
+			int fd __attribute__((unused)), char *team)
 {
+	static int id = 0;
 	int pos = -1;
 	t_player_p *player;
 	if (fill_team(game, team) == -1)
@@ -54,10 +57,10 @@ t_player_p *init_player(t_game_p *game, int fd, char *team)
 	player = malloc(sizeof(t_player_p) * 1);
 	if (player == NULL)
 		return (NULL);
-	player->id = fd;
+	player->id = id;
+	id += 1;
 	player->alive = 1;
 	init_inventory(player);
-	player->lvl = 1;
 	player->direction = 0;
 	player->team = team;
 	while (pos == -1) {
