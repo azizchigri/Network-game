@@ -14,7 +14,7 @@ void death(t_player_p *player, int fd)
 	asprintf(&result, "pdi %d\n", player->id);
 	if (fd != -1)
 		send(fd, result, strlen(result), 0);
-	if (result!= NULL)
+	if (result != NULL)
 		free(result);
 	result = NULL;
 }

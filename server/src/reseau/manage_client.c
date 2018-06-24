@@ -31,7 +31,7 @@ void destroy_client(t_server *server, t_client *client)
 		destroy_player(client->player);
 	}
 	for (cpt = 0; server->fds[cpt] < server->fds_len &&
-		      server->fds[cpt] != client->fd; cpt += 1);
+	server->fds[cpt] != client->fd; cpt += 1);
 	server->fds[cpt] = -1;
 	if (client->buffer != NULL)
 		free(client->buffer);
@@ -65,10 +65,10 @@ int connect_client(t_server *server, t_client *client, int fd, char **tab)
 	char str2[2048];
 	t_game_p *game = server->game;
 	for (i = 0; tab[1] != NULL && game->teams[i] != NULL &&
-		    strcmp(game->teams[i]->name, tab[1]) != 0; i += 1) {
+	strcmp(game->teams[i]->name, tab[1]) != 0; i += 1) {
 	}
 	if (game->teams[i] != NULL && server->game->teams[i]->slot > 0 &&
-	    client->player == NULL) {
+	client->player == NULL) {
 		init_client_player(server, client, tab);
 		t_game_p *game = server->game;
 		sprintf(str, "CLIENT-%d\n", game->teams[i]->slot);

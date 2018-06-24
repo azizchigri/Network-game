@@ -1,6 +1,7 @@
 /*
 ** EPITECH PROJECT, 2018
-** PSU_zappy_2017s
+** zappy
+** File description:
 ** execute function
 */
 
@@ -64,11 +65,11 @@ int execute_other_cmd(t_server *server, t_client *client, char **tab)
 		return (0);
 	}
 	if (tab != NULL && strcmp(tab[0], "Broadcast") == 0 &&
-	    client->buf[0].time == 0) {
+	client->buf[0].time == 0) {
 		execute_broadcast(server, client);
 	}
 	if (tab != NULL && strcmp(tab[0], "Fork") == 0 &&
-	    client->buf[0].time == 0) {
+	client->buf[0].time == 0) {
 		if (client->player != NULL)
 			server->egg = add_egg(server, server->egg,
 			client->player->team);
@@ -76,12 +77,12 @@ int execute_other_cmd(t_server *server, t_client *client, char **tab)
 		clear_cmd(client);
 	}
 	if (tab != NULL && strcmp(tab[0], "Incantation") == 0 &&
-	    client->buf[0].time == 0) {
+	client->buf[0].time == 0) {
 		if (client->player != NULL)
 			execute_incantation(server, client);
 	}
 	if (tab != NULL && strcmp(tab[0], "Incantation2") == 0 &&
-	    client->buf[0].time == 0) {
+	client->buf[0].time == 0) {
 		if (client->player != NULL)
 			execute_incantation_next(server, client);
 	}

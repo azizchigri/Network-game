@@ -51,10 +51,11 @@ SRC	=	src/generation/map_gen.c				\
 		src/lib/free.c	\
 		src/reseau/client.c	\
         	src/parameters.c        \
-        src/reseau/manage_client.c  \
+		src/parameters_pars.c	\
+		src/reseau/manage_client.c  \
         src/reseau/execute.c        \
         src/reseau/execute_cmd.c    \
-        src/manage_cmd.c            \
+	src/manage_cmd.c            \
         src/manage_fd.c             \
         src/gameplay/fork.c         \
         src/ressources.c
@@ -64,7 +65,6 @@ SRC1	=	src/generation/map_gen.c				\
 		src/generation/player_gen.c				\
 		src/generation/destroy_game.c				\
 		src/generation/game.c					\
-		src/reseau/execute_cmd.c    \
 		src/gameplay/move/go.c					\
 		src/gameplay/move/move.c				\
 		src/gameplay/cmd.c					\
@@ -98,9 +98,18 @@ SRC1	=	src/generation/map_gen.c				\
 		src/gameplay/game.c					\
 		src/graph_client/end_game.c				\
 		src/graph_client/new_player.c				\
-		src/graph_client/mct_function.c			\
+		src/graph_client/mct_function.c				\
+		src/lib/str_to_wordtab.c				\
+		src/parameters.c        				\
+		src/parameters_pars.c					\
+		src/reseau/execute.c        				\
+		src/lib/free.c						\
+		src/manage_cmd.c            				\
+		src/reseau/manage_client.c  				\
+		src/reseau/client.c					\
+	        src/reseau/execute_cmd.c    				\
+		src/gameplay/game_info/broadcast.c			\
 		src/graph_client/graphical_cmd.c    	\
-		src/lib/str_to_wordtab.c	\
 		src/ressources.c            \
 		tests/test_take.c					\
 		tests/test_drop.c					\
@@ -113,7 +122,8 @@ SRC1	=	src/generation/map_gen.c				\
 		tests/test_cmd.c					\
 		tests/test_eject.c					\
 		tests/test_cmd_g.c					\
-		tests/test_time.c
+		tests/test_time.c					\
+		tests/test_parameters.c
 
 OBJ     =       $(SRC:.c=.o)
 
