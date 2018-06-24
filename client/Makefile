@@ -2,26 +2,24 @@
 ## EPITECH PROJECT, 2018
 ## zappy
 ## File description:
-## zappy serveur makefile
+## libia makefile
 ##
 
 SRC	=	lib/com_client/args_management.c	\
 		lib/com_client/client_communication.c	\
 		lib/com_client/error_client.c		\
-		lib/com_client/get_next_line.c		\
 		lib/com_client/init_communication.c
 
 SRC1	=	lib/com_client/args_management.c	\
 		lib/com_client/client_communication.c	\
 		lib/com_client/error_client.c		\
-		lib/com_client/get_next_line.c		\
 		lib/com_client/init_communication.c
 
 OBJ     =       $(SRC:.c=.o)
 
 CFLAGS	+=	-Wall -Wextra -Werror -Iinclude -fpic -shared
 
-CFLAGS1	+=	-Wall -Wextra -Werror -Iinclude -lcriterion --coverage
+CFLAGS1	+=	-Wall -Wextra -Werror -Iinclude -lcriterion --coverage -fpic -shared
 
 NAME    =	libia.so
 

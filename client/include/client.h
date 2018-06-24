@@ -18,7 +18,6 @@
 	#include <arpa/inet.h>
 	#include <string.h>
 	#include <getopt.h>
-	#include "get_next_line.h"
 
 //communication
 	//Management for "-help" argument
@@ -29,16 +28,12 @@
 	char **get_args(int argc, char **argv);
 	//Check if necessary arguments are here
 	int check_args(char **args);
-	//launch main program
-	int launch_client(char **args);
 	//initialize a file descriptor for socket
 	int init_socket();
 	//Connect the program on server
 	int init_connection(char **av, int fd);
 	//Management in case of error when socket is open
 	int return_error(int fd);
-	//(Client_manual) Direct communication between client and server
-	int client_actions(int fd, char *name);
 	//Close the socket
 	int stop_socket(int fd);
 
