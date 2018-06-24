@@ -72,22 +72,20 @@ t_respond incantation(t_game_p *game, t_player_p *player)
 	int error = 0;
 	t_respond resp;
 
-	if (tmp == -1)
+	error += del_s1(game, player);
+	error += del_s2(game, player);
+	error += del_s3(game, player);
+	error += del_s4(game, player);
+	error += del_s5(game, player);
+	error += del_s6(game, player);
+	if (error != 0 || tmp == -1) {
 		resp.respond = "KO";
-	else
-	{
-		error += del_s1(game, player);
-		error += del_s2(game, player);
-		error += del_s3(game, player);
-		error += del_s4(game, player);
-		error += del_s5(game, player);
-		error += del_s6(game, player);
-		if (error != 0)
-			resp.respond = "KO";
-		else {
-			//resp = get_player_incant(game, player, tmp);
-			lvl_up(game, player, tmp);
-		}
+		resp.respond_g = NULL;
+		resp.id = NULL;
+	}
+	else {
+		resp = get_player_incant(game, player, tmp);
+		lvl_up(game, player, tmp);
 	}
 	return (resp);
 }

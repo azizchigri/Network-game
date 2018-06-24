@@ -20,7 +20,7 @@ Test(parsing_cmd, valide_incantation)
 	msg_r[0] = INCANTATION;
 	msg_r[1] = NULL;
 	game->map[player->x][player->y].linemate = 1;
-	cr_assert_eq(strcmp(gameplay(msg_r, player, game).respond, "OK"), 0);
+	cr_assert_eq(strcmp(gameplay(msg_r, player, game).respond, "Elevation underway Current level: 1"), 0);
 	game = destroy_game(game);
 	player = destroy_player(player);
 }

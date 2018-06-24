@@ -21,6 +21,7 @@ SRC	=	src/generation/map_gen.c		\
 		src/gameplay/item_action/drop_take.c	\
 		src/gameplay/time.c			\
 		src/gameplay/item_action/incantation.c	\
+		src/gameplay/item_action/incantation2.c	\
 		src/gameplay/item_action/del_s.c	\
 		src/gameplay/item_action/del_s2.c   	\
 		src/gameplay/game_info/sound_from.c	\
@@ -62,6 +63,7 @@ SRC1	=	src/generation/map_gen.c		\
 		src/gameplay/game_info/eject.c		\
 		src/gameplay/time.c			\
 		src/gameplay/item_action/incantation.c	\
+		src/gameplay/item_action/incantation2.c	\
 		src/gameplay/item_action/del_s.c	\
 		src/gameplay/item_action/del_s2.c	\
 		src/gameplay/game_info/sound_from.c	\

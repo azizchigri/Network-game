@@ -82,6 +82,7 @@
 	struct s_game_p {
 		int height;
 		int width;
+
 		int slot;
 		int nb_player;
 		t_cell **map;
@@ -185,4 +186,8 @@
 	char *check_win(t_game_p *game);
 	// return the size of an int to do a str
 	int getsize_int_to_str(int nbr);
+	//return all the msg after an incantation
+	t_respond get_player_incant(t_game_p *game,
+				t_player_p *player, int tmp);
+
 #endif
