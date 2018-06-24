@@ -22,17 +22,25 @@ void init_client_player(t_server *server, t_client *client, char **tab)
 void destroy_client(t_server *server, t_client *client)
 {
 	int i;
-	for (i = 0; strcmp(client->player->team, server->game->teams[i]->name) != 0; i += 1);
-	server->game->teams[i]->slot += 1;
-	remove_place(client->player, server->game);
+	int cpt;
+	if (client != NULL && client->player) {
+		for (i = 0; strcmp(client->player->team,
+		server->game->teams[i]->name) != 0; i += 1);
+		server->game->teams[i]->slot += 1;
+		remove_place(client->player, server->game);
+		destroy_player(client->player);
+	}
+	for (cpt = 0; server->fds[cpt] < server->fds_len &&
+		      server->fds[cpt] != client->fd; cpt += 1);
+	server->fds[cpt] = -1;
 	if (client->buffer != NULL)
 		free(client->buffer);
-	destroy_player(client->player);
 	for (i = 0; i < 10; i += 1) {
 		if (client->buf[i].cmd != NULL)
 			free(client->buf[i].cmd);
 	}
 	server->client = delete_client(server->client, client);
+	client = NULL;
 }
 
 t_client *init_client(t_server *server __attribute__((unused)), int fd)

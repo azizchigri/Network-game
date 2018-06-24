@@ -18,6 +18,27 @@ void clear_cmd(t_client *client)
 	client->buf[9].time = -1;
 }
 
+void eat_client(t_server *server)
+{
+	t_client *client = server->client;
+	if (server->eat == 0) {
+		while (client != NULL) {
+			if (client->player != NULL) {
+				char *str = eat(client->player);
+				if (str != NULL && strcmp(str, "dead") == 0) {
+					FD_CLR(client->fd, &(server->readfds));
+					send(client->fd, "dead\n", 5, 0);
+					destroy_client(server, client);
+				}
+			}
+			if (client != NULL)
+				client = client->next;
+		}
+		server->eat = SERVER_EAT;
+	} else
+		server->eat -= 1;
+}
+
 int execute_commands(t_server *server)
 {
 	t_client *client = server->client;
@@ -29,5 +50,6 @@ int execute_commands(t_server *server)
 			manage_cmd(server, client);
 		client = client->next;
 	}
+	eat_client(server);
 	return (0);
 }

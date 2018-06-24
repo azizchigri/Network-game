@@ -34,13 +34,19 @@ t_client *delete_client(t_client *liste, t_client *delete)
 	if (tmp == delete) {
 		tmp = liste->next;
 		free(liste);
+		tmp = NULL;
+		delete = NULL;
 		return (tmp);
 	}
-	while (tmp->next != delete)
+	while (tmp != NULL && tmp->next != delete)
 		tmp = tmp->next;
-	tmp2 = tmp->next;
-	tmp3 = tmp2->next;
-	tmp->next = tmp3;
-	free(tmp2);
+	if (tmp != NULL) {
+		tmp2 = tmp->next;
+		tmp3 = tmp2->next;
+		tmp->next = tmp3;
+		free(tmp2);
+		tmp2 = NULL;
+	}
+	delete = NULL;
 	return (liste);
 }

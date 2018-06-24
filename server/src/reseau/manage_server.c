@@ -16,6 +16,7 @@ void init_server_params(t_server *server)
 	server->client = NULL;
 	server->game = game_init(server->options.width, server->options.height,
 	server->options.frequence);
+	server->eat = SERVER_EAT;
 }
 
 int init_sockets(struct sockaddr_in s_addr, t_server *server)
@@ -78,6 +79,7 @@ int manage_server(t_server *server)
 	while (!error) {
 		tv.tv_sec = 1;
 		set = server->readfds;
+		printf("tick:%ld\n", tv.tv_sec);
 		result = select(server->higher_fd + 1, &set, NULL, NULL, &tv);
 		if (result == -1)
 			error = -1;
