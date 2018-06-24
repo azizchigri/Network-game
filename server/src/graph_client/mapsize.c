@@ -42,12 +42,9 @@ char *map_size(t_game_p *game)
 	char *result;
 	int x = game->width;
 	int y = game->height;
-	int tmp;
 	int size = 1;
-	for (tmp = x; tmp != 0; tmp /= 10)
-		size += 1;
-	for (tmp = y; tmp != 0; tmp /= 10)
-		size += 1;
+	size += getsize_int_to_str(x);
+	size += getsize_int_to_str(y);
 	result = malloc(sizeof(char) * (size + 6));
 	if (result == NULL)
 		return (NULL);

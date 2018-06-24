@@ -24,15 +24,10 @@ char *player_pos(t_player_p *player)
 {
 	char *result;
 	int size = 0;
-	int tmp;
-	for (tmp = player->id; tmp != 0; tmp /= 10)
-		size += 1;
-	for (tmp = player->x; tmp != 0; tmp /= 10)
-		size += 1;
-	for (tmp = player->y; tmp != 0; tmp /= 10)
-		size += 1;
-	for (tmp = player->direction; tmp != 0; tmp /= 10)
-		size += 1;
+	size += getsize_int_to_str(player->id);
+	size += getsize_int_to_str(player->x);
+	size += getsize_int_to_str(player->y);
+	size += getsize_int_to_str(player->direction);
 	size += 7;
 	result = malloc(sizeof(char) * size + 1);
 	if (result == NULL)
@@ -43,28 +38,20 @@ char *player_pos(t_player_p *player)
 	return (result);
 }
 
-void size_pin(t_player_p *player, int *size, int tmp)
+int size_pin(t_player_p *player)
 {
-	for (tmp = player->id; tmp != 0; tmp /= 10)
-		*size += 1;
-	for (tmp = player->x; tmp != 0; tmp /= 10)
-		*size += 1;
-	for (tmp = player->y; tmp != 0; tmp /= 10)
-		*size += 1;
-	for (tmp = player->food; tmp != 0; tmp /= 10)
-		*size += 1;
-	for (tmp = player->linemate; tmp != 0; tmp /= 10)
-		*size += 1;
-	for (tmp = player->deraumere; tmp != 0; tmp /= 10)
-		*size += 1;
-	for (tmp = player->sibur; tmp != 0; tmp /= 10)
-		*size += 1;
-	for (tmp = player->mendiane; tmp != 0; tmp /= 10)
-		*size += 1;
-	for (tmp = player->phiras; tmp != 0; tmp /= 10)
-		*size += 1;
-	for (tmp = player->thystame; tmp != 0; tmp /= 10)
-		*size += 1;
+	int size = 0;
+	size += getsize_int_to_str(player->id);
+	size += getsize_int_to_str(player->x);
+	size += getsize_int_to_str(player->y);
+	size += getsize_int_to_str(player->food);
+	size += getsize_int_to_str(player->linemate);
+	size += getsize_int_to_str(player->deraumere);
+	size += getsize_int_to_str(player->sibur);
+	size += getsize_int_to_str(player->mendiane);
+	size += getsize_int_to_str(player->phiras);
+	size += getsize_int_to_str(player->thystame);
+	return (size);
 }
 
 char *write_pin(char *result, t_player_p *player)
@@ -93,8 +80,7 @@ char *write_pin(char *result, t_player_p *player)
 char *player_inv(t_player_p *player)
 {
 	char *result;
-	int size = 0;
-	size_pin(player, &size, 0);
+	int size = size_pin(player);
 	size += 13;
 	result = malloc(sizeof(char) * size + 1);
 	if (result == NULL)

@@ -11,9 +11,7 @@ char *death(t_player_p *player)
 {
 	char *result;
 	int size = 0;
-	int tmp;
-	for (tmp = player->id; tmp != 0; tmp /= 10)
-		size += 1;
+	size += getsize_int_to_str(player->id);
 	size += 4;
 	result = malloc(sizeof(char) * size + 1);
 	if (result == NULL)
