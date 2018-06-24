@@ -14,6 +14,7 @@
 #include "game.h"
 
 #define BUFF_SIZE (2048)
+#define SERVER_EAT (125)
 
 typedef struct s_buff t_buff;
 struct s_buff {
@@ -32,6 +33,7 @@ struct s_client {
 
 typedef struct s_server t_server;
 struct s_server {
+	int eat;
 	int fd_connection;
 	int fds_len;
 	int higher_fd;

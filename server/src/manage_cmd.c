@@ -76,7 +76,7 @@ void manage_buff(t_server *server, char *buff, int fd)
 
 void manage_cmd(t_server *server, t_client *client)
 {
-	if (client->player == NULL || client->buf[0].time == -2) {
+	if (client->player == NULL || client->buf[0].time < -1) {
 		send(client->fd, "ko\n", strlen("ko\n"), 0);
 		clear_cmd(client);
 		return;

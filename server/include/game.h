@@ -166,7 +166,7 @@
 	void refresh_map(t_player_p *player, t_game_p *game);
 	void refresh_player(t_player_p *player, t_game_p *game);
 	// eat or die, if die return dead
-	char *eat(t_player_p *player, t_game_p *game);
+	char *eat(t_player_p *player);
 	//com with graphical client
 	char *death(t_player_p *player);
 	char *lvl_client(t_player_p *player);
