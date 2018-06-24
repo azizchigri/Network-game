@@ -18,7 +18,7 @@
 
 	#define TAKE (1000)
 
-#define DROP (-1000)
+	#define DROP (-1000)
 
 	#define LEFT "Left"
 	#define RIGHT "Right"
@@ -100,7 +100,7 @@
 	//create the game, take width heigth and frequency
 	t_game_p *game_init(int w, int h, int f);
 	//init the player with an unique id as fd
-	t_player_p *init_player(t_game_p *game, int fd, char *team);
+	t_player_p *init_player(t_game_p *game, int fd __attribute__((unused)), char *team);
 	//free the player and return NULL
 	t_player_p *destroy_player(t_player_p *player);
 	//init teams in the game
