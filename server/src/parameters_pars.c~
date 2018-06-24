@@ -1,0 +1,12 @@
+/*
+** EPITECH PROJECT, 2018
+** zappy
+** File description:
+** parse and manage parameters
+*/
+
+#include "server.h"
+
+int manage_parameters_case(int ac, char **av, int c, t_server *server)
+{
+}
