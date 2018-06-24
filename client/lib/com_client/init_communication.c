@@ -23,7 +23,7 @@ int init_connection(char **av, int fd)
 	return (0);
 }
 
-int init_socket()
+int init_socket(void)
 {
 	struct protoent *pe;
 	int fd;

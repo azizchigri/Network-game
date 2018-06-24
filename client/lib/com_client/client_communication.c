@@ -33,7 +33,6 @@ int	stop_socket(int fd)
 	if (close(fd) == -1) {
 		perror("Socket error");
 		return (84);
-
 	}
 	return (0);
 }
