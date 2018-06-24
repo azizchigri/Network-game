@@ -14,7 +14,7 @@ class Client():
 			search_most_food, roles
 	from ._client_queen import queen, queen_check_broadcast
 	from ._client_master import master, follow_incant, try_incant, \
-			do_incant, wait_incant
+			do_incant, wait_incant, wait_end_incant
 
 	def __init__(self, sock_fd, ia_com, args, len):
 		self.sock_fd = sock_fd

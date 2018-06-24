@@ -28,7 +28,7 @@ int get_help(int argc, char **argv)
 	return (84);
 }
 
-void print_usage()
+void print_usage(void)
 {
 	printf("USAGE: ./zappy_ai -p port -n name -h machine\n");
 	printf("\tport\tis the port number\n");
