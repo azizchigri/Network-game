@@ -40,6 +40,7 @@ SRC	=	src/generation/map_gen.c				\
 		src/graph_client/mapsize.c				\
 		src/graph_client/player_p.c				\
 		src/graph_client/res_drop_take.c			\
+		src/graph_client/mct_function.c			\
 		src/gameplay/game.c					\
 		src/graph_client/end_game.c				\
 		src/graph_client/new_player.c				\
@@ -53,7 +54,8 @@ SRC	=	src/generation/map_gen.c				\
         src/reseau/execute.c        \
         src/manage_cmd.c            \
         src/manage_fd.c             \
-        src/gameplay/fork.c
+        src/gameplay/fork.c         \
+        src/ressources.c
 
 SRC1	=	src/generation/map_gen.c				\
 		src/generation/teams.c					\
@@ -93,7 +95,9 @@ SRC1	=	src/generation/map_gen.c				\
 		src/gameplay/game.c					\
 		src/graph_client/end_game.c				\
 		src/graph_client/new_player.c				\
+		src/graph_client/mct_function.c			\
 		src/lib/str_to_wordtab.c	\
+		src/ressources.c            \
 		tests/test_take.c					\
 		tests/test_drop.c					\
 		tests/test_destroy.c					\

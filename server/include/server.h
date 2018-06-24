@@ -15,6 +15,7 @@
 
 #define BUFF_SIZE (2048)
 #define SERVER_EAT (125)
+#define RESSOURCES_TICK (600)
 
 typedef struct s_buff t_buff;
 struct s_buff {
@@ -38,6 +39,7 @@ struct s_server {
 	int fds_len;
 	int higher_fd;
 	int graph;
+	int ressources;
 	t_options options;
 	fd_set readfds;
 	t_game_p *game;
@@ -70,5 +72,6 @@ void manage_cmd(t_server *server, t_client *client);
 void execute_broadcast(t_server *server, t_client *client);
 t_egg *check_egg(t_server *server, t_egg *start);
 t_egg *add_egg(t_server *server, t_egg *start, char *team);
+void check_ressources(t_server *server);
 
 #endif //PSU_ZAPPY_2017_SERVER_H

@@ -16,7 +16,6 @@ t_egg *add_egg(t_server *server, t_egg *start, char *team)
 	elem->next = NULL;
 	elem->team = strdup(team);
 	elem->time = 600.0 / server->options.frequence;
-	printf("time:%f\n",elem->time);
 	for (; tmp != NULL && tmp->next != NULL; tmp = tmp->next);
 	if (tmp != NULL)
 		tmp->next = elem;

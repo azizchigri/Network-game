@@ -29,6 +29,7 @@ void eat_client(t_server *server)
 					FD_CLR(client->fd, &(server->readfds));
 					send(client->fd, "dead\n", 5, 0);
 					destroy_client(server, client);
+					client = NULL;
 				}
 			}
 			if (client != NULL)
@@ -62,7 +63,8 @@ int execute_other_cmd(t_server *server, t_client *client, char **tab)
 		server->graph = client->fd;
 		send(client->fd, "ok\n", 3, 0);
 		clear_cmd(client);
-		//msz et mct
+		map_size(server->game, server->graph);
+		mct(server->game, server->graph);
 		return (0);
 	}
 	if (tab != NULL && strcmp(tab[0], "Broadcast") == 0 &&
@@ -74,7 +76,6 @@ int execute_other_cmd(t_server *server, t_client *client, char **tab)
 		if (client->player != NULL)
 		server->egg = add_egg(server, server->egg, client->player->team);
 		send(client->fd, "ok\n", 3, 0);
-		printf("egg:%p, next:%p\n", server->egg, server->egg->next);
 		clear_cmd(client);
 	}
 	return (-1);
@@ -95,5 +96,6 @@ int execute_commands(t_server *server)
 	eat_client(server);
 	check_client_win(server);
 	server->egg = check_egg(server, server->egg);
+	check_ressources(server);
 	return (0);
 }

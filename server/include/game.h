@@ -183,7 +183,7 @@
 	char *lvl_client(t_player_p *player);
 	char *add_str(char *src, char *str);
 	char *add_int(char *str, int nb);
-	char *map_size(t_game_p *game);
+	void map_size(t_game_p *game, int fd);
 	char *player_pos(t_player_p *player);
 	char *player_inv(t_player_p *player);
 	char *take_r_client(char ress, int nb);

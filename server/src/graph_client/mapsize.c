@@ -38,9 +38,11 @@ char *add_int(char *str, int nb)
 	return (str);
 }
 
-char *map_size(t_game_p *game)
+void map_size(t_game_p *game, int fd)
 {
 	char *result;
 	asprintf(&result, "msz %d %d\n", game->width, game->height);
-	return (result);
+	send(fd, result, strlen(result), 0);
+	free(result);
+	result = NULL;
 }

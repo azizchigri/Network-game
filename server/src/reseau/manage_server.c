@@ -19,6 +19,7 @@ void init_server_params(t_server *server)
 	server->eat = SERVER_EAT;
 	server->graph = -1;
 	server->egg = NULL;
+	server->ressources = RESSOURCES_TICK;
 }
 
 int init_sockets(struct sockaddr_in s_addr, t_server *server)
