@@ -24,7 +24,8 @@ void add_client_cmd(t_server *server, int fd, char *buff)
 	int i2 = 0;
 	char **tab = get_cmd(buff);
 	if (tab != NULL && client != NULL) {
-		int time = cooldown(server->game, client->player, tab);
+		float time = cooldown(server->game, client->player, tab) /
+		server->options.frequence;
 		if (time == -1) {
 			time = -2;
 		}
@@ -32,7 +33,6 @@ void add_client_cmd(t_server *server, int fd, char *buff)
 			client = client->next;
 		}
 		for (i2 = 0; client->buf[i2].cmd != NULL && i2 < 10; i2 += 1);
-		//appller destroy client
 		client->buf[i2].cmd = tab;
 		client->buf[i2].time = time;
 	}
@@ -76,7 +76,7 @@ void manage_buff(t_server *server, char *buff, int fd)
 
 void manage_cmd(t_server *server, t_client *client)
 {
-	if (client->player == NULL || client->buf[0].time == -2) {
+	if (client->player == NULL || client->buf[0].time < -1) {
 		send(client->fd, "ko\n", strlen("ko\n"), 0);
 		clear_cmd(client);
 		return;
@@ -85,10 +85,13 @@ void manage_cmd(t_server *server, t_client *client)
 		char **cmd = client->buf[0].cmd;
 		printf("cmd :%s", client->buf[0].cmd[0]);
 		t_respond rep = gameplay(cmd, client->player, server->game);
-		printf("retour = %s\n", rep.respond);
 		send(client->fd, rep.respond, strlen(rep.respond), 0);
+		send(client->fd, "\n", strlen("\n"), 0);
+		if (server->graph != -1 && rep.respond_g != NULL)
+			send(server->graph,
+			rep.respond_g, strlen(rep.respond_g), 0);
 		clear_cmd(client);
-		// free_respond();
+		free_respond(rep);
 	}
 	if (client->buf[0].time != -1)
 		client->buf[0].time -= 1;

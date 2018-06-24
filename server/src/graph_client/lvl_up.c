@@ -6,25 +6,14 @@
 */
 
 #include "game.h"
+#include "server.h"
 
-char *lvl_client(t_player_p *player)
+void lvl_client(t_player_p *player, int fd)
 {
 	char *result;
-	int size = 0;
-	int tmp;
-	for (tmp = player->lvl; tmp != 0; tmp /= 10)
-		size += 1;
-	for (tmp = player->id; tmp != 0; tmp /= 10)
-		size += 1;
-	size += 5;
-	result = malloc(sizeof(char) * size + 1);
-	if (result == NULL)
-		return (NULL);
-	result[0] = 0;
-	result = add_str(result, "plv ");
-	result = add_int(result, player->id);
-	result = add_str(result, " ");
-	result = add_int(result, player->lvl);
-	result[size] = 0;
-	return (result);
+	asprintf(&result, "plv %d %d\n", player->id, player->lvl);
+	if (result != NULL && fd != -1)
+		send(fd, result, strlen(result), 0);
+	if (result != NULL)
+		free(result);
 }

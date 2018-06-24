@@ -20,7 +20,7 @@ Test(Drop, not_enought)
 	msg_r[0] = SET_OBJ;
 	msg_r[1] = "linemate";
 	player->linemate = 0;
-	cr_assert_eq(strcmp(gameplay(msg_r, player, game).respond, "KO"), 0);
+	cr_assert_eq(strcmp(gameplay(msg_r, player, game).respond, KO), 0);
 	game = destroy_game(game);
 	player = destroy_player(player);
 }
@@ -38,7 +38,7 @@ Test(Drop, enought)
 	msg_r[0] = SET_OBJ;
 	msg_r[1] = "linemate";
 	player->linemate = 1;
-	cr_assert_eq(strcmp(gameplay(msg_r, player, game).respond, "OK"), 0);
+	cr_assert_eq(strcmp(gameplay(msg_r, player, game).respond, OK), 0);
 	game = destroy_game(game);
 	player = destroy_player(player);
 }

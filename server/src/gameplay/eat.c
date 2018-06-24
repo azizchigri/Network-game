@@ -5,9 +5,9 @@
 ** eat when possible or die
 */
 
-#include "game.h"
+#include "server.h"
 
-char *eat(t_player_p *player, t_game_p *game)
+char *eat(t_player_p *player, t_server *server)
 {
 	char *result = "alive";
 
@@ -15,7 +15,7 @@ char *eat(t_player_p *player, t_game_p *game)
 	if (player->food < 0) {
 		player->alive  = 0;
 		result = "dead";
-		remove_place(player, game);
+		death(player, server->graph);
 	}
 	return (result);
 }

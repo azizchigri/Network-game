@@ -6,21 +6,15 @@
 */
 
 #include "game.h"
+#include "server.h"
 
-char *death(t_player_p *player)
+void death(t_player_p *player, int fd)
 {
 	char *result;
-	int size = 0;
-	int tmp;
-	for (tmp = player->id; tmp != 0; tmp /= 10)
-		size += 1;
-	size += 4;
-	result = malloc(sizeof(char) * size + 1);
-	if (result == NULL)
-		return (NULL);
-	result[0] = 0;
-	result = add_str(result, "pdi ");
-	result = add_int(result, player->id);
-	result[size] = 0;
-	return (result);
+	asprintf(&result, "pdi %d\n", player->id);
+	if (fd != -1)
+		send(fd, result, strlen(result), 0);
+	if (result != NULL)
+		free(result);
+	result = NULL;
 }

@@ -61,29 +61,26 @@ void lvl_up(t_game_p *game, t_player_p *player, int tmp)
 		}
 	}
 	for (i = 0; strcmp(game->teams[i]->name, player->team) != 0; i += 1);
-	if (player->lvl == 5)
+	if (player->lvl == 7)
 		game->teams[i]->lvl6 += 1;
 	player->lvl += 1;
 }
 
-char *incantation(t_game_p *game, t_player_p *player)
+t_respond incantation(t_game_p *game, t_player_p *player, int begin)
 {
 	int tmp = check_incantation(game, player);
 	int error = 0;
-	if (tmp == -1)
-		return ("KO");
-	else
-	{
-		error += del_s1(game, player);
-		error += del_s2(game, player);
-		error += del_s3(game, player);
-		error += del_s4(game, player);
-		error += del_s5(game, player);
-		error += del_s6(game, player);
-		if (error != 0)
-			return ("KO");
-		else
-			lvl_up(game, player, tmp);
-	}
-	return ("OK");
+	t_respond resp;
+	if (begin == 0)
+		return (get_player_incant(game, player, tmp));
+	error += del_s1(game, player);
+	error += del_s2(game, player);
+	error += del_s3(game, player);
+	error += del_s4(game, player);
+	error += del_s5(game, player);
+	error += del_s6(game, player);
+	if (error == 0 || tmp != -1)
+		lvl_up(game, player, tmp);
+	resp = get_player_had_incant(game, player, tmp);
+	return (resp);
 }

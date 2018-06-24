@@ -16,6 +16,10 @@ void init_server_params(t_server *server)
 	server->client = NULL;
 	server->game = game_init(server->options.width, server->options.height,
 	server->options.frequence);
+	server->eat = SERVER_EAT;
+	server->graph = -1;
+	server->egg = NULL;
+	server->ressources = RESSOURCES_TICK;
 }
 
 int init_sockets(struct sockaddr_in s_addr, t_server *server)
@@ -75,8 +79,10 @@ int manage_server(t_server *server)
 	fd_set set;
 	struct timeval tv;
 	tv.tv_usec = 0;
+	float time = 1.0 / server->options.frequence;
 	while (!error) {
-		tv.tv_sec = 1;
+		tv.tv_sec = (int) time;
+		tv.tv_usec = (time - (int) time) * 1000000;
 		set = server->readfds;
 		result = select(server->higher_fd + 1, &set, NULL, NULL, &tv);
 		if (result == -1)

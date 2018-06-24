@@ -18,7 +18,7 @@ char *nbr_player(t_game_p *game, t_player_p *player)
 		size += 1;
 	respond = malloc(sizeof(char) * (size + 1));
 	if (respond == NULL)
-		return ("KO");
+		return (KO);
 	sprintf(respond, "%d", game->teams[i]->slot);
 	return (respond);
 }

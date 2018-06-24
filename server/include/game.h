@@ -31,11 +31,14 @@
 	#define TAKE_OBJ "Take"
 	#define SET_OBJ "Set"
 	#define INCANTATION "Incantation"
+	#define OK "ok"
+	#define KO "ko"
 
 	typedef struct s_respond t_respond;
 	struct s_respond {
-		int time;
+		int *id;
 		char *respond;
+		char *respond_g;
 	};
 
 	typedef struct s_teams t_teams;
@@ -49,6 +52,7 @@
 	typedef struct s_player_p t_player_p;
 	struct s_player_p {
 		int id;
+		int fd;
 		int alive;
 		int lvl;
 		char *team;
@@ -80,11 +84,19 @@
 	struct s_game_p {
 		int height;
 		int width;
+
 		int slot;
 		int nb_player;
 		t_cell **map;
 		t_teams **teams;
 		int f;
+	};
+
+	typedef struct s_egg t_egg;
+	struct s_egg {
+		float time;
+		char *team;
+		t_egg *next;
 	};
 
 //genearation
@@ -106,6 +118,8 @@
 	t_teams **free_teams(t_teams **teams);
 	//free respond
 	t_respond free_respond(t_respond respond);
+	//put ressources on each cell
+	void init_ressources(t_game_p *game);
 
 //gameplay
 	//turn left the player
@@ -131,9 +145,9 @@
 	//add a player on a cell
 	int new_place(t_player_p *player, t_game_p *game);
 	//take an item, if not possible return KO
-	char *take(t_player_p *player, t_game_p *game, char *obj);
+	t_respond take(t_player_p *player, t_game_p *game, char *obj);
 	//drop an item, if not possible retrurn KO
-	char *drop(t_player_p *player, t_game_p *game, char *obj);
+	t_respond drop(t_player_p *player, t_game_p *game, char *obj);
 	//take and drop stone
 	int linemate(t_player_p *player, t_game_p *game, int value);
 	int deraumere(t_player_p *player, t_game_p *game, int value);
@@ -143,11 +157,11 @@
 	int food(t_player_p *player, t_game_p *game, int value);
 	int sibur(t_player_p *player, t_game_p *game, int value);
 	//eject player
-	char *eject(t_player_p *player, t_game_p *game);
+	t_respond eject(t_player_p *player, t_game_p *game);
 	//return time for each action
 	int cooldown(t_game_p *game, t_player_p *player, char **cmd);
 	//incantation to lvl up
-	char *incantation(t_game_p *game, t_player_p *player);
+	t_respond incantation(t_game_p *game, t_player_p *player, int begin);
 	//delete stone to do incantation
 	int del_s1(t_game_p *game, t_player_p *player);
 	int del_s2(t_game_p *game, t_player_p *player);
@@ -164,20 +178,43 @@
 	//refresh before and after action client and map
 	void refresh_map(t_player_p *player, t_game_p *game);
 	void refresh_player(t_player_p *player, t_game_p *game);
-	// eat or die, if die return dead
-	char *eat(t_player_p *player, t_game_p *game);
 	//com with graphical client
-	char *death(t_player_p *player);
-	char *lvl_client(t_player_p *player);
+	void death(t_player_p *player, int fd);
+	void lvl_client(t_player_p *player, int fd);
 	char *add_str(char *src, char *str);
 	char *add_int(char *str, int nb);
-	char *map_size(t_game_p *game);
-	char *ppo(t_player_p *player);
-	char *pin(t_player_p *player);
+	void map_size(t_game_p *game, int fd);
+	char *player_pos(t_player_p *player);
+	void player_inv(t_player_p *player, int fd);
 	char *take_r_client(char ress, int nb);
 	char *drop_r_client(char ress, int nb);
+	void new_connection(t_player_p *player, int fd);
+	char *graphical_win(char *team);
 	//check if a team won the game, return ko or the team name;
 	char *check_win(t_game_p *game);
+	// return the size of an int to do a str
+	int getsize_int_to_str(int nbr);
+	//return all the msg after an incantation
+	t_respond get_player_incant(t_game_p *game,
+				t_player_p *player, int tmp);
+	t_respond get_player_had_incant(t_game_p *game,
+				t_player_p *player, int tmp);
+	// look function
+	char *look(t_game_p *game, t_player_p *player);
+	void see_north(t_player_p *player, int level, t_game_p *game, char
+	**tab);
+	void see_south(t_player_p *player, int level, t_game_p *game, char
+	**tab);
+	void see_east(t_player_p *player, int level, t_game_p *game,
+	char **tab);
+	void see_west(t_player_p *player, int level, t_game_p *game,
+	char **tab);
+	// build content of a tile for look function
+	char *build_result(int x, int y, t_game_p *game);
+	// mct function of graphical client
+	void mct(t_game_p *game, int fd);
 
-
+//utils
+	// convert char ** into char * separated by char * separator
+	char *wordtab_to_str(char **tab, char *separator);
 #endif
