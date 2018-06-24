@@ -21,7 +21,7 @@ def	launch_client(ia_com, args):
 
 def	main():
 	try:
-		ia_com = ctypes.CDLL('./libia.so')
+		ia_com = ctypes.CDLL("libia.so")
 	except OSError:
 		print("Error: libia.so not found")
 		return 84
