@@ -61,7 +61,7 @@ void lvl_up(t_game_p *game, t_player_p *player, int tmp)
 		}
 	}
 	for (i = 0; strcmp(game->teams[i]->name, player->team) != 0; i += 1);
-	if (player->lvl == 5)
+	if (player->lvl == 7)
 		game->teams[i]->lvl6 += 1;
 	player->lvl += 1;
 }
