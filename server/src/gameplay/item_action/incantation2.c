@@ -16,12 +16,12 @@ int *get_id_lvlup(t_game_p *game, t_player_p *player, int tmp, int *id)
 	for (i = 0; game->map[x][y].players[i] != NULL; i += 1) {
 		if (game->map[x][y].players[i]->id != player->id
 		&& tmp != 1) {
-			id[j] = game->map[x][y].players[i]->id;
+			id[j] = game->map[x][y].players[i]->fd;
 			tmp -= 1;
 			j += 1;
 		}
 	}
-	id[j] = player->id;
+	id[j] = player->fd;
 	id[j + 1] = -1;
 	return (id);
 }
