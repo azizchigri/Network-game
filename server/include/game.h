@@ -110,6 +110,8 @@
 	t_teams **free_teams(t_teams **teams);
 	//free respond
 	t_respond free_respond(t_respond respond);
+	//put ressources on each cell
+	void init_ressources(t_game_p *game);
 
 //gameplay
 	//turn left the player
