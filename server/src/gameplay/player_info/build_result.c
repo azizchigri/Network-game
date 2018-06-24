@@ -7,7 +7,7 @@
 
 #include "game.h"
 
-char *build_players(t_cell map, int x, int y, char *res)
+char *build_players(t_cell map, char *res)
 {
 	int i = 0;
 
@@ -50,7 +50,7 @@ char *build_result(int x, int y, t_game_p *game)
 	t_cell map = game->map[x][y];
 	char *res = strdup("");
 
-	res = build_players(map, x, y, res);
+	res = build_players(map, res);
 	res = build_resource(map.deraumere, "deraumere", res);
 	res = build_resource(map.linemate, "linemate", res);
 	res = build_resource(map.food, "food", res);

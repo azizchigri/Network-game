@@ -10,7 +10,7 @@
 char **fct(t_game_p *game, t_player_p *player)
 {
 	int level = player->lvl;
-	char **tab = malloc(sizeof(char*) * (level + 2));
+	char **tab = malloc(sizeof(char *) * (level + 2));
 	void (*see[4])(t_player_p *, int, t_game_p *, char **);
 
 	if (tab == NULL)
@@ -34,9 +34,6 @@ char *look(t_game_p *game, t_player_p *player)
 	char **response;
 
 	if (!game || !player)
-		return (NULL);
-	response = strdup("[");
-	if (response == NULL)
 		return (NULL);
 	response = fct(game, player);
 	return (wordtab_to_str(response, ", "));

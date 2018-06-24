@@ -82,6 +82,7 @@
 	struct s_game_p {
 		int height;
 		int width;
+
 		int slot;
 		int nb_player;
 		t_cell **map;
@@ -192,6 +193,9 @@
 	char *check_win(t_game_p *game);
 	// return the size of an int to do a str
 	int getsize_int_to_str(int nbr);
+	//return all the msg after an incantation
+	t_respond get_player_incant(t_game_p *game,
+				t_player_p *player, int tmp);
 	// look function
 	char *look(t_game_p *game, t_player_p *player);
 	void see_north(t_player_p *player, int level, t_game_p *game, char
@@ -204,9 +208,10 @@
 	char **tab);
 	// build content of a tile for look function
 	char *build_result(int x, int y, t_game_p *game);
+	// mct function of graphical client
+	void mct(t_game_p *game, int fd);
 
 //utils
 	// convert char ** into char * separated by char * separator
 	char *wordtab_to_str(char **tab, char *separator);
-	
 #endif
