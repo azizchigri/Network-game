@@ -57,12 +57,12 @@ t_respond get_player_had_incant(t_game_p *game,
 {
 	t_respond resp;
 	char *str;
-	if (tmp == -1) {
+	if (tmp == -1)
 		resp.respond = KO;
-		return (resp);
+	else {
+		str = "Current level: ";
+		resp.respond = put_lvl_inrespond(str, player->lvl);
 	}
-	str = "Current level: ";
-	resp.respond = put_lvl_inrespond(str, player->lvl);
 	resp.id = malloc(sizeof(int) * (tmp + 1));
 	if (resp.id == NULL)
 		return (resp);
