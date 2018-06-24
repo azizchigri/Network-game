@@ -47,36 +47,44 @@ def follow_incant(self, message, sender):
 	return 0
 
 def wait_incant(self, message, sender):
-	print("111111111")
 	if self.broadcast(":" + self.team + ":" + self.id + ":"
 			+ sender + ":IncantOk") == 84:
 		return 84
-	while (not "0" in message[0][8]
+	while ("0" in message[0][8]
 			and message[2] in sender
-			and not "IncantNow" in message[4]):
-		print("222222222")
+			and "IncantNow" in message[4]):
 		if self.look() == 84:
 			return 84
 		message = self.check_messages("Incant")
-	print("3333333333")
 	if "IncantFail" is message[4]:
 		return 0
 	else:
-		print("4444444444")
-		while (not "0" in message[0][8]
-				and "Elevation" in message[4]):
-			print("5555555555")
-			if self.look() == 84:
+		if self.wait_end_incant(message, "Elevation") == 84:
+			return 84
+		if self.wait_end_incant(message, "Current level") == 84:
+			return 84
+		if self.res is True:
+			if self.receive() == 84:
 				return 84
-			if self.looked is "ko":
-				if self.receive() == 84:
-					return 84
-				return 0
-			message = self.check_messages("Elevation")
-		print("6666666666")
-		if message is not None:
+			if self.receive() == 84:
+				return 84
 			self.level += 1
-	print("7777777777")
+	return 0
+
+def wait_end_incant(self, message, waiting):
+	while (not waiting in message[4]):
+		if self.look() == 84:
+			return 84
+		if self.looked is "":
+			if self.receive() == 84:
+				return 84
+			if self.receive() == 84:
+				return 84
+		if "Current level" in self.buff_str:
+			return 0
+		message_tmp = self.check_messages(waiting)
+		if message_tmp is not None:
+			message = message_tmp
 	return 0
 
 def try_incant(self):
