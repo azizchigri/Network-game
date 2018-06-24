@@ -85,7 +85,7 @@ t_respond incantation(t_game_p *game, t_player_p *player)
 		if (error != 0)
 			resp.respond = "KO";
 		else {
-			resp = get_player_incant(game, player, tmp);
+			//resp = get_player_incant(game, player, tmp);
 			lvl_up(game, player, tmp);
 		}
 	}
