@@ -260,6 +260,12 @@ public class CommandHandler : MonoBehaviour {
     {
         if (array.Length != 2)
             return false;
+        Debug.Log("Quit program");
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
         return true;
     }
 
