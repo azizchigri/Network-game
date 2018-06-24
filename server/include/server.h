@@ -19,7 +19,7 @@
 typedef struct s_buff t_buff;
 struct s_buff {
 	char **cmd;
-	int time;
+	float time;
 };
 
 typedef struct s_client t_client;
@@ -66,5 +66,6 @@ char **get_cmd(char *buff);
 void manage_buff(t_server *server, char *buff, int fd);
 t_client *delete_client(t_client *liste, t_client *delete);
 void manage_cmd(t_server *server, t_client *client);
+void execute_broadcast(t_server *server, t_client *client);
 
 #endif //PSU_ZAPPY_2017_SERVER_H

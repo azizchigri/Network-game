@@ -67,21 +67,11 @@ int execute_other_cmd(t_server *server, t_client *client, char **tab)
 	}
 	if (tab != NULL && strcmp(tab[0], "Broadcast") == 0 &&
 	    client->buf[0].time == 0) {
-		t_client *tmp = server->client;
-		char *msg;
-		int size = 0;
-		for (; tmp != NULL; tmp = tmp->next) {
-			if (tmp != client) {
-				msg = broadcast(server->game, client->player,
-				tmp->player);
-				size = strlen(msg);
-				msg = realloc(msg, size + 2);
-				strcat(msg, "\n\0");
-				send(tmp->fd, msg, size, 0);
-				free(msg);
-			}
-		}
-		send(client->fd, "ok\n", 3, 0);
+		execute_broadcast(server, client);
+	}
+	if (tab != NULL && strcmp(tab[0], "Fork") == 0 &&
+	    client->buf[0].time == 0) {
+		//excute_fork(server, client);
 		clear_cmd(client);
 	}
 	return (-1);

@@ -5,7 +5,7 @@
 ** broadcast
 */
 
-#include "game.h"
+#include "server.h"
 
 char relativ_pos(int or, char cell)
 {
@@ -83,4 +83,24 @@ char *broadcast(t_game_p *game, t_player_p *start, t_player_p *end)
 		cell = is_center(up_down, end);
 	cell[0] = relativ_pos(end->direction, cell[0]);
 	return (cell);
+}
+
+void execute_broadcast(t_server *server, t_client *client)
+{
+	t_client *tmp = server->client;
+	char *msg;
+	int size = 0;
+	for (; tmp != NULL; tmp = tmp->next) {
+		if (tmp != client) {
+			msg = broadcast(server->game, client->player,
+			tmp->player);
+			size = strlen(msg);
+			msg = realloc(msg, size + 2);
+			strcat(msg, "\n\0");
+			send(tmp->fd, msg, size, 0);
+			free(msg);
+		}
+	}
+	send(client->fd, "ok\n", 3, 0);
+	clear_cmd(client);
 }
