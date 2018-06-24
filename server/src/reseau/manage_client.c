@@ -94,7 +94,6 @@ int manage_new_client(t_server *server, int fd)
 	server->higher_fd = server->higher_fd > fd ? server->higher_fd : fd;
 	fcntl(fd, F_SETFL, O_NONBLOCK);
 	FD_SET(fd, &(server->readfds));
-	printf("New client connected\n");
 	send(fd, "WELCOME\n", 8, 0);
 	server->client = add_client(server->client, init_client(server, fd));
 	return (0);

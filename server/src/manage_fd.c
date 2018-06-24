@@ -22,7 +22,6 @@ void read_fd(t_server *server, int fd)
 	} else {
 		buff[result] = '\0';
 		manage_buff(server, buff, fd);
-		printf("message:%s, len:%ld\n", buff, strlen(buff));
 	}
 }
 
