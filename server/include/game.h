@@ -197,6 +197,8 @@
 	char **tab);
 	// build content of a tile for look function
 	char *build_result(int x, int y, t_game_p *game);
+	// mct function of graphical client
+	void mct(t_game_p *game, int fd);
 
 //utils
 	// convert char ** into char * separated by char * separator
