@@ -52,7 +52,7 @@ t_respond game_info(char **msg_r, t_player_p *player, t_game_p *game)
 	if (strcmp(msg_r[0], CONNECT_NBR) == 0)
 		resp.respond = nbr_player(game, player);
 	else if (strcmp(msg_r[0], EJECT) == 0)
-		resp.respond = eject(player, game);
+		resp = eject(player, game);
 	refresh_map(player, game);
 	return (resp);
 }
