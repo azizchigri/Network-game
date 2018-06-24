@@ -12,8 +12,8 @@ char *player_pos(t_player_p *player)
 {
 	char *result;
 
-	asprintf(&result, "ppo %d %d %d %c\n", player->id,
-		player->x, player->y, player->direction);
+	asprintf(&result, "ppo %d %d %d %d\n", player->id,
+		player->x, player->y, (int) (player->direction + 1));
 	return (result);
 }
 

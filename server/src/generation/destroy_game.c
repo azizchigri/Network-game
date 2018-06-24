@@ -9,8 +9,8 @@
 
 t_respond free_respond(t_respond respond)
 {
-	if (strcmp(respond.respond, "KO") != 0
-	&& strcmp(respond.respond, "OK") != 0
+	if (strcmp(respond.respond, "ko") != 0
+	&& strcmp(respond.respond, "ok") != 0
 	&& respond.respond != NULL)
 		free(respond.respond);
 	respond.respond = NULL;
