@@ -40,7 +40,7 @@ t_respond get_player_incant(t_game_p *game,
 	t_respond resp;
 	char *str;
 	if (tmp == -1) {
-		resp.respond = "KO";
+		resp.respond = KO;
 		return (resp);
 	}
 	asprintf(&str, "Elevation underway");
@@ -58,7 +58,7 @@ t_respond get_player_had_incant(t_game_p *game,
 	t_respond resp;
 	char *str;
 	if (tmp == -1) {
-		resp.respond = "KO";
+		resp.respond = KO;
 		return (resp);
 	}
 	str = "Current level: ";

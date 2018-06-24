@@ -81,7 +81,7 @@ t_respond incantation(t_game_p *game, t_player_p *player, int begin)
 	error += del_s5(game, player);
 	error += del_s6(game, player);
 	if (error != 0 || tmp == -1) {
-		resp.respond = "KO";
+		resp.respond = KO;
 		resp.respond_g = NULL;
 		resp.id = NULL;
 	}

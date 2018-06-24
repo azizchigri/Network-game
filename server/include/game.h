@@ -31,6 +31,8 @@
 	#define TAKE_OBJ "Take"
 	#define SET_OBJ "Set"
 	#define INCANTATION "Incantation"
+	#define OK "ok"
+	#define KO "ko"
 
 	typedef struct s_respond t_respond;
 	struct s_respond {

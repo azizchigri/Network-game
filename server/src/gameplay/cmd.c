@@ -14,17 +14,17 @@ t_respond move(char **msg_r, t_player_p *player, t_game_p *game)
 	resp.respond_g = NULL;
 	if (strcmp(msg_r[0], FORWARD) == 0) {
 		front(player, game);
-		resp.respond = "OK";
+		resp.respond = OK;
 		resp.respond_g = player_pos(player);
 	}
 	else if (strcmp(msg_r[0], RIGHT) == 0) {
 		right(player, game);
-		resp.respond = "OK";
+		resp.respond = OK;
 		resp.respond_g = player_pos(player);
 	}
 	else if (strcmp(msg_r[0], LEFT) == 0) {
 		left(player, game);
-		resp.respond = "OK";
+		resp.respond = OK;
 		resp.respond_g = player_pos(player);
 	}
 	refresh_map(player, game);
@@ -90,6 +90,6 @@ t_respond gameplay(char **msg_r, t_player_p *player, t_game_p *game)
 	msg_s = item_action(msg_r, player, game);
 	if (msg_s.respond != NULL || msg_s.respond_g != NULL)
 		return (msg_s);
-	msg_s.respond = "KO";
+	msg_s.respond = KO;
 	return (msg_s);
 }

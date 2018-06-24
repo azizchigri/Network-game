@@ -20,7 +20,7 @@ Test(Take, Take_true)
 	msg_r[0] = TAKE_OBJ;
 	msg_r[1] = "linemate";
 	game->map[player->x][player->y].linemate = 1;
-	cr_assert_eq(strcmp(gameplay(msg_r, player, game).respond, "OK"), 0);
+	cr_assert_eq(strcmp(gameplay(msg_r, player, game).respond, OK), 0);
 	game = destroy_game(game);
 	player = destroy_player(player);
 }
@@ -38,7 +38,7 @@ Test(Take, Take_false)
 	msg_r[0] = TAKE_OBJ;
 	msg_r[1] = "linemate";
 	game->map[player->x][player->y].linemate = 0;
-	cr_assert_eq(strcmp(gameplay(msg_r, player, game).respond, "KO"), 0);
+	cr_assert_eq(strcmp(gameplay(msg_r, player, game).respond, KO), 0);
 	game = destroy_game(game);
 	player = destroy_player(player);
 }
