@@ -53,7 +53,19 @@ public class Client : MonoBehaviour
             Quit();
         if (!isAtStartup && client != null && client.Connected)
         {
-            Handler.CallCommand(RcvData());
+            string command = RcvData();
+            if (command.Length != 0)
+            {
+                while (command[command.Length - 1] != '\n')
+                {
+                    command += RcvData();
+                }
+                string[] commandArray = command.Split('\n');
+                foreach (string cmd in commandArray)
+                {
+                    Handler.CallCommand(cmd);
+                }
+            }
         }
     }
 
