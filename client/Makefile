@@ -1,37 +1,52 @@
 ##
 ## EPITECH PROJECT, 2018
-## PSU_zappy_2017
+## zappy
 ## File description:
-## client makefile
+## zappy serveur makefile
 ##
 
-SRC	=
+SRC	=	lib/com_client/args_management.c	\
+		lib/com_client/client_communication.c	\
+		lib/com_client/error_client.c		\
+		lib/com_client/get_next_line.c		\
+		lib/com_client/init_communication.c
 
-TESTS = tests.test_json_wrapper
+SRC1	=	lib/com_client/args_management.c	\
+		lib/com_client/client_communication.c	\
+		lib/com_client/error_client.c		\
+		lib/com_client/get_next_line.c		\
+		lib/com_client/init_communication.c
 
 OBJ     =       $(SRC:.c=.o)
 
-CFLAGS	+=	-Wall -Wextra -Werror -Iinclude
+CFLAGS	+=	-Wall -Wextra -Werror -Iinclude -fpic -shared
 
 CFLAGS1	+=	-Wall -Wextra -Werror -Iinclude -lcriterion --coverage
 
-NAME    =
+NAME    =	libia.so
 
-COVER1	=	*/*.pyc
+NAME1	=	test
 
-COVER2	=	*/__pycache__
+COVER1	=	*.gcno
+
+COVER2	=	*.gcda
 
 all:    $(NAME)
 
 $(NAME): $(OBJ)
-	gcc -o $(NAME) $(OBJ) $(CFLAGS)
+	gcc $(CFLAGS) $(OBJ) -o $(NAME)
+
+debug: $(OBJ)
+	gcc -o $(NAME) $(OBJ) $(CFLAGS) -g3
 
 tests_run:
-	python3 -m unittest $(TESTS)
+	gcc -o $(NAME1) $(SRC1) $(CFLAGS1)
+	./$(NAME1)
 
 tests_clean:
-	rm -rf $(COVER1)
-	rm -rf $(COVER2)
+	rm -f $(COVER1)
+	rm -f $(COVER2)
+	rm -f $(NAME1)
 
 clean:
 	rm -f $(OBJ)

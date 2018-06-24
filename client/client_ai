@@ -1,0 +1,46 @@
+#!/usr/bin/python3.6
+
+import sys
+import ctypes
+from module_client import Client
+
+def	launch_client(ia_com, args):
+	sock_fd = ia_com.init_socket()
+	if (sock_fd < 0):
+		return (84)
+	if (ia_com.init_connection(args, sock_fd) == 84):
+		return (84)
+	len_team_name = ia_com.get_len_team_name(args)
+	myClient = Client(sock_fd, ia_com, args, len_team_name)
+	if myClient.connect(args) == 84:
+		return 84
+	if myClient.run() == 84:
+		if myClient.check_dead() == 84:
+			return 84
+	return (ia_com.stop_socket(sock_fd))
+
+def	main():
+	try:
+		ia_com = ctypes.CDLL('./libia.so')
+	except OSError:
+		print("Error: libia.so not found")
+		return 84
+	LP_c_char = ctypes.POINTER(ctypes.c_char)
+	LP_LP_c_char = ctypes.POINTER(LP_c_char)
+	ia_com.get_args.argtypes = (ctypes.c_int, LP_LP_c_char)
+	ia_com.get_args.restype = LP_LP_c_char
+	argc = len(sys.argv)
+	argv = (LP_c_char * (argc + 1))()
+	for i, arg in enumerate(sys.argv):
+		enc_arg = arg.encode('utf-8')
+		argv[i] = ctypes.create_string_buffer(enc_arg)
+	if (ia_com.get_help(argc, argv) == 0):
+		return (0)
+	args = ia_com.get_args(argc, argv)
+	if args is None:
+		return (84)
+	if (ia_com.check_args(args) == 84):
+		return (84)
+	return (launch_client(ia_com, args))
+
+exit(main())
