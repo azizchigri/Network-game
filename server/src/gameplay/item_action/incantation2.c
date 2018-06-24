@@ -39,6 +39,10 @@ t_respond get_player_incant(t_game_p *game,
 {
 	t_respond resp;
 	char *str;
+	if (tmp == -1) {
+		resp.respond = "KO";
+		return (resp);
+	}
 	asprintf(&str, "Elevation underway");
 	resp.respond = str;
 	resp.id = malloc(sizeof(int) * (tmp + 1));
@@ -49,10 +53,14 @@ t_respond get_player_incant(t_game_p *game,
 }
 
 t_respond get_player_had_incant(t_game_p *game,
-			 t_player_p *player, int tmp)
+				t_player_p *player, int tmp)
 {
 	t_respond resp;
 	char *str;
+	if (tmp == -1) {
+		resp.respond = "KO";
+		return (resp);
+	}
 	str = "Current level: ";
 	resp.respond = put_lvl_inrespond(str, player->lvl);
 	resp.id = malloc(sizeof(int) * (tmp + 1));
