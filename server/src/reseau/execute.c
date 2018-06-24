@@ -71,7 +71,10 @@ int execute_other_cmd(t_server *server, t_client *client, char **tab)
 	}
 	if (tab != NULL && strcmp(tab[0], "Fork") == 0 &&
 	    client->buf[0].time == 0) {
-		//excute_fork(server, client);
+		if (client->player != NULL)
+		server->egg = add_egg(server, server->egg, client->player->team);
+		send(client->fd, "ok\n", 3, 0);
+		printf("egg:%p, next:%p\n", server->egg, server->egg->next);
 		clear_cmd(client);
 	}
 	return (-1);
@@ -91,6 +94,6 @@ int execute_commands(t_server *server)
 	}
 	eat_client(server);
 	check_client_win(server);
-	check_egg(server, server->egg);
+	server->egg = check_egg(server, server->egg);
 	return (0);
 }

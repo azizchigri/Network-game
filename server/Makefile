@@ -52,7 +52,8 @@ SRC	=	src/generation/map_gen.c				\
         src/reseau/manage_client.c  \
         src/reseau/execute.c        \
         src/manage_cmd.c            \
-        src/manage_fd.c
+        src/manage_fd.c             \
+        src/gameplay/fork.c
 
 SRC1	=	src/generation/map_gen.c				\
 		src/generation/teams.c					\
@@ -83,6 +84,7 @@ SRC1	=	src/generation/map_gen.c				\
 		src/gameplay/player_info/look_orientation/look_north.c	\
 		src/gameplay/player_info/look_orientation/look_south.c	\
 		src/gameplay/player_info/look_orientation/look_west.c	\
+		src/gameplay/fork.c                                     \
 		src/graph_client/death.c				\
 		src/graph_client/lvl_up.c				\
 		src/graph_client/mapsize.c				\
