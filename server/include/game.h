@@ -179,6 +179,21 @@
 	char *drop_r_client(char ress, int nb);
 	//check if a team won the game, return ko or the team name;
 	char *check_win(t_game_p *game);
+	// look function
+	char *look(t_game_p *game, t_player_p *player);
+	void see_north(t_player_p *player, int level, t_game_p *game, char
+	**tab);
+	void see_south(t_player_p *player, int level, t_game_p *game, char
+	**tab);
+	void see_east(t_player_p *player, int level, t_game_p *game,
+	char **tab);
+	void see_west(t_player_p *player, int level, t_game_p *game,
+	char **tab);
+	// build content of a tile for look function
+	char *build_result(int x, int y, t_game_p *game);
 
+//utils
+	// convert char ** into char * separated by char * separator
+	char *wordtab_to_str(char **tab, char *separator);
 
 #endif
