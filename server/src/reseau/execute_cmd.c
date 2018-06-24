@@ -15,6 +15,8 @@ void execute_incantation(t_server *server, t_client *client)
 	else {
 		for (int i = 0; rep.id[i] != -1; i += 1) {
 			send(rep.id[i], rep.respond, strlen(rep.respond), 0);
+			send(rep.id[i], "\n", strlen("\n"), 0);
+
 		}
 		if (rep.respond != NULL)
 			free(rep.respond);
@@ -32,6 +34,7 @@ void execute_incantation_next(t_server *server, t_client *client)
 	t_respond rep = incantation(server->game, client->player, 1);
 	for (int i = 0; rep.id[i] != -1; i += 1) {
 		send(rep.id[i], rep.respond, strlen(rep.respond), 0);
+		send(rep.id[i], "\n", strlen("\n"), 0);
 		for (tmp = server->client; tmp != NULL; tmp = tmp->next) {
 			if (tmp->player != NULL &&
 			    tmp->player->fd == rep.id[i])
