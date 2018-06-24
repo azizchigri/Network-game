@@ -83,13 +83,11 @@ int execute_other_cmd(t_server *server, t_client *client, char **tab)
 	    client->buf[0].time == 0) {
 		if (client->player != NULL)
 			execute_incantation(server, client);
-		send(client->fd, "ok\n", 3, 0);
 	}
 	if (tab != NULL && strcmp(tab[0], "Incantation2") == 0 &&
 	    client->buf[0].time == 0) {
 		if (client->player != NULL)
 			execute_incantation_next(server, client);
-		send(client->fd, "ok\n", 3, 0);
 	}
 	return (-1);
 }
