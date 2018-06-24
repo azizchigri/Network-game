@@ -66,12 +66,14 @@ void lvl_up(t_game_p *game, t_player_p *player, int tmp)
 	player->lvl += 1;
 }
 
-char *incantation(t_game_p *game, t_player_p *player)
+t_respond incantation(t_game_p *game, t_player_p *player)
 {
 	int tmp = check_incantation(game, player);
 	int error = 0;
+	t_respond resp;
+
 	if (tmp == -1)
-		return ("KO");
+		resp.respond = "KO";
 	else
 	{
 		error += del_s1(game, player);
@@ -81,9 +83,11 @@ char *incantation(t_game_p *game, t_player_p *player)
 		error += del_s5(game, player);
 		error += del_s6(game, player);
 		if (error != 0)
-			return ("KO");
-		else
+			resp.respond = "KO";
+		else {
+			//resp = get_player_incant(game, player, tmp);
 			lvl_up(game, player, tmp);
+		}
 	}
-	return ("OK");
+	return (resp);
 }

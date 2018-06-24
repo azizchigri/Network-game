@@ -35,8 +35,7 @@
 
 	typedef struct s_respond t_respond;
 	struct s_respond {
-		int time;
-
+		int *id;
 		char *respond;
 		char *respond_g;
 	};
@@ -151,7 +150,7 @@
 	//return time for each action
 	int cooldown(t_game_p *game, t_player_p *player, char **cmd);
 	//incantation to lvl up
-	char *incantation(t_game_p *game, t_player_p *player);
+	t_respond incantation(t_game_p *game, t_player_p *player);
 	//delete stone to do incantation
 	int del_s1(t_game_p *game, t_player_p *player);
 	int del_s2(t_game_p *game, t_player_p *player);

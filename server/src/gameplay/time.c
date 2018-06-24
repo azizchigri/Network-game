@@ -20,6 +20,14 @@ void player_refresh(t_player_p **players, t_player_p *player)
 	}
 }
 
+int fork_time(char **cmd)
+{
+	int time = -1;
+	if (strcmp(FORK, cmd[0]) == 0)
+		time = 42;
+	return (time);
+}
+
 int other_time(char **cmd)
 {
 	int time = 0;
@@ -30,7 +38,7 @@ int other_time(char **cmd)
 		strcmp("Graphical", cmd[0]) == 0)
 		time = 0;
 	else
-		time = -1;
+		time = fork_time(cmd);
 	return (time);
 }
 
@@ -54,7 +62,7 @@ int cooldown(t_game_p *game, t_player_p *player, char **cmd)
 	int i;
 	int j;
 	int time = 0;
-	if (strcmp("Inventory", cmd[0]) == 0)
+	if (strcmp(INVENTORY, cmd[0]) == 0)
 		time = 1;
 	else
 		time = check_time(cmd);
