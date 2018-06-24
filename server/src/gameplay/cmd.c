@@ -66,8 +66,6 @@ t_respond item_action(char **msg_r, t_player_p *player, t_game_p *game)
 		resp = take(player, game, msg_r[1]);
 	else if (strcmp(msg_r[0], SET_OBJ) == 0)
 		resp = drop(player, game, msg_r[1]);
-	else if (strcmp(msg_r[0], INCANTATION) == 0)
-		resp = incantation(game, player);
 	refresh_map(player, game);
 	return (resp);
 }
