@@ -83,7 +83,7 @@ def set_item(self, item):
 	return 0
 
 def incantation(self):
-	if self.send("Incant") == 84:
+	if self.send("Incantation") == 84:
 		return 84
 	if self.receive() == 84:
 		return 84

@@ -6,14 +6,15 @@ class Client():
 
 	from ._client_launch import connect, run
 	from ._client_communication import send, receive, check_messages, \
-			check_dead
+			check_dead, check_buff
 	from ._client_commands import forward, left, right, inventory, look, \
 			get_team_slots, set_item, take_item, broadcast, fork, \
 			incantation
 	from ._client_newplayer import get_ressources, go_to_food_place, \
 			search_most_food, roles
 	from ._client_queen import queen, queen_check_broadcast
-	from ._client_master import master, follow_incant, try_incant, do_incant
+	from ._client_master import master, follow_incant, try_incant, \
+			do_incant, wait_incant
 
 	def __init__(self, sock_fd, ia_com, args, len):
 		self.sock_fd = sock_fd
