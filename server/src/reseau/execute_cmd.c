@@ -9,5 +9,8 @@
 
 void execute_incantation(t_server *server, t_client *client)
 {
-	incantation(server->game, client->player, 0);
+	t_respond rep = incantation(server->game, client->player, 0);
+	for (int i = 0; rep.id != -1; i += 1) {
+		send();
+	}
 }
