@@ -159,7 +159,7 @@
 	//return time for each action
 	int cooldown(t_game_p *game, t_player_p *player, char **cmd);
 	//incantation to lvl up
-	t_respond incantation(t_game_p *game, t_player_p *player);
+t_respond incantation(t_game_p *game, t_player_p *player, int begin);
 	//delete stone to do incantation
 	int del_s1(t_game_p *game, t_player_p *player);
 	int del_s2(t_game_p *game, t_player_p *player);
@@ -196,6 +196,8 @@
 	int getsize_int_to_str(int nbr);
 	//return all the msg after an incantation
 	t_respond get_player_incant(t_game_p *game,
+				t_player_p *player, int tmp);
+	t_respond get_player_had_incant(t_game_p *game,
 				t_player_p *player, int tmp);
 	// look function
 	char *look(t_game_p *game, t_player_p *player);
