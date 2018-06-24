@@ -17,6 +17,7 @@ void init_server_params(t_server *server)
 	server->game = game_init(server->options.width, server->options.height,
 	server->options.frequence);
 	server->eat = SERVER_EAT;
+	server->graph = -1;
 }
 
 int init_sockets(struct sockaddr_in s_addr, t_server *server)

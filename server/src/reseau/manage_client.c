@@ -98,4 +98,4 @@ int manage_new_client(t_server *server, int fd)
 	send(fd, "WELCOME\n", 8, 0);
 	server->client = add_client(server->client, init_client(server, fd));
 	return (0);
-                                                                                                                       }
+}

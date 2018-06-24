@@ -46,6 +46,11 @@ int execute_commands(t_server *server)
 		char **tab = client->buf[0].cmd;
 		if (tab != NULL && strcmp(tab[0], "TEAM") == 0) {
 			connect_client(server, client, client->fd, tab);
+		} else if (tab != NULL && strcmp(tab[0], "Graphical")) {
+			server->graph = client->fd;
+			send(client->fd, "ok\n", 3, 0);
+			clear_cmd(client);
+			printf("hey le client graphique est:%d\n",server->graph);
 		} else if (client->buf[0].time != -1)
 			manage_cmd(server, client);
 		client = client->next;

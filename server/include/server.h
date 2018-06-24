@@ -37,6 +37,7 @@ struct s_server {
 	int fd_connection;
 	int fds_len;
 	int higher_fd;
+	int graph;
 	t_options options;
 	fd_set readfds;
 	t_game_p *game;
