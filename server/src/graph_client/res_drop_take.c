@@ -6,37 +6,18 @@
 */
 
 #include "game.h"
+#include "server.h"
 
 char *take_r_client(char ress, int nb)
 {
 	char *result;
-	int size = 0;
-	size += getsize_int_to_str(nb);
-	result = malloc(sizeof(char) * size + 8);
-	if (result == NULL)
-		return (NULL);
-	result[0] = 0;
-	result = add_str(result, "pgt ");
-	result = add_int(result, nb);
-	result = add_str(result, " ");
-	result[size + 6] = ress;
-	result[size + 7] = 0;
+	asprintf(&result, "pgt %d %c\n", nb, ress);
 	return (result);
 }
 
 char *drop_r_client(char ress, int nb)
 {
 	char *result;
-	int size = 0;
-	size += getsize_int_to_str(nb);
-	result = malloc(sizeof(char) * size + 8);
-	if (result == NULL)
-		return (NULL);
-	result[0] = 0;
-	result = add_str(result, "pdr ");
-	result = add_int(result, nb);
-	result = add_str(result, " ");
-	result[size + 6] = ress;
-	result[size + 7] = 0;
+	asprintf(&result, "pdr %d %c\n", nb, ress);
 	return (result);
 }

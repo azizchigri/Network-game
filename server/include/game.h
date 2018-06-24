@@ -17,7 +17,6 @@
 	#include <criterion/criterion.h>
 
 	#define TAKE (1000)
-
 	#define DROP (-1000)
 
 	#define LEFT "Left"
