@@ -17,6 +17,7 @@ t_player_p *destroy_player(t_player_p *player)
 
 void init_inventory(t_player_p *player)
 {
+	player->lvl = 1;
 	player->linemate = 0;
 	player->deraumere = 0;
 	player->sibur = 0;
@@ -60,7 +61,6 @@ t_player_p *init_player(t_game_p *game,
 	id += 1;
 	player->alive = 1;
 	init_inventory(player);
-	player->lvl = 1;
 	player->direction = 0;
 	player->team = team;
 	while (pos == -1) {

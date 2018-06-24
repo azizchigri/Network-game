@@ -16,7 +16,7 @@ char *add_str(char *src, char *str)
 	for (i = 0; str[i] != 0; i += 1) {
 		src[j] = str[i];
 		j += 1;
-	}       
+	}
 	src[j] = 0;
 	return (src);
 }
