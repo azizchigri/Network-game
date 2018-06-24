@@ -8,9 +8,13 @@
 #include "game.h"
 #include "server.h"
 
-char *death(t_player_p *player)
+void death(t_player_p *player, int fd)
 {
 	char *result;
 	asprintf(&result, "pdi %d\n", player->id);
-	return (result);
+	if (fd != -1)
+		send(fd, result, strlen(result), 0);
+	if (result!= NULL)
+		free(result);
+	result = NULL;
 }

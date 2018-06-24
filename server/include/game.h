@@ -178,16 +178,14 @@
 	//refresh before and after action client and map
 	void refresh_map(t_player_p *player, t_game_p *game);
 	void refresh_player(t_player_p *player, t_game_p *game);
-	// eat or die, if die return dead
-	char *eat(t_player_p *player);
 	//com with graphical client
-	char *death(t_player_p *player);
+	void death(t_player_p *player, int fd);
 	void lvl_client(t_player_p *player, int fd);
 	char *add_str(char *src, char *str);
 	char *add_int(char *str, int nb);
 	void map_size(t_game_p *game, int fd);
 	char *player_pos(t_player_p *player);
-	char *player_inv(t_player_p *player);
+	void player_inv(t_player_p *player, int fd);
 	char *take_r_client(char ress, int nb);
 	char *drop_r_client(char ress, int nb);
 	void new_connection(t_player_p *player, int fd);

@@ -30,4 +30,5 @@ void new_connection(t_player_p *player, int fd)
 			send(fd, result, strlen(result), 0);
 	}
 	free(result);
+	result = NULL;
 }

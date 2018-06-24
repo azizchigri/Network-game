@@ -41,6 +41,7 @@ SRC	=	src/generation/map_gen.c				\
 		src/graph_client/player_p.c				\
 		src/graph_client/res_drop_take.c			\
 		src/graph_client/mct_function.c			\
+		src/graph_client/graphical_cmd.c    	\
 		src/gameplay/game.c					\
 		src/graph_client/end_game.c				\
 		src/graph_client/new_player.c				\
@@ -98,6 +99,7 @@ SRC1	=	src/generation/map_gen.c				\
 		src/graph_client/end_game.c				\
 		src/graph_client/new_player.c				\
 		src/graph_client/mct_function.c			\
+		src/graph_client/graphical_cmd.c    	\
 		src/lib/str_to_wordtab.c	\
 		src/ressources.c            \
 		tests/test_take.c					\

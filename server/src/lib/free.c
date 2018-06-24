@@ -10,9 +10,5 @@
 
 void free_tab(char **tab __attribute__((unused)))
 {
-	/*for (int i = 0; tab[i] != NULL; i += 1) {
-			free(tab[i]);
-		}
-		free(tab);
-	} */
+	return;
 }
