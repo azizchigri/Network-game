@@ -9,7 +9,6 @@
 
 void clear_cmd(t_client *client)
 {
-	free_tab(client->buf[0].cmd);
 	client->buf[0].time = -1;
 	for (int i = 1; i < 10; i += 1) {
 		client->buf[i - 1].cmd = client->buf[i].cmd;

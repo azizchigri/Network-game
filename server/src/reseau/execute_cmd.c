@@ -23,7 +23,6 @@ void execute_incantation(t_server *server, t_client *client)
 		if (rep.id != NULL)
 			free(rep.id);
 	}
-	free_tab(client->buf[0].cmd);
 	client->buf[0].time = 300.0 / server->options.frequence;
 	client->buf[0].cmd = str_to_wordtab("Incantation2");
 }
