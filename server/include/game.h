@@ -179,6 +179,6 @@
 	char *drop_r_client(char ress, int nb);
 	//check if a team won the game, return ko or the team name;
 	char *check_win(t_game_p *game);
-
-
+	// return the size of an int to do a str
+	int getsize_int_to_str(int nbr);
 #endif

@@ -11,9 +11,7 @@ char *take_r_client(char ress, int nb)
 {
 	char *result;
 	int size = 0;
-	int tmp;
-	for (tmp = nb; tmp != 0; tmp /= 10)
-		size += 1;
+	size += getsize_int_to_str(nb);
 	result = malloc(sizeof(char) * size + 7);
 	if (result == NULL)
 		return (NULL);
@@ -30,9 +28,7 @@ char *drop_r_client(char ress, int nb)
 {
 	char *result;
 	int size = 0;
-	int tmp;
-	for (tmp = nb; tmp != 0; tmp /= 10)
-		size += 1;
+	size += getsize_int_to_str(nb);
 	result = malloc(sizeof(char) * size + 7);
 	if (result == NULL)
 		return (NULL);
