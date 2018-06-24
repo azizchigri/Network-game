@@ -25,6 +25,7 @@ void init_inventory(t_player_p *player)
 	player->phiras = 0;
 	player->thystame = 0;
 	player->food = 9;
+	player->alive = 1;
 }
 
 int fill_team(t_game_p *game, char *name)
@@ -47,7 +48,7 @@ int fill_team(t_game_p *game, char *name)
 }
 
 t_player_p *init_player(t_game_p *game,
-			int fd __attribute__((unused)), char *team)
+			int fd, char *team)
 {
 	static int id = 0;
 	int pos = -1;
@@ -58,8 +59,8 @@ t_player_p *init_player(t_game_p *game,
 	if (player == NULL)
 		return (NULL);
 	player->id = id;
+	player->fd = fd;
 	id += 1;
-	player->alive = 1;
 	init_inventory(player);
 	player->direction = 0;
 	player->team = team;
