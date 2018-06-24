@@ -18,5 +18,5 @@ Test(Drop_client, enought)
 	init_teams(game, str, 2);
 	player = init_player(game, 0, "poulet");
 	player->linemate = 1;
-	cr_assert_eq(strcmp(drop_r_client('1', player->id), "pdr 0 1"), 0);
+	cr_assert_eq(strcmp(drop_r_client('1', player->id), "pdr 0 1\n"), 0);
 }

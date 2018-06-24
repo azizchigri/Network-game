@@ -5,7 +5,6 @@
 ** mct_function function
 */
 
-#define _GNU_SOURCE
 #define CURRENT_LINE "bct %d %d %d %d %d %d %d %d %d\n"
 #include "game.h"
 #include "server.h"

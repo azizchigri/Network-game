@@ -6,6 +6,7 @@
 */
 
 #include "game.h"
+#include "server.h"
 
 char *add_str(char *src, char *str)
 {
@@ -40,19 +41,6 @@ char *add_int(char *str, int nb)
 char *map_size(t_game_p *game)
 {
 	char *result;
-	int x = game->width;
-	int y = game->height;
-	int size = 1;
-	size += getsize_int_to_str(x);
-	size += getsize_int_to_str(y);
-	result = malloc(sizeof(char) * (size + 6));
-	if (result == NULL)
-		return (NULL);
-	result[0] = 0;
-	result = add_str(result, "msz ");
-	result = add_int(result, x);
-	result = add_str(result, " ");
-	result = add_int(result, x);
-	result[size + 5] = 0;
+	asprintf(&result, "msz %d %d\n", game->width, game->height);
 	return (result);
 }

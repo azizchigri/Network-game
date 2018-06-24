@@ -110,9 +110,9 @@ SRC1	=	src/generation/map_gen.c				\
 
 OBJ     =       $(SRC:.c=.o)
 
-CFLAGS	+=	-Wall -Wextra -Werror -Iinclude
+CFLAGS	+=	-Wall -Wextra -Werror -Iinclude -D _GNU_SOURCE
 
-CFLAGS1	+=	-Wall -Wextra -Werror -Iinclude -lcriterion --coverage
+CFLAGS1	+=	-Wall -Wextra -Werror -Iinclude -lcriterion --coverage -D _GNU_SOURCE
 
 NAME    =	zappy_server
 
