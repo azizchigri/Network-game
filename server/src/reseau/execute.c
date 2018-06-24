@@ -74,11 +74,21 @@ int execute_other_cmd(t_server *server, t_client *client, char **tab)
 	if (tab != NULL && strcmp(tab[0], "Fork") == 0 &&
 	    client->buf[0].time == 0) {
 		if (client->player != NULL)
-		server->egg = add_egg(server, server->egg, client->player->team);
+			server->egg = add_egg(server, server->egg,
+			client->player->team);
 		send(client->fd, "ok\n", 3, 0);
 		clear_cmd(client);
 	}
-	return (-1);
+	if (tab != NULL && strcmp(tab[0], "Fork") == 0 &&
+	    client->buf[0].time == 0) {
+		if (client->player != NULL)
+			execute_incantation(server, client);
+		send(client->fd, "ok\n", 3, 0);
+		clear_cmd(client);
+	}
+}
+
+return (-1);
 }
 
 int execute_commands(t_server *server)

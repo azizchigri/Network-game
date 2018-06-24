@@ -17,12 +17,17 @@ int getsize_int_to_str(int nbr)
 	return (size);
 }
 
-char *new_connection(t_player_p *player)
+void new_connection(t_player_p *player, int fd)
 {
 	char *result = NULL;
 
-	asprintf(&result, "pnw #%d %d %d %c %d %s\n",
-		player->id, player->x, player->y,
-		player->direction, player->lvl, player->team);
-	return (result);
+	if (player != NULL) {
+		asprintf(&result, "pnw %d %d %d %d %d %s\n", player->id,
+		player->x, player->y, (int) (player->direction + 1),
+		player->lvl,
+		player->team);
+		if (fd != -1)
+			send(fd, result, strlen(result), 0);
+	}
+	free(result);
 }

@@ -188,7 +188,7 @@
 	char *player_inv(t_player_p *player);
 	char *take_r_client(char ress, int nb);
 	char *drop_r_client(char ress, int nb);
-	char *new_connection(t_player_p *player);
+	void new_connection(t_player_p *player, int fd);
 	char *graphical_win(char *team);
 	//check if a team won the game, return ko or the team name;
 	char *check_win(t_game_p *game);

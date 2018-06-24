@@ -76,11 +76,11 @@ int connect_client(t_server *server, t_client *client, int fd, char **tab)
 		sprintf(str2, "%d %d\n", server->options.width,
 		server->options.height);
 		send(fd, str2, strlen(str2), 0);
+		new_connection(client->player, server->graph);
 	} else {
 		send(fd, "ko\n", strlen("ko\n"), 0);
 	}
 	clear_cmd(client);
-	// free_respond();
 	return (0);
 }
 
