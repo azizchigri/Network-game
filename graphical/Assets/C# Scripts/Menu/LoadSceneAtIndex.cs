@@ -19,6 +19,8 @@ public class LoadSceneAtIndex : MonoBehaviour {
         {
             if (sceneIndex == 1) {
                 Parameters.port = port.text;
+                if (ip.text == "localhost")
+                    ip.text = "127.0.0.1";
                 Parameters.ip = ip.text;
             }
             SceneManager.LoadScene(sceneIndex);

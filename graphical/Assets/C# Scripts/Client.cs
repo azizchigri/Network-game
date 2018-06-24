@@ -21,7 +21,15 @@ public class Client : MonoBehaviour
 
     public void SetPort()
     {
-        port = int.Parse(Parameters.port);
+        try
+        {
+            port = int.Parse(Parameters.port);
+        } catch (Exception e)
+        {
+            Debug.Log(e);
+            Quit();
+        }
+        
     }
 
     public void SetIp()
