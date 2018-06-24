@@ -8,9 +8,13 @@
 #include "game.h"
 #include "server.h"
 
-char *lvl_client(t_player_p *player)
+
+void lvl_client(t_player_p *player, int fd)
 {
 	char *result;
 	asprintf(&result, "plv %d %d\n", player->id, player->lvl);
-	return (result);
+	if (result != NULL && fd != -1)
+		send(fd, result, strlen(result), 0);
+	if (result != NULL)
+		free(result);
 }

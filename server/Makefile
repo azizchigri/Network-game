@@ -52,6 +52,7 @@ SRC	=	src/generation/map_gen.c				\
         	src/parameters.c        \
         src/reseau/manage_client.c  \
         src/reseau/execute.c        \
+        src/reseau/execute_cmd.c    \
         src/manage_cmd.c            \
         src/manage_fd.c             \
         src/gameplay/fork.c         \
@@ -62,6 +63,7 @@ SRC1	=	src/generation/map_gen.c				\
 		src/generation/player_gen.c				\
 		src/generation/destroy_game.c				\
 		src/generation/game.c					\
+		src/reseau/execute_cmd.c    \
 		src/gameplay/move/go.c					\
 		src/gameplay/move/move.c				\
 		src/gameplay/cmd.c					\

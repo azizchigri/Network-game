@@ -180,7 +180,7 @@
 	char *eat(t_player_p *player);
 	//com with graphical client
 	char *death(t_player_p *player);
-	char *lvl_client(t_player_p *player);
+	void lvl_client(t_player_p *player, int fd);
 	char *add_str(char *src, char *str);
 	char *add_int(char *str, int nb);
 	void map_size(t_game_p *game, int fd);
