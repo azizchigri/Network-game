@@ -1,6 +1,7 @@
 /*
 ** EPITECH PROJECT, 2018
-** PSU_zappy_2017s
+** zappy
+** File description:
 ** execute function
 */
 
@@ -24,7 +25,7 @@ void eat_client(t_server *server)
 	if (server->eat == 0) {
 		while (client != NULL) {
 			if (client->player != NULL) {
-				char *str = eat(client->player);
+				char *str = eat(client->player, server);
 				if (str != NULL && strcmp(str, "dead") == 0) {
 					FD_CLR(client->fd, &(server->readfds));
 					send(client->fd, "dead\n", 5, 0);
@@ -49,7 +50,7 @@ void check_client_win(t_server *server)
 		for (; client != NULL; client = client->next) {
 			destroy_client(server, client);
 		}
-		//free server
+		send(server->graph, "seg bbsn\n", strlen("seg bbsn\n"), 0);
 		exit(0);
 	}
 }
@@ -60,19 +61,15 @@ int execute_other_cmd(t_server *server, t_client *client, char **tab)
 		connect_client(server, client, client->fd, tab);
 		return (0);
 	} else if (tab != NULL && strcmp(tab[0], "Graphical") == 0) {
-		server->graph = client->fd;
-		send(client->fd, "ok\n", 3, 0);
-		clear_cmd(client);
-		map_size(server->game, server->graph);
-		mct(server->game, server->graph);
+		init_client_graph(server, client);
 		return (0);
 	}
 	if (tab != NULL && strcmp(tab[0], "Broadcast") == 0 &&
-	    client->buf[0].time == 0) {
+	client->buf[0].time == 0) {
 		execute_broadcast(server, client);
 	}
 	if (tab != NULL && strcmp(tab[0], "Fork") == 0 &&
-	    client->buf[0].time == 0) {
+	client->buf[0].time == 0) {
 		if (client->player != NULL)
 			server->egg = add_egg(server, server->egg,
 			client->player->team);
@@ -80,12 +77,12 @@ int execute_other_cmd(t_server *server, t_client *client, char **tab)
 		clear_cmd(client);
 	}
 	if (tab != NULL && strcmp(tab[0], "Incantation") == 0 &&
-	    client->buf[0].time == 0) {
+	client->buf[0].time == 0) {
 		if (client->player != NULL)
 			execute_incantation(server, client);
 	}
 	if (tab != NULL && strcmp(tab[0], "Incantation2") == 0 &&
-	    client->buf[0].time == 0) {
+	client->buf[0].time == 0) {
 		if (client->player != NULL)
 			execute_incantation_next(server, client);
 	}

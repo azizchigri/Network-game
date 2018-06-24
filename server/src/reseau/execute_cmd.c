@@ -37,7 +37,7 @@ void execute_incantation_next(t_server *server, t_client *client)
 		send(rep.id[i], "\n", strlen("\n"), 0);
 		for (tmp = server->client; tmp != NULL; tmp = tmp->next) {
 			if (tmp->player != NULL &&
-			    tmp->player->fd == rep.id[i])
+			tmp->player->fd == rep.id[i])
 				lvl_client(tmp->player, server->graph);
 		}
 	}

@@ -9,7 +9,6 @@
 
 void free_server(t_server *server)
 {
-	//free server->name free le tab complet;
 	free(server);
 	server = NULL;
 }
@@ -25,7 +24,6 @@ int launch_server(int ac, char **av)
 	}
 	init_server(server);
 	manage_server(server);
-	//free_server();
 	return (0);
 }
 

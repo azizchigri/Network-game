@@ -30,7 +30,6 @@ t_client *delete_client(t_client *liste, t_client *delete)
 	t_client *tmp = liste;
 	t_client *tmp2;
 	t_client *tmp3;
-
 	if (tmp == delete) {
 		tmp = liste->next;
 		free(liste);

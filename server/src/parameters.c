@@ -51,12 +51,11 @@ int manage_parameters(int ac, char **av, int c, t_server *server)
 	return (0);
 }
 
-
 int check_options(t_server *server)
 {
 	t_options opt = server->options;
 	if (opt.port <= 0 || opt.width <= 0 || opt.height <= 0 ||
-	    opt.nameX == NULL || opt.nb_clients <= 0) {
+	opt.nameX == NULL || opt.nb_clients <= 0) {
 		return (ERROR);
 	}
 	if (opt.frequence <= 0)

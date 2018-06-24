@@ -76,10 +76,11 @@ void check_ressources(t_server *server);
 void execute_incantation(t_server *server, t_client *client);
 void execute_incantation_next(t_server *server, t_client *client);
 int manage_parameters_cases(int ac, char **av, int c, t_server *server);
-int manage_parameters_cases(int ac, char **av, int c, t_server *server);
 int get_int_parameter(char *param);
 void get_n_parameter(int ac __attribute__((unused)),
 char **av __attribute__((unused)), int index __attribute__((unused)),
 		t_server *server);
+void init_client_graph(t_server *server, t_client *client);
+char *eat(t_player_p *player, t_server *server);
 
 #endif //PSU_ZAPPY_2017_SERVER_H

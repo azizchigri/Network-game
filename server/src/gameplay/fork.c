@@ -55,8 +55,8 @@ t_egg *check_egg(t_server *server, t_egg *start)
 	while (tmp != NULL) {
 		if (tmp->time <= 0) {
 			for (i = 0; server->game->teams[i]->name != NULL &&
-				    strcmp(server->game->teams[i]->name,
-				    tmp->team) != 0; i += 1);
+				strcmp(server->game->teams[i]->name,
+				tmp->team) != 0; i += 1);
 			if (server->game->teams[i] != NULL)
 				server->game->teams[i]->slot += 1;
 			start = delete_egg(start, tmp);

@@ -17,7 +17,7 @@ char *player_pos(t_player_p *player)
 	return (result);
 }
 
-char *player_inv(t_player_p *player)
+void player_inv(t_player_p *player, int fd)
 {
 	char *result;
 
@@ -27,5 +27,9 @@ char *player_inv(t_player_p *player)
 		player->food, player->linemate,
 		player->deraumere, player->sibur,
 		player->mendiane, player->phiras, player->thystame);
-	return (result);
+	if (fd != -1)
+		send(fd, result, strlen(result), 0);
+	if (result != NULL)
+		free(result);
+	result = NULL;
 }

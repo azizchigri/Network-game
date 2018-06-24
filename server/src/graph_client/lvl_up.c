@@ -8,7 +8,6 @@
 #include "game.h"
 #include "server.h"
 
-
 void lvl_client(t_player_p *player, int fd)
 {
 	char *result;
