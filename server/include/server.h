@@ -81,5 +81,7 @@ char **av __attribute__((unused)), int index __attribute__((unused)),
 		t_server *server);
 void init_client_graph(t_server *server, t_client *client);
 char *eat(t_player_p *player, t_server *server);
+int execute_other_md_next(t_server *server, t_client *client, char **tab);
+int launch_server(int ac, char **av);
 
 #endif //PSU_ZAPPY_2017_SERVER_H

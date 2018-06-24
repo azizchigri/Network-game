@@ -65,8 +65,7 @@ int connect_client(t_server *server, t_client *client, int fd, char **tab)
 	char str2[2048];
 	t_game_p *game = server->game;
 	for (i = 0; tab[1] != NULL && game->teams[i] != NULL &&
-	strcmp(game->teams[i]->name, tab[1]) != 0; i += 1) {
-	}
+	strcmp(game->teams[i]->name, tab[1]) != 0; i += 1);
 	if (game->teams[i] != NULL && server->game->teams[i]->slot > 0 &&
 	client->player == NULL) {
 		init_client_player(server, client, tab);
@@ -77,9 +76,8 @@ int connect_client(t_server *server, t_client *client, int fd, char **tab)
 		server->options.height);
 		send(fd, str2, strlen(str2), 0);
 		new_connection(client->player, server->graph);
-	} else {
+	} else
 		send(fd, "ko\n", strlen("ko\n"), 0);
-	}
 	clear_cmd(client);
 	return (0);
 }

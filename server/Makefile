@@ -46,10 +46,10 @@ SRC	=	src/generation/map_gen.c				\
 		src/graph_client/end_game.c				\
 		src/graph_client/new_player.c				\
 		src/reseau/manage_server.c	\
-        	src/reseau/zappy_server.c	\
+        src/reseau/zappy_server.c	\
 		src/lib/str_to_wordtab.c	\
 		src/reseau/client.c	\
-        	src/parameters.c        \
+        src/parameters.c        \
 		src/parameters_pars.c	\
 		src/reseau/manage_client.c  \
         src/reseau/execute.c        \
@@ -57,7 +57,8 @@ SRC	=	src/generation/map_gen.c				\
 	src/manage_cmd.c            \
         src/manage_fd.c             \
         src/gameplay/fork.c         \
-        src/ressources.c
+        src/ressources.c            \
+        src/main.c
 
 SRC1	=	src/generation/map_gen.c				\
 		src/generation/teams.c					\

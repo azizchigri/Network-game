@@ -26,9 +26,3 @@ int launch_server(int ac, char **av)
 	manage_server(server);
 	return (0);
 }
-
-int main(int ac, char **av)
-{
-	launch_server(ac, av);
-	return (0);
-}
