@@ -88,7 +88,8 @@ void manage_cmd(t_server *server, t_client *client)
 		send(client->fd, rep.respond, strlen(rep.respond), 0);
 		send(client->fd, "\n", strlen("\n"), 0);
 		if (server->graph != -1 && rep.respond_g != NULL)
-			send(server->graph, rep.respond_g, strlen(rep.respond_g), 0);
+			send(server->graph,
+			rep.respond_g, strlen(rep.respond_g), 0);
 		clear_cmd(client);
 		free_respond(rep);
 	}

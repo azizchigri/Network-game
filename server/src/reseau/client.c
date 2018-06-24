@@ -25,17 +25,22 @@ t_client *add_client(t_client *liste, t_client *client)
 	return (liste);
 }
 
+t_client *delete_first(t_client *tmp, t_client *liste)
+{
+	tmp = liste->next;
+	free(liste);
+	tmp = NULL;
+	return (tmp);
+}
+
 t_client *delete_client(t_client *liste, t_client *delete)
 {
 	t_client *tmp = liste;
 	t_client *tmp2;
 	t_client *tmp3;
 	if (tmp == delete) {
-		tmp = liste->next;
-		free(liste);
-		tmp = NULL;
 		delete = NULL;
-		return (tmp);
+		return (delete_first(tmp, liste));
 	}
 	while (tmp != NULL && tmp->next != delete)
 		tmp = tmp->next;

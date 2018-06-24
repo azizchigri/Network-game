@@ -36,7 +36,7 @@ void refresh_map(t_player_p *player, t_game_p *game)
 {
 	int i;
 	for (i = 0; game->map[player->x][player->y].players[i]->id !=
-		    player->id; i += 1);
+		player->id; i += 1);
 	game->map[player->x][player->y].players[i]->x = player->x;
 	game->map[player->x][player->y].players[i]->y = player->y;
 	game->map[player->x][player->y].players[i]->direction = player
