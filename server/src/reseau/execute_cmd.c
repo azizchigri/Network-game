@@ -58,12 +58,12 @@ int execute_other_md_next(t_server *server, t_client *client, char **tab)
 		clear_cmd(client);
 		return (0);
 	} else if (tab != NULL && strcmp(tab[0], "Incantation") == 0 &&
-	    client->buf[0].time == 0) {
+		client->buf[0].time == 0) {
 		if (client->player != NULL)
 			execute_incantation(server, client);
 		return (0);
 	} else if (tab != NULL && strcmp(tab[0], "Incantation2") == 0 &&
-	    client->buf[0].time == 0) {
+		client->buf[0].time == 0) {
 		if (client->player != NULL)
 			execute_incantation_next(server, client);
 		return (0);
