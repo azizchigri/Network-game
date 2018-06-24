@@ -14,13 +14,13 @@ void init_ressources(t_game_p *game)
 
 	for (i = 0; game->map[i] != NULL; i += 1) {
 		for (j = 0; j < game->width; j += 1) {
-			game->map[i][j].linemate = rand() % 2;
-			game->map[i][j].deraumere = rand() % 2;
-			game->map[i][j].sibur = rand() % 2;
-			game->map[i][j].mendiane = rand() % 2;
-			game->map[i][j].phiras = rand() % 2;
-			game->map[i][j].thystame = rand() % 2;
-			game->map[i][j].food = rand() % 2;
+			game->map[i][j].linemate += rand() % 2;
+			game->map[i][j].deraumere += rand() % 2;
+			game->map[i][j].sibur += rand() % 2;
+			game->map[i][j].mendiane += rand() % 2;
+			game->map[i][j].phiras += rand() % 2;
+			game->map[i][j].thystame += rand() % 2;
+			game->map[i][j].food += rand() % 2;
 		}
 	}
 }
