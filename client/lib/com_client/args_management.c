@@ -9,7 +9,8 @@
 
 int check_args(char **args)
 {
-	if (args[0] == NULL || args[1] == NULL) {
+	if (args == NULL || args[0] == NULL
+	    || args[1] == NULL || args[2] == NULL) {
 		printf("Missing parameters! \n\n");
 		print_usage();
 		return (84);
@@ -33,7 +34,8 @@ void print_usage(void)
 	printf("USAGE: ./zappy_ai -p port -n name -h machine\n");
 	printf("\tport\tis the port number\n");
 	printf("\tname\tis the name of the team\n");
-	printf("\tmachine\tis the name of the machine; localhost by default\n");
+	printf(
+	"\tmachine\tis the name of the machine; localhost by default\n");
 }
 
 int get_len_team_name(char **args)
@@ -47,8 +49,11 @@ int get_len_team_name(char **args)
 char **get_args(int argc, char **argv)
 {
 	int opt;
-	char **args = malloc(sizeof(args) * 3);
-	args[2] = "127.0.0.1";
+	char **args = malloc(sizeof(char *) * 4);
+	args[0] = NULL;
+	args[1] = NULL;
+	args[2] = NULL;
+	args[3] = NULL;
 	while ((opt = getopt(argc, argv, "p:n:h:")) != -1) {
 		switch (opt) {
 			case 'p':
