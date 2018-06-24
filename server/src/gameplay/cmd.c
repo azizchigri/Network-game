@@ -37,7 +37,7 @@ t_respond personnal_action(char **msg_r, t_player_p *player, t_game_p *game)
 	resp.respond = NULL;
 	resp.respond_g = NULL;
 	if (strcmp(msg_r[0], LOOK) == 0)
-		resp.respond = "OK";
+		resp.respond = look(game, player);
 	else if (strcmp(msg_r[0], INVENTORY) == 0)
 		resp.respond = inventory(player);
 	refresh_map(player, game);

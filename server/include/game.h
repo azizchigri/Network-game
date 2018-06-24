@@ -189,5 +189,20 @@
 	//return all the msg after an incantation
 	t_respond get_player_incant(t_game_p *game,
 				t_player_p *player, int tmp);
+	// look function
+	char *look(t_game_p *game, t_player_p *player);
+	void see_north(t_player_p *player, int level, t_game_p *game, char
+	**tab);
+	void see_south(t_player_p *player, int level, t_game_p *game, char
+	**tab);
+	void see_east(t_player_p *player, int level, t_game_p *game,
+	char **tab);
+	void see_west(t_player_p *player, int level, t_game_p *game,
+	char **tab);
+	// build content of a tile for look function
+	char *build_result(int x, int y, t_game_p *game);
 
+//utils
+	// convert char ** into char * separated by char * separator
+	char *wordtab_to_str(char **tab, char *separator);
 #endif

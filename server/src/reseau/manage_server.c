@@ -77,10 +77,11 @@ int manage_server(t_server *server)
 	fd_set set;
 	struct timeval tv;
 	tv.tv_usec = 0;
+	float time = 1.0 / server->options.frequence;
 	while (!error) {
-		tv.tv_sec = 1;
+		tv.tv_sec = (int) time;
+		tv.tv_usec = (time - (int) time) * 1000000;
 		set = server->readfds;
-		printf("tick:%ld\n", tv.tv_sec);
 		result = select(server->higher_fd + 1, &set, NULL, NULL, &tv);
 		if (result == -1)
 			error = -1;

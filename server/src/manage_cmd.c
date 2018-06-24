@@ -24,7 +24,8 @@ void add_client_cmd(t_server *server, int fd, char *buff)
 	int i2 = 0;
 	char **tab = get_cmd(buff);
 	if (tab != NULL && client != NULL) {
-		int time = cooldown(server->game, client->player, tab);
+		float time = cooldown(server->game, client->player, tab) /
+		server->options.frequence;
 		if (time == -1) {
 			time = -2;
 		}
