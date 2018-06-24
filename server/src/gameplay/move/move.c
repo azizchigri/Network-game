@@ -8,18 +8,30 @@
 
 #include "game.h"
 
-void right(t_player_p *player)
+void right(t_player_p *player, t_game_p *game)
 {
+	int i;
 	player->direction += 1;
 	if (player->direction == 4)
 		player->direction = 0;
+	for (i = 0; player->id !=
+	game->map[player->x][player->y].players[i]->id;
+	i += 1);
+	game->map[player->x][player->y].players[i]->direction
+		= player->direction;
 }
 
-void left(t_player_p *player)
+void left(t_player_p *player, t_game_p *game)
 {
+	int i;
 	player->direction -= 1;
 	if (player->direction == -1)
 		player->direction = 3;
+	for (i = 0; player->id !=
+	game->map[player->x][player->y].players[i]->id;
+	i += 1);
+	game->map[player->x][player->y].players[i]->direction
+		= player->direction;
 }
 
 void up_down(t_player_p *player, t_game_p *game)

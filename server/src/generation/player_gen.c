@@ -15,34 +15,55 @@ t_player_p *destroy_player(t_player_p *player)
 	return (player);
 }
 
-int place_player(t_game_p *game, t_player_p *player)
+void init_inventory(t_player_p *player)
 {
-	if (game->map[player->x][player->y].players != NULL)
+	player->linemate = 0;
+	player->deraumere = 0;
+	player->sibur = 0;
+	player->mendiane = 0;
+	player->phiras = 0;
+	player->thystame = 0;
+	player->food = 10;
+}
+
+int fill_team(t_game_p *game, char *name)
+{
+	int i = 0;
+	int tmp = -1;
+	for (i = 0; game->teams[i] != NULL; i += 1) {
+		if (strcmp(name, game->teams[i]->name) == 0) {
+			game->teams[i]->slot -= 1;
+			tmp = i;
+		}
+	}
+	if (tmp == -1)
 		return (-1);
-	game->map[player->x][player->y].players =
-		malloc(sizeof(t_player_p *) * 2);
-	if (game->map[player->x][player->y].players == NULL)
+	if (game->teams[tmp]->slot < 0) {
+		game->teams[tmp]->slot = 0;
 		return (-1);
-	game->map[player->x][player->y].players[0] = player;
-	game->map[player->x][player->y].players[1] = NULL;
+	}
 	return (0);
 }
 
-t_player_p *init_player(t_game_p *game, int fd)
+t_player_p *init_player(t_game_p *game, int fd, char *team)
 {
 	int pos = -1;
-	t_player_p *player = malloc(sizeof(t_player_p) * 1);
+	t_player_p *player;
+	if (fill_team(game, team) == -1)
+		return (NULL);
+	player = malloc(sizeof(t_player_p) * 1);
 	if (player == NULL)
 		return (NULL);
 	player->id = fd;
 	player->alive = 1;
-	player->inventory = NULL;
-	while (pos == -1) {
-		player->y = rand() % (game->width + 1) - 1;
-		player->x = rand() % (game->height + 1) - 1;
-		pos = place_player(game, player);
-	}
-	player->lvl = 0;
+	init_inventory(player);
+	player->lvl = 1;
 	player->direction = 0;
+	player->team = team;
+	while (pos == -1) {
+		player->y = rand() % (game->width);
+		player->x = rand() % (game->height);
+		pos = new_place(player, game);
+	}
 	return (player);
 }

@@ -11,22 +11,19 @@ Test(map, is_the_map_NULL)
 {
 	int height = 10;
 	int width = 10;
-	int freq = 1;
+	int freq = 100;
 	t_game_p *game = game_init(width, height, freq);
 	cr_assert_neq(game->map, NULL);
-	destroy_game(game);
 }
 
 Test(map, is_random_working)
 {
 	int height = 10;
 	int width = 10;
-	int freq = 1;
+	int freq = 100;
 	t_game_p *game = game_init(width, height, freq);
 	t_game_p *game2 = game_init(width, height, freq);
 	cr_assert_neq(game->map, game2->map);
-	destroy_game(game);
-	destroy_game(game2);
 }
 
 int check_random(t_cell cell, t_cell cell2)
@@ -50,16 +47,14 @@ Test(map, is_random_working3)
 	t_game_p *game;
 	t_game_p *game2;
 	srand(time(NULL));
-	game = game_init(10, 10, 1);
-	game2 = game_init(10, 10, 1);
+	game = game_init(10, 10, 100);
+	game2 = game_init(10, 10, 100);
 	for (i = 0; game->map[i] != NULL; i += 1) {
 		for (j = 0; j < 10; j += 1)
 			cpt += check_random(game->map[i][j],
 					game2->map[i][j]);
 	}
 	cr_assert(cpt < 100);
-	destroy_game(game);
-	destroy_game(game2);
 }
 
 Test(map, is_the_map_have_ressources)
@@ -67,7 +62,7 @@ Test(map, is_the_map_have_ressources)
 	int cpt = 0;
 	int i, j;
 	int linemate, deraumere, sibur, mendiane, phiras, thystame, food = 0;
-	t_game_p *game = game_init(10, 10, 1);
+	t_game_p *game = game_init(10, 10, 100);
 	for (i = 0; game->map[i] != NULL; i += 1) {
 		for (j = 0; j < 10; j += 1) {
 			linemate += game->map[i][j].linemate;
@@ -76,12 +71,11 @@ Test(map, is_the_map_have_ressources)
 			mendiane += game->map[i][j].mendiane;
 			phiras += game->map[i][j].phiras;
 			thystame += game->map[i][j].thystame;
-			food += game->map[i][j].food;	
+			food += game->map[i][j].food;
 		}
 	}
 	if (linemate == 0 && deraumere == 0 && sibur == 0
 	&& mendiane == 0 && phiras == 0 && thystame == 0 && food == 0)
 		cpt = -1;
 	cr_assert(cpt != -1);
-	destroy_game(game);
 }
