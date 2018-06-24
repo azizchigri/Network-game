@@ -25,6 +25,7 @@ public class BoardManager : MonoBehaviour {
 
     private Vector3 clickPosition = Vector3.zero;
     public Tile selectedTile = null;
+    public Character selectedPlayer = null;
 
     private Canvas PanelCanvas;
     private GameObject CanvasObject;
@@ -56,9 +57,43 @@ public class BoardManager : MonoBehaviour {
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
                 clickPosition = hit.point;
-                getTileOnClick();
+                if (hit.collider.gameObject.name == "Terrain")
+                    getTileOnClick();
+                else {
+                    foreach (GameObject player in Players)
+                    {
+                        if (hit.collider.gameObject == player)
+                        {
+                            DisplayPlayerInventory(player.GetComponent<Character>());
+                        }
+                    }
+                }
             }
         }
+    }
+
+    private void DisplayPlayerInventory(Character player)
+    {
+        selectedPlayer = player;
+        string[] prefabName = { "Food", "Linemate", "Deraumere", "Sibur", "Mendiane", "Phiras", "Thystame" };
+        CharPanel.gameObject.SetActive(true);
+        int i = 0;
+        foreach (string name in prefabName)
+        {
+            Transform tmp = CharPanel.transform.Find(name);
+            Text text = tmp.GetComponent<Text>();
+            text.text = name + ": " + selectedPlayer.resources[i];
+            i++;
+        }
+        Transform tmp2 = CharPanel.transform.Find("Title");
+        Text text2 = tmp2.GetComponent<Text>();
+        text2.text = "PLAYER: " + selectedPlayer.Id;
+        tmp2 = CharPanel.transform.Find("Level");
+        text2 = tmp2.GetComponent<Text>();
+        text2.text = "Level: " + selectedPlayer.Level;
+        tmp2 = CharPanel.transform.Find("TeamName");
+        text2 = tmp2.GetComponent<Text>();
+        text2.text = "Team: " + selectedPlayer.TeamName;
     }
 
     private void getTileOnClick()
@@ -133,6 +168,7 @@ public class BoardManager : MonoBehaviour {
         CreateMap();
         Landscape = Instantiate((GameObject)Resources.Load("Prefabs/Terrain"), new Vector3(x, z, y + y / 2), Quaternion.identity);
         Landscape.transform.SetParent(transform);
+        Landscape.name = "Terrain";
         MyMap.maxX = MapSizeX;
         MyMap.maxY = MapSizeY;
         MyMap.gridScale = MapScale;
@@ -208,6 +244,16 @@ public class BoardManager : MonoBehaviour {
             };
             ObjectRenderer.material = ObjectMaterial;
             player.CurrentZ = 25;
+        } else
+        {
+            BoxCollider coll = go.AddComponent<BoxCollider>();
+            Vector3 newPos = Vector3.zero;
+            newPos.y = 30;
+            coll.center = newPos;
+            newPos.x = 50;
+            newPos.y = 100;
+            newPos.z = 20;
+            coll.size = newPos;
         }
         player.SetPosition(GetTileCenter(x, y));
         player.Id = id;

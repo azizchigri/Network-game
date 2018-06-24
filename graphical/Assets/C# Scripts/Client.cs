@@ -43,7 +43,7 @@ public class Client : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Escape) || (!isAtStartup && client == null))
             Quit();
-        if (!isAtStartup && client.Connected)
+        if (!isAtStartup && client != null && client.Connected)
         {
             Handler.CallCommand(RcvData());
         }
@@ -58,6 +58,7 @@ public class Client : MonoBehaviour
         try
         {
             client.Connect(ipAddress, port);
+            SendData("Graphical\n");
         } catch (SocketException e) {
             Debug.Log(e);
             Quit();

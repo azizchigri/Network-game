@@ -185,17 +185,17 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: blinn3
-    second: {fileID: 2100000, guid: 27ec51287c78bfb479fe3729111634a4, type: 2}
+    second: {fileID: 2100000, guid: cdfabc7e78df9ef43a70351f0aa3a4b5, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: pasted__blinn1
-    second: {fileID: 2100000, guid: 6fcd9d698ea07974abf39f90181445d2, type: 2}
+    second: {fileID: 2100000, guid: 1c871ac3bb2685548b1fd27dc8fe3ff3, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: pasted__pasted__blinn2
-    second: {fileID: 2100000, guid: 27ec51287c78bfb479fe3729111634a4, type: 2}
+    second: {fileID: 2100000, guid: cdfabc7e78df9ef43a70351f0aa3a4b5, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -228,7 +228,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 50
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 0
     importBlendShapes: 1
     importCameras: 0

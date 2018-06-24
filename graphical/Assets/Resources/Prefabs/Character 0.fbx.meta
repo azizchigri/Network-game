@@ -185,7 +185,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: blinn2
-    second: {fileID: 2100000, guid: 1c568156d9d473c42a9182ac94535a12, type: 2}
+    second: {fileID: 2100000, guid: 2532e05245b69e44da8502b71792cc39, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -218,7 +218,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 50
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 0
     importBlendShapes: 1
     importCameras: 0
@@ -229,7 +229,7 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
-    preserveHierarchy: 1
+    preserveHierarchy: 0
     indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
