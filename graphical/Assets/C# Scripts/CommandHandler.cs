@@ -115,33 +115,43 @@ public class CommandHandler : MonoBehaviour {
 
     private static bool PlayerPosition(string[] array)
     {
-        if (array.Length != 5)
+        GameObject playerObject;
+        if (array.Length != 5 || !Manager.Players.TryGetValue(int.Parse(array[1]), out playerObject))
             return false;
-        Character player = Manager.Players[int.Parse(array[1])].GetComponent<Character>();
+        Character player = playerObject.GetComponent<Character>();
         player.MoveTo(Manager.GetTileCenter(int.Parse(array[2]), int.Parse(array[3])));
+        player.SetPosition(int.Parse(array[2]), int.Parse(array[3]));
         player.ChangeOrientation((Character.Orientation)int.Parse(array[4]));
+        if (player == Manager.selectedPlayer)
+            Manager.DisplayPlayerInventory(player);
         return true;
     }
 
     private static bool PlayerLvl(string[] array)
     {
-        if (array.Length != 3)
+        GameObject playerObject;
+        if (array.Length != 3 || !Manager.Players.TryGetValue(int.Parse(array[1]), out playerObject))
             return false;
-        Character player = Manager.Players[int.Parse(array[1])].GetComponent<Character>();
+        Character player = playerObject.GetComponent<Character>();
         player.Level = int.Parse(array[2]);
+        if (player == Manager.selectedPlayer)
+            Manager.DisplayPlayerInventory(player);
         return true;
     }
 
     private static bool PlayerInventory(string[] array)
     {
-        if (array.Length != 11)
+        GameObject playerObject;
+        if (array.Length != 11 || !Manager.Players.TryGetValue(int.Parse(array[1]), out playerObject))
             return false;
-        Character player = Manager.Players[int.Parse(array[1])].GetComponent<Character>();
+        Character player = playerObject.GetComponent<Character>();
         player.SetPosition(int.Parse(array[2]), int.Parse(array[3]));
         for (int i = 4; i < 11; i++)
         {
             player.resources[i - 4] = int.Parse(array[i]);
         }
+        if (player == Manager.selectedPlayer)
+            Manager.DisplayPlayerInventory(player);
         return true;
     }
 
@@ -182,25 +192,31 @@ public class CommandHandler : MonoBehaviour {
 
     private static bool ResourceDrop(string[] array)
     {
-        if (array.Length != 3)
+        GameObject playerObject;
+        if (array.Length != 3 || !Manager.Players.TryGetValue(int.Parse(array[1]), out playerObject))
             return false;
-        Character player = Manager.Players[int.Parse(array[1])].GetComponent<Character>();
+        Character player = playerObject.GetComponent<Character>();
         Manager.Map[player.CurrentX, player.CurrentY].resources[int.Parse(array[2])] += 1;
         player.resources[int.Parse(array[2])] -= 1;
         if (Manager.Map[player.CurrentX, player.CurrentY] == Manager.selectedTile)
             Manager.DisplayTileInventory();
+        if (player == Manager.selectedPlayer)
+            Manager.DisplayPlayerInventory(player);
         return true;
     }
 
     private static bool ResourceCollect(string[] array)
     {
-        if (array.Length != 3)
+        GameObject playerObject;
+        if (array.Length != 3 || !Manager.Players.TryGetValue(int.Parse(array[1]), out playerObject))
             return false;
-        Character player = Manager.Players[int.Parse(array[1])].GetComponent<Character>();
+        Character player = playerObject.GetComponent<Character>();
         Manager.Map[player.CurrentX, player.CurrentY].resources[int.Parse(array[2])] -= 1;
         player.resources[int.Parse(array[2])] += 1;
         if (Manager.Map[player.CurrentX, player.CurrentY] == Manager.selectedTile)
             Manager.DisplayTileInventory();
+        if (player == Manager.selectedPlayer)
+            Manager.DisplayPlayerInventory(player);
         return true;
     }
 

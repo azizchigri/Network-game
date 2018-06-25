@@ -16,7 +16,7 @@ public class BoardManager : MonoBehaviour {
     public int MapSizeX = 10;
     public int MapSizeY = 10;
 
-    public List<GameObject> Players;
+    public Dictionary<int, GameObject> Players;
     public List<string> TeamName;
     public List<Color> TeamColor;
     private string[] PlayerPrefab = { "Prefabs/Character 0",
@@ -36,7 +36,7 @@ public class BoardManager : MonoBehaviour {
     {
         gameObject.transform.position = Vector3.zero;
         Instance = this;
-        Players = new List<GameObject>();
+        Players = new Dictionary<int, GameObject>();
         MyMap = gameObject.AddComponent<DrawMap>();
         TeamName = new List<string>();
         TeamColor = new List<Color>();
@@ -60,11 +60,11 @@ public class BoardManager : MonoBehaviour {
                 if (hit.collider.gameObject.name == "Terrain")
                     getTileOnClick();
                 else {
-                    foreach (GameObject player in Players)
+                    foreach (KeyValuePair<int, GameObject> entry in Players)
                     {
-                        if (hit.collider.gameObject == player)
+                        if (hit.collider.gameObject == entry.Value)
                         {
-                            DisplayPlayerInventory(player.GetComponent<Character>());
+                            DisplayPlayerInventory(entry.Value.GetComponent<Character>());
                         }
                     }
                 }
@@ -72,7 +72,7 @@ public class BoardManager : MonoBehaviour {
         }
     }
 
-    private void DisplayPlayerInventory(Character player)
+    public void DisplayPlayerInventory(Character player)
     {
         selectedPlayer = player;
         string[] prefabName = { "Food", "Linemate", "Deraumere", "Sibur", "Mendiane", "Phiras", "Thystame" };
@@ -258,7 +258,7 @@ public class BoardManager : MonoBehaviour {
         player.SetPosition(GetTileCenter(x, y));
         player.Id = id;
         player.TeamName = teamName;
-        Players.Add(go);
+        Players[id] = go;
         return player;
     }
 }
